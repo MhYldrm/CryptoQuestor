@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_questor/ui/views/portfolio_coin_history_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Components/item.dart';
 import '../../models/gecko_models.dart';
 import '../../services/coin_services.dart';
 import '../../services/firebase_service.dart';
+import '../../utils/functions.dart';
+import '../../utils/texts.dart';
 import '../../widgets/coin_card.dart';
 import '../../widgets/credit_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +23,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 //portfolio coins get from Firebase
+  List allCoins = [];
+  bool? isLoadinng;
   getPortCoins() async {
     final firebaseAuth = FirebaseAuth.instance;
     isLoadinng = true;
@@ -31,10 +38,14 @@ class _HomePageState extends State<HomePage> {
     isLoadinng = false;
   }
 
-  List allCoins = [];
+  //coins info from api
+  final CoinService _service = CoinService();
+  List<GeckoModel>? coinMarket = [];
+  bool? isLoading;
 
   @override
   void initState() {
+    //coins info from api
     _service.getCoinsFromCoingeckoApi().then((value) {
       if (value != null) {
         setState(() {
@@ -51,22 +62,16 @@ class _HomePageState extends State<HomePage> {
     getPortCoins();
   }
 
-  bool? isLoadinng;
-  bool? isLoading;
-  final CoinService _service = CoinService();
-  List<GeckoModel>? coinMarket = [];
-
+  // for categoriesCoins part page-view
   final PageController _pageController = PageController();
-
   void _changePage(int indeks) {
     _pageController.jumpToPage(indeks);
   }
 
   @override
   Widget build(BuildContext context) {
-    //double height = MediaQuery.of(context).size.height;
-    //double widht = MediaQuery.of(context).size.width;
 
+    // sort coins from geckoApi
     List sortedGainersCoins = List.from(coinMarket!);
     sortedGainersCoins.sort((a, b) => b.marketCapChangePercentage24H
         .compareTo(a.marketCapChangePercentage24H));
@@ -78,52 +83,16 @@ class _HomePageState extends State<HomePage> {
     List sortedHotCoins = List.from(coinMarket!);
     sortedHotCoins.sort((a, b) => b.totalVolume.compareTo(a.totalVolume));
 
-    //converted the data from firebase
-    List<Map<String, dynamic>> summarizeData(List data) {
-      Map<String, Map<String, dynamic>> summary = {};
-      for (var item in data) {
-        String name = item['name'];
-        String symbol = item['symbol'];
-        String imageUrl = item['imageUrl'];
-        double quantity =
-        double.parse(item['quantity']);
-        double totalSpent = double.parse(item['totalSpent']);
-
-        if (summary.containsKey(name)) {
-          summary[name]!['quantity'] =
-              (summary[name]!['quantity'] ?? 0) + quantity;
-          summary[name]!['totalSpent'] =
-              (summary[name]!['totalSpent'] ?? 0) + totalSpent;
-        } else {
-          summary[name] = {
-            'quantity': quantity,
-            'totalSpent': totalSpent,
-            'symbol': symbol,
-            'imageUrl': imageUrl,
-          };
-        }
-      }
-
-      return summary.entries.map((entry) {
-        return {
-          'name': entry.key,
-          'quantity': entry.value['quantity'],
-          'totalSpent': entry.value['totalSpent'],
-          'symbol': entry.value['symbol'],
-          'imageUrl': entry.value['imageUrl']
-        };
-      }).toList();
-    }
-
-    List<Map<String, dynamic>> result = summarizeData(allCoins);
+    List<Map<String, dynamic>> result = MyFunctions().summarizeData(allCoins);
     double totalSpentSum = 0;
     for (var item in result) {
       totalSpentSum += item['totalSpent'] as double;
     }
 
+    var mText = AppLocalizations.of(context)!;
     return SafeArea(
         child: Scaffold(
-          backgroundColor: const Color(0xff001E34),
+          backgroundColor: CustomColors.bgcolor,
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,13 +106,14 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                     Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                       child: Text(
-                        "My Portfolio",
+                        mText.myPortfolio,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
+                          color: CustomColors.mWhitePrimary.withOpacity(0.9)
                         ),
                       ),
                     ),
@@ -168,6 +138,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   SizedBox _portfolioCoinsCardPart(List<Map<String, dynamic>> result) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
         height: 170,
         child: isLoadinng == true
@@ -197,12 +168,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               );
-            }) : const Center(child: Text("You have not any coin in portfolio"),)
+            }) :  Center(child: Text(mText.isNotHaveAnyCoins),)
     );
   }
 
-  SizedBox _categoriesCoinsPart(List<dynamic> sortedHotCoins,
-      List<dynamic> sortedGainersCoins, List<dynamic> sortedLosersCoins) {
+  SizedBox _categoriesCoinsPart(List<dynamic> sortedHotCoins, List<dynamic> sortedGainersCoins, List<dynamic> sortedLosersCoins) {
     return SizedBox(
       height: 500,
       width: double.infinity,
@@ -222,36 +192,37 @@ class _HomePageState extends State<HomePage> {
   }
 
   Padding _categoriesPart() {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           TextButton(
               onPressed: () => _changePage(0),
-              child: const Text(
-                "Top 100",
-                style: TextStyle(
-                  color: Color(0xffD4BBFF),
-                  fontSize: 13,
+              child:  Text(
+                CustomTexts().top100,
+                style: const TextStyle(
+                  color: CustomColors.mLilacPrimary,
+                  fontSize: 11.5,
                 ),
               )),
           TextButton(
               onPressed: () => _changePage(1),
-              child: const Text(
-                "Hot 🔥",
-                style: TextStyle(fontSize: 13,color: Color(0xffFFD400)),
+              child:  Text(
+                "${mText.hotCoins} 🔥",
+                style: const TextStyle(fontSize: 11.5,color: CustomColors.mYellow,),
               )),
           TextButton(
               onPressed: () => _changePage(2),
-              child: const Text(
-                "Gainers",
-                style: TextStyle(fontSize: 13,color: Colors.green),
+              child:  Text(
+                mText.gainersCoin,
+                style: const TextStyle(fontSize: 11.5,color: CustomColors.mGreenPrimary,),
               )),
           TextButton(
             onPressed: () => _changePage(3),
             child: Text(
-              "Losers",
-              style: TextStyle(fontSize: 13,color: Colors.red.shade300),
+              mText.losersCoin,
+              style: TextStyle(fontSize: 11.5,color: CustomColors.mRedPrimary.withOpacity(0.9),),
             ),
           ),
         ],
@@ -271,6 +242,7 @@ class _sortedGainersCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
       height: 400,
       width: double.infinity,
@@ -289,11 +261,14 @@ class _sortedGainersCoinsWidget extends StatelessWidget {
                   item: sortedGainersCoins[indeks],
                 ));
           })
-          : const Padding(
-        padding: EdgeInsets.all(8.0),
+          :  Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Text(
-              "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+              mText.isApiRequestFailed,
+          style: const TextStyle(
+            color: CustomColors.mWhitePrimary
+          ),),
         ),
       ),
     );
@@ -311,6 +286,7 @@ class _sortedHotCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
       height: 400,
       width: double.infinity,
@@ -329,11 +305,14 @@ class _sortedHotCoinsWidget extends StatelessWidget {
                   item: sortedHotCoins[indeks],
                 ));
           })
-          : const Padding(
-        padding: EdgeInsets.all(8.0),
+          : Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Text(
-              "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+              mText.isApiRequestFailed,
+            style: const TextStyle(
+                color: CustomColors.mWhitePrimary
+            ),),
         ),
       ),
     );
@@ -351,6 +330,7 @@ class _sortedLosersCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
       height: 400,
       width: double.infinity,
@@ -369,11 +349,14 @@ class _sortedLosersCoinsWidget extends StatelessWidget {
                   item: sortedLosersCoins[indeks],
                 ));
           })
-          : const Padding(
-        padding: EdgeInsets.all(8.0),
+          : Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Text(
-              "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+            mText.isApiRequestFailed,
+            style: const TextStyle(
+                color: CustomColors.mWhitePrimary
+            ),),
         ),
       ),
     );
@@ -391,6 +374,7 @@ class _allCoins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
       height: 400,
       width: double.infinity,
@@ -409,11 +393,14 @@ class _allCoins extends StatelessWidget {
                   item: coinMarket![indeks],
                 ));
           })
-          : const Padding(
-        padding: EdgeInsets.all(8.0),
+          : Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Text(
-              "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+            mText.isApiRequestFailed,
+            style: const TextStyle(
+                color: CustomColors.mWhitePrimary
+            ),),
         ),
       ),
     );
@@ -426,6 +413,7 @@ class _welcomePart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var firebaseService = FirebaseService().firebaseAuth;
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Row(
@@ -433,12 +421,12 @@ class _welcomePart extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Welcome",
-                style: TextStyle(
+               Text(
+                mText.welcome,
+                style: const TextStyle(
                     fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w200),
+                    color: CustomColors.mGreyPrimary,
+                    fontWeight: FontWeight.w300),
               ),
               const SizedBox(
                 height: 5,
@@ -446,10 +434,10 @@ class _welcomePart extends StatelessWidget {
               Text(
                 firebaseService.currentUser?.displayName ??
                     firebaseService.currentUser?.email ??
-                    'Crypto Lover',
+                    mText.cryptoLover,
                 style: const TextStyle(
                     fontSize: 15,
-                    color: Colors.white,
+                    color: CustomColors.mWhitePrimary,
                     fontWeight: FontWeight.bold),
               )
             ],

@@ -1,8 +1,11 @@
 import 'package:crypto_questor/ui/views/portfolio_page.dart';
 import 'package:crypto_questor/ui/views/profile_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'earn_page.dart';
 import 'home_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -23,13 +26,14 @@ class _IntroPageState extends State<IntroPage> {
   Widget currentScreen = const HomePage();
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SafeArea(
         child: Scaffold(
           body: PageStorage(bucket: bucket, child: currentScreen),
           bottomNavigationBar: BottomAppBar(
             elevation: 10,
             notchMargin: 17,
-            color: const Color(0xff001E34),
+            color: CustomColors.bgcolor,
             shape: const CircularNotchedRectangle(),
             child: SizedBox(
               height: 60,
@@ -51,16 +55,16 @@ class _IntroPageState extends State<IntroPage> {
                           Icons.home_filled,
                           size: 20,
                           color: currentTab == 0
-                              ? const Color(0xffFFD400)
-                              : Colors.white54,
+                              ? CustomColors.mYellow
+                              : CustomColors.mGreyPrimary,
                         ),
                         Text(
-                          "Homepage",
+                          mText.homePage,
                           style: TextStyle(
                               fontSize: 11,
                               color: currentTab == 0
-                                  ? const Color(0xffFFD400)
-                                  : Colors.white54),
+                                  ? CustomColors.mYellow
+                                  : CustomColors.mGreyPrimary,),
                         )
                       ],
                     ),
@@ -80,16 +84,16 @@ class _IntroPageState extends State<IntroPage> {
                           Icons.currency_bitcoin_rounded,
                           size: 20,
                           color: currentTab == 1
-                              ? const Color(0xffFFD400)
-                              : Colors.white54,
+                              ? CustomColors.mYellow
+                              : CustomColors.mGreyPrimary,
                         ),
                         Text(
-                          "Earn",
+                          mText.earn,
                           style: TextStyle(
                               fontSize: 11,
                               color: currentTab == 1
-                                  ? const Color(0xffFFD400)
-                                  : Colors.white54),
+                                  ? CustomColors.mYellow
+                                  : CustomColors.mGreyPrimary,),
                         )
                       ],
                     ),
@@ -98,7 +102,7 @@ class _IntroPageState extends State<IntroPage> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = PortfolioPage();
+                        currentScreen = const PortfolioPage();
                         currentTab = 2;
                       });
                     },
@@ -109,16 +113,16 @@ class _IntroPageState extends State<IntroPage> {
                           Icons.pie_chart_outline_rounded,
                           size: 20,
                           color: currentTab == 2
-                              ? const Color(0xffFFD400)
-                              : Colors.white54,
+                              ? CustomColors.mYellow
+                              : CustomColors.mGreyPrimary,
                         ),
                         Text(
-                          "My Portfolio",
+                          mText.myPortfolio,
                           style: TextStyle(
                               fontSize: 11,
                               color: currentTab == 2
-                                  ? const Color(0xffFFD400)
-                                  : Colors.white54),
+                                  ? CustomColors.mYellow
+                                  : CustomColors.mGreyPrimary,),
                         )
                       ],
                     ),
@@ -138,16 +142,16 @@ class _IntroPageState extends State<IntroPage> {
                           Icons.person_2_rounded,
                           size: 20,
                           color: currentTab == 3
-                              ? const Color(0xffFFD400)
-                              : Colors.white54,
+                              ? CustomColors.mYellow
+                              : CustomColors.mGreyPrimary,
                         ),
                         Text(
-                          "Profile",
+                          mText.profile,
                           style: TextStyle(
                               fontSize: 11,
                               color: currentTab == 3
-                                  ? const Color(0xffFFD400)
-                                  : Colors.white54),
+                                  ? CustomColors.mYellow
+                                  : CustomColors.mGreyPrimary,),
                         )
                       ],
                     ),

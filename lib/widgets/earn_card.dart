@@ -1,4 +1,8 @@
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class EarnCard extends StatelessWidget {
   EarnCard(
@@ -12,6 +16,7 @@ class EarnCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
     double widht = MediaQuery.sizeOf(context).width;
+    var mText = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -24,12 +29,7 @@ class EarnCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: [0, 0.25, 0.75, 1],
-              colors: [
-                Color(0x99FFFFFF),
-                Color(0x00FFFFFF),
-                Color(0x00FFFFFF),
-                Color(0x99FFFFFF),
-              ],
+              colors: CustomColors.cardGradientColors
             ),
           ),
           child: ClipRRect(
@@ -65,7 +65,7 @@ class EarnCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: VerticalDivider(
                         thickness: 1,
-                        color: Colors.white,
+                        color: CustomColors.mWhitePrimary,
                       ),
                     ),
                     const SizedBox(
@@ -86,7 +86,7 @@ class EarnCard extends StatelessWidget {
                                     ? 13
                                     : 11,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: CustomColors.mWhitePrimary,),
                           ),
                         ),
 
@@ -96,10 +96,10 @@ class EarnCard extends StatelessWidget {
                             const Icon(
                               Icons.pin_drop,
                               size: 23,
-                              color: Color(0xffFFD400),
+                              color: CustomColors.mYellow,
                             ),
                             Text(
-                              " - Exchange: $exchangeName",
+                              " - ${mText.exchange} $exchangeName",
                               style: const TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w300,
@@ -114,16 +114,16 @@ class EarnCard extends StatelessWidget {
                             width: 140,
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              color: const Color(0xffFFD400),
+                              color: CustomColors.mYellow,
                               borderRadius: BorderRadius.circular(17),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                "Go to Details",
-                                style: TextStyle(
+                                mText.goToDetails,
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
-                                    color: Colors.black),
+                                    color: CustomColors.mBlackPrimary,),
                               ),
                             ),
                           ),

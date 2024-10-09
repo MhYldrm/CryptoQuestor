@@ -1,7 +1,11 @@
 import 'package:crypto_questor/ui/views/sign_up_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
 import '../../services/firebase_service.dart';
 import 'intro_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -18,11 +22,12 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.sizeOf(context).height;
     double myWidht = MediaQuery.sizeOf(context).width;
+    var mText = AppLocalizations.of(context)!;
     return Form(
       key: formKey,
       child: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color(0xff001E34),
+            backgroundColor: CustomColors.bgcolor,
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -35,7 +40,7 @@ class _SignInPageState extends State<SignInPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 110, vertical: 90),
                           child: Image.asset(
-                            "assets/wallet.png",
+                            CustomTexts().walletImagePath,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -68,31 +73,37 @@ class _SignInPageState extends State<SignInPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: myWidht / 5),
-                          child: Row(
-                            children: [
-                              const Text(
-                                "Don't have an a account ?",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey),
-                              ),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                            const SignUpPage()));
-                                  },
-                                  child: Text(
-                                    "Sign Up",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.deepPurpleAccent.shade200),
-                                  ))
-                            ],
+                        Container(
+                          height: 50,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                 Text(
+                                  mText.isNotHaveAccount,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: CustomColors.mGreyPrimary,),
+                                ),
+                                const SizedBox(width: 10,),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                              const SignUpPage()));
+                                    },
+                                    child:  Text(
+                                      mText.signUp,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: CustomColors.mYellow,),
+                                    ))
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -106,6 +117,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Padding _buttonWidget(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: SizedBox(
@@ -124,25 +136,25 @@ class _SignInPageState extends State<SignInPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        backgroundColor: const Color(0xff001E34),
-                        title: const Text(
-                          "ERROR",
-                          style: TextStyle(
+                        backgroundColor: CustomColors.bgcolor,
+                        title:  Text(
+                          mText.error,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xffFFD400),
+                            color: CustomColors.mYellow,
                           ),
                         ),
                         content: Text(
                           result!,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: CustomColors.mWhitePrimary),
                         ),
                         actions: [
                           TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: Text(
-                                "Try Again",
-                                style: TextStyle(
-                                    color: Colors.deepPurpleAccent.shade700),
+                              child:  Text(
+                                mText.tryAgain,
+                                style: const TextStyle(
+                                    color: CustomColors.mYellow),
                               )),
                         ],
                       );
@@ -151,14 +163,14 @@ class _SignInPageState extends State<SignInPage> {
             } else {}
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffFFD400),
+            backgroundColor: CustomColors.mYellow,
           ),
-          child: Text(
-            "Login",
-            style: TextStyle(
+          child:  Text(
+            mText.login,
+            style: const TextStyle(
                 fontSize: 16.5,
                 fontWeight: FontWeight.w700,
-                color: Colors.deepPurple.shade900),
+                color: CustomColors.mPurple),
           ),
         ),
       ),
@@ -166,15 +178,16 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Padding _passwordField(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffFFD400),
+            color: CustomColors.mYellow,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color(0xffFFD400),
+              color: CustomColors.mYellow,
             )),
         child: TextFormField(
           decoration: InputDecoration(
@@ -182,12 +195,12 @@ class _SignInPageState extends State<SignInPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             errorStyle: const TextStyle(
                 fontSize: 15,
-                color: Colors.deepPurpleAccent,
+                color: CustomColors.mPurple,
                 fontWeight: FontWeight.w500),
             prefixIcon: const Icon(
               Icons.key,
               size: 30,
-              color: Colors.deepPurple,
+              color: CustomColors.mPurple,
             ),
             suffixIcon: IconButton(
                 onPressed: () {
@@ -199,22 +212,22 @@ class _SignInPageState extends State<SignInPage> {
                   _passwordVisibility
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
-                  color: Colors.deepPurple,
+                  color: CustomColors.mPurple,
                 )),
-            hintText: "Password",
+            hintText: mText.password,
             hintStyle: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w400, color: CustomColors.mBlackPrimary,),
           ),
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.deepPurple,
+            color: CustomColors.mPurple,
           ),
           obscuringCharacter: '*',
           obscureText: _passwordVisibility,
           validator: (value) {
             if (value!.isEmpty) {
-              return "Cannot be Empty";
+              return mText.cannotEmpty;
             } else {}
             return null;
           },
@@ -227,15 +240,16 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Padding _emailField(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffFFD400),
+            color: CustomColors.mYellow,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color(0xffFFD400),
+              color: CustomColors.mYellow,
             )),
         child: TextFormField(
           decoration: InputDecoration(
@@ -243,26 +257,26 @@ class _SignInPageState extends State<SignInPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             errorStyle: const TextStyle(
                 fontSize: 15,
-                color: Colors.deepPurpleAccent,
+                color: CustomColors.mPurple,
                 fontWeight: FontWeight.w500),
             prefixIcon: const Icon(
               Icons.mail_outline_rounded,
               size: 30,
-              color: Colors.deepPurple,
+              color: CustomColors.mPurple,
             ),
-            hintText: "E-mail",
+            hintText: mText.email,
             hintStyle: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w400, color: CustomColors.mBlackPrimary,),
           ),
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.deepPurple,
+            color: CustomColors.mPurple,
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return "Cannot be Empty";
+              return mText.cannotEmpty;
             } else {}
             return null;
           },

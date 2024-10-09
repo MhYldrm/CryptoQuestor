@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_questor/ui/views/sign_in_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../Components/wallet_list.dart';
 import '../../widgets/customappbar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -20,9 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
   var authService = FirebaseAuth.instance;
   final Uri _mailUrl = Uri(scheme: 'mailto',path: 'mmyildirrimm5@gmail.com');
   final Uri _webUrl = Uri.parse('https://myildirrim.netlify.app');
-
-
-
 
   List personInfo = [];
   bool? isLoading;
@@ -46,23 +45,23 @@ class _ProfilePageState extends State<ProfilePage> {
     getInfo(authService.currentUser!.uid);
   }
 
-
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     double widht = MediaQuery.sizeOf(context).width;
     //double height = MediaQuery.sizeOf(context).height;
     return SafeArea(
         child: Scaffold(
           extendBody: true,
           extendBodyBehindAppBar: true,
-          backgroundColor: const Color(0xff001E34),
+          backgroundColor: CustomColors.bgcolor,
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(100),
               child: CustomAppBar(
-                  title: "My Account",
+                  title: mText.myAccount,
                   icon: Icons.person,
                   iconSize: 33,
-                  iconColor: Colors.black)),
+                  iconColor: CustomColors.mBlackPrimary,)),
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -81,6 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Padding _dashboardListWidget(double widht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(left: 30),
       child: Row(
@@ -96,9 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                   child: Row(
                     children: [
-                      Image.asset("assets/aboutus.png",height: 35,width: 35,fit: BoxFit.fill,color: const Color(0xffFFD400).withOpacity(0.8),),
+                      Image.asset(CustomTexts().aboutUsImagePath,height: 35,width: 35,fit: BoxFit.fill,color: CustomColors.mYellow),
                       const SizedBox(width: 20,),
-                      const Text("About Us",style: TextStyle(fontSize: 20,color: Colors.white),),
+                       Text(mText.aboutUs,style: const TextStyle(fontSize: 20,color: CustomColors.mWhitePrimary),),
                     ],
                   ),
                 ),
@@ -110,10 +110,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                          backgroundColor: const Color(0xffFFD400).withOpacity(0.8),
-                          child: Image.asset("assets/contactus.png",height: 30,width: 30,fit: BoxFit.fill,color: Colors.black)),
+                          backgroundColor: CustomColors.mYellow,
+                          child: Image.asset(CustomTexts().contactUsImagePath,height: 30,width: 30,fit: BoxFit.fill,color: CustomColors.mBlackPrimary)),
                       const SizedBox(width: 20,),
-                      const Text("Contact Us",style: TextStyle(fontSize: 20,color: Colors.white),),
+                       Text(mText.contactUs,style: const TextStyle(fontSize: 20,color: CustomColors.mWhitePrimary),),
                     ],
                   ),
                 ),
@@ -126,11 +126,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                   child:  Row(
                     children: [
-                      CircleAvatar(
-                          backgroundColor: const Color(0xffFFD400).withOpacity(0.8),
-                          child: const Icon(Icons.logout_outlined,size: 23,color: Colors.black,)),
+                      const CircleAvatar(
+                          backgroundColor: CustomColors.mYellow,
+                          child:  Icon(Icons.logout_outlined,size: 23,color: CustomColors.mBlackPrimary,)),
                       const SizedBox(width: 20,),
-                      const Text("Logout",style: TextStyle(fontSize: 20,color: Colors.red),),
+                       Text(mText.logout,style: const TextStyle(fontSize: 20,color: CustomColors.mRedPrimary),),
                     ],
                   ),
                 ),
@@ -143,6 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Padding _buyMeCoffeeWidget() {
+    var mText = AppLocalizations.of(context)!;
     double height = MediaQuery.sizeOf(context).height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -154,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 shape: BoxShape.rectangle,
-                color:  Color(0xff001E34),
+                color: CustomColors.bgcolor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -165,12 +166,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400", "Bitcoin", WalletList().btcAdress,13),
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628", "Ethereum", WalletList().ethAdress,12),
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/4128/large/solana.png?1718769756", "Solana", WalletList().solAdress,11),
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/17980/large/photo_2024-09-10_17.09.00.jpeg?1725963446", "Ton Chain", WalletList().tonAdress,10),
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/16547/large/arb.jpg?1721358242", "Arbitrum", WalletList().arbAdress,12),
-                      _bottomSheetListWidget(80, 380, "https://coin-images.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193", "Tron Chain", WalletList().trxAdress,13),
+                      _bottomSheetListWidget(80, 380, CustomTexts().bitcoinInfo[0], CustomTexts().bitcoinInfo[1], CustomTexts().bitcoinInfo[2],13),
+                      _bottomSheetListWidget(80, 380, CustomTexts().ethInfo[0], CustomTexts().ethInfo[1], CustomTexts().ethInfo[2],12),
+                      _bottomSheetListWidget(80, 380, CustomTexts().solInfo[0], CustomTexts().solInfo[1], CustomTexts().solInfo[2],11),
+                      _bottomSheetListWidget(80, 380, CustomTexts().tonInfo[0], CustomTexts().tonInfo[1], CustomTexts().tonInfo[2],10),
+                      _bottomSheetListWidget(80, 380, CustomTexts().arbInfo[0], CustomTexts().arbInfo[1], CustomTexts().arbInfo[2],12),
+                      _bottomSheetListWidget(80, 380, CustomTexts().tronInfo[0], CustomTexts().tronInfo[1], CustomTexts().tronInfo[2],13),
                     ],
                   ),
                 ),
@@ -183,15 +184,15 @@ class _ProfilePageState extends State<ProfilePage> {
           width: double.infinity,
           child: Column(
             children: [
-              const Text("Do you want support us ?",style: TextStyle(
+               Text(mText.supportUs,style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w300,
-                  color: Colors.grey
+                  color: CustomColors.mGreyPrimary
               ),),
               const SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 100),
-                child: Image.asset("assets/buymecoffee.png",fit: BoxFit.fill,),
+                child: Image.asset(CustomTexts().buyMeCoffeeImagePath,fit: BoxFit.fill,),
               ),
             ],
           ),
@@ -201,6 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   SizedBox _bottomSheetListWidget(double height,double width,String url,String name,String wallet,double fontSize) {
+    var mText = AppLocalizations.of(context)!;
     return SizedBox(
       height: height,
       width: width,
@@ -208,7 +210,14 @@ class _ProfilePageState extends State<ProfilePage> {
         onTap: (){
           Clipboard.setData( ClipboardData(text: wallet)).then((_) {
             ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Copied to your clipboard !')));
+                 SnackBar(
+                     backgroundColor: CustomColors.mYellow,
+                     content: Text(mText.copiedBoard,
+                       style: const TextStyle(
+                         color: CustomColors.bgcolor,
+                         fontWeight: FontWeight.bold
+                       ),
+                     )));
           });
         },
         child: Row(
@@ -232,7 +241,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(width: 10,),
             const Padding(
                 padding:  EdgeInsets.only(top: 12),
-                child:  Icon(Icons.content_copy,size: 12,color: Colors.grey,)
+                child:  Icon(Icons.content_copy,size: 12,color: CustomColors.mGreyPrimary)
             ),
           ],
         ),
@@ -241,14 +250,15 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Padding _dashboardString() {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(left: 30),
       child: Row(
         children: [
-          Text("Dashboard",style: TextStyle(
+          Text(mText.dashboard,style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.bold,
-            color: Colors.white.withOpacity(0.5),
+            color: CustomColors.mWhitePrimary.withOpacity(0.4),
           ),),
         ],
       ),
@@ -256,13 +266,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Padding _topWidget() {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SizedBox(
         height: 220,
         width: double.infinity,
         child: isLoading == null
-            ?  SizedBox(height: 10,child:  CircularProgressIndicator(color: const Color(0xffFFD400).withOpacity(0.8),))
+            ?  const SizedBox(height: 10,child:  CircularProgressIndicator(color: CustomColors.mYellow))
             : isLoading == false
             ? ListView.builder(
           itemCount: 1,
@@ -277,9 +288,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 70,
                     child: CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        child: isMan == true ? Image.asset("assets/man.png",
+                        child: isMan == true ? Image.asset(CustomTexts().manImagePath,
                           fit: BoxFit.fill,
-                        ) : Image.asset("assets/woman.png",
+                        ) : Image.asset(CustomTexts().womanImagePath,
                           fit: BoxFit.fill,
                         )
                     ),
@@ -333,24 +344,24 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(width: 18,),
                   PopupMenuButton(
-                    child: Icon(Icons.manage_accounts_rounded,color: const Color(0xffFFD400).withOpacity(0.8),),
+                    child: const Icon(Icons.manage_accounts_rounded,color: CustomColors.mYellow),
                     onSelected: (value){
-                      if(value == "Change Gender Picture"){
+                      if(value == mText.changeGenderImage){
                         chanceGender();
                       }
                     },
                     itemBuilder: (context) => [
                       PopupMenuItem(
-                        value: "Change Gender Picture",
+                        value: mText.changeGenderImage,
                         child: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.change_circle_rounded,color: const Color(0xffFFD400).withOpacity(0.8),),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 8.0),
+                              child: Icon(Icons.change_circle_rounded,color: CustomColors.mYellow),
                             ),
-                            const Text(
-                              'Change Gender Picture',
-                              style: TextStyle(fontSize: 15),
+                             Text(
+                               mText.changeGenderImage,
+                              style: const TextStyle(fontSize: 15),
                             ),
                           ],
                         ),

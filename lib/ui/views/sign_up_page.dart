@@ -1,6 +1,10 @@
 import 'package:crypto_questor/ui/views/sign_in_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
 import '../../services/firebase_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,11 +21,12 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.sizeOf(context).height;
     double myWidht = MediaQuery.sizeOf(context).width;
+    var mText = AppLocalizations.of(context)!;
     return Form(
       key: formKey,
       child: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color(0xff001E34),
+            backgroundColor: CustomColors.bgcolor,
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -34,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 70),
                           child: Image.asset(
-                            "assets/blockchain.png",
+                            CustomTexts().blockchainImagePath,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -72,11 +77,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           padding: EdgeInsets.symmetric(horizontal: myWidht / 5),
                           child: Row(
                             children: [
-                              const Text(
-                                "I'm aldready registered",
-                                style: TextStyle(
+                               Text(
+                               mText.isHaveAccount,
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.grey),
+                                    color: CustomColors.mGreyPrimary),
                               ),
                               TextButton(
                                   onPressed: () {
@@ -87,10 +92,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                             const SignInPage()));
                                   },
                                   child: Text(
-                                    "Log in",
-                                    style: TextStyle(
+                                    mText.login,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.deepPurpleAccent.shade200),
+                                        color: CustomColors.mYellow),
                                   ))
                             ],
                           ),
@@ -106,6 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Padding _buttonWidget(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: SizedBox(
@@ -121,12 +127,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 if (result == "success") {
                   formKey.currentState!.reset();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: const Color(0xffFFD400),
+                      backgroundColor: CustomColors.mYellow,
                       duration: const Duration(seconds: 2),
                       content: Text(
-                        "New User Created",
+                        mText.newUserCreated,
                         style:
-                        TextStyle(color: Colors.deepPurpleAccent.shade700),
+                        const TextStyle(color: CustomColors.bgcolor),
                       )));
                   Navigator.push(
                       context,
@@ -137,25 +143,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          backgroundColor: const Color(0xff001E34),
-                          title: const Text(
-                            "ERROR",
-                            style: TextStyle(
+                          backgroundColor: CustomColors.bgcolor,
+                          title:  Text(
+                            mText.error,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffFFD400),
+                              color: CustomColors.mYellow,
                             ),
                           ),
                           content: Text(
                             result!,
-                            style: const TextStyle(color: Colors.white),
+                            style:  const TextStyle(color: CustomColors.mWhitePrimary,),
                           ),
                           actions: [
                             TextButton(
                                 onPressed: () => Navigator.pop(context),
                                 child: Text(
-                                  "Try Again",
-                                  style: TextStyle(
-                                      color: Colors.deepPurpleAccent.shade700),
+                                  mText.tryAgain,
+                                  style: const TextStyle(
+                                      color: CustomColors.mYellow,),
                                 )),
                           ],
                         );
@@ -167,14 +173,14 @@ class _SignUpPageState extends State<SignUpPage> {
             } else {}
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffFFD400),
+            backgroundColor: CustomColors.mYellow,
           ),
           child: Text(
-            "Sign Up",
-            style: TextStyle(
+            mText.signUp,
+            style: const TextStyle(
                 fontSize: 16.5,
                 fontWeight: FontWeight.w500,
-                color: Colors.deepPurple.shade900),
+                color: CustomColors.mPurple),
           ),
         ),
       ),
@@ -182,15 +188,16 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Padding _passwordField(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffFFD400),
+            color: CustomColors.mYellow,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color(0xffFFD400),
+              color: CustomColors.mYellow,
             )),
         child: TextFormField(
           decoration: InputDecoration(
@@ -198,12 +205,12 @@ class _SignUpPageState extends State<SignUpPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             errorStyle: const TextStyle(
                 fontSize: 15,
-                color: Colors.deepPurpleAccent,
+                color: CustomColors.mPurple,
                 fontWeight: FontWeight.w500),
             prefixIcon: const Icon(
               Icons.key,
               size: 30,
-              color: Colors.deepPurple,
+              color: CustomColors.mPurple,
             ),
             suffixIcon: IconButton(
                 onPressed: () {
@@ -215,22 +222,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   _passwordVisibility
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
-                  color: Colors.deepPurple,
+                  color: CustomColors.mPurple,
                 )),
-            hintText: "Password",
+            hintText: mText.password,
             hintStyle: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w400, color: CustomColors.mBlackPrimary,),
           ),
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.deepPurple,
+            color: CustomColors.mPurple,
           ),
           obscuringCharacter: '*',
           obscureText: _passwordVisibility,
           validator: (value) {
             if (value!.isEmpty) {
-              return "Cannot be Empty";
+              return mText.cannotEmpty;
             } else {}
             return null;
           },
@@ -243,15 +250,16 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Padding _emailField(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffFFD400),
+            color: CustomColors.mYellow,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color(0xffFFD400),
+              color: CustomColors.mYellow,
             )),
         child: TextFormField(
           decoration: InputDecoration(
@@ -259,26 +267,26 @@ class _SignUpPageState extends State<SignUpPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             errorStyle: const TextStyle(
                 fontSize: 15,
-                color: Colors.deepPurpleAccent,
+                color: CustomColors.mPurple,
                 fontWeight: FontWeight.w500),
             prefixIcon: const Icon(
               Icons.mail_outline_rounded,
               size: 30,
-              color: Colors.deepPurple,
+              color: CustomColors.mPurple,
             ),
-            hintText: "E-mail",
+            hintText: mText.email,
             hintStyle: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w400, color: CustomColors.mBlackPrimary,),
           ),
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.deepPurple,
+            color: CustomColors.mPurple,
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return "Cannot be Empty";
+              return mText.cannotEmpty;
             } else {}
             return null;
           },
@@ -291,15 +299,16 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Padding _nameField(double myWidht) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: BoxDecoration(
-            color: const Color(0xffFFD400),
+            color: CustomColors.mYellow,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color(0xffFFD400),
+              color: CustomColors.mYellow,
             )),
         child: TextFormField(
           decoration: InputDecoration(
@@ -307,25 +316,25 @@ class _SignUpPageState extends State<SignUpPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
             errorStyle: const TextStyle(
                 fontSize: 15,
-                color: Colors.deepPurpleAccent,
+                color: CustomColors.mPurple,
                 fontWeight: FontWeight.w500),
             prefixIcon: const Icon(
               Icons.person_sharp,
               size: 30,
-              color: Colors.deepPurple,
+              color: CustomColors.mPurple,
             ),
-            hintText: "Name",
+            hintText: mText.name,
             hintStyle: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w400, color: CustomColors.mBlackPrimary,),
           ),
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.deepPurple,
+            color: CustomColors.mPurple,
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return "Cannot be Empty";
+              return mText.cannotEmpty;
             } else {}
             return null;
           },

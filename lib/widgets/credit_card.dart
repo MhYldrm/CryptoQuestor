@@ -1,5 +1,9 @@
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
 import '../ui/views/portfolio_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreditCard extends StatelessWidget {
   CreditCard({super.key, this.balance});
@@ -7,6 +11,7 @@ class CreditCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: SizedBox(
@@ -14,7 +19,7 @@ class CreditCard extends StatelessWidget {
         child: Stack(
           children: [
             const CreditCardBackground(),
-            balanceText(balance),
+            balanceText(balance,context),
             profitPercent(context),
           ],
         ),
@@ -30,7 +35,7 @@ class CreditCard extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: Color.fromARGB(255, 138, 124, 54)),
+              color: const Color.fromARGB(255, 138, 124, 54)),
           child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -45,15 +50,16 @@ class CreditCard extends StatelessWidget {
     );
   }
 
-  Widget balanceText(String? balance) {
+  Widget balanceText(String? balance,BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Total Spent',
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+           Text(
+            mText.totalSpent,
+            style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
           ),
           Text(
             "${balance} \$",
@@ -67,7 +73,7 @@ class CreditCard extends StatelessWidget {
             height: 80,
             width: 140,
             child: Image.asset(
-              "assets/blockchain.png",
+              CustomTexts().blockchainImagePath,
               fit: BoxFit.fill,
             ),
           ),
@@ -90,12 +96,7 @@ class CreditCardBackground extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           stops: [0, 0.25, 0.75, 1],
-          colors: [
-            Color(0x99FFFFFF),
-            Color(0x00FFFFFF),
-            Color(0x00FFFFFF),
-            Color(0x99FFFFFF),
-          ],
+          colors: CustomColors.cardGradientColors
         ),
       ),
       child: ClipRRect(

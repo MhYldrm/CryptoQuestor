@@ -1,9 +1,11 @@
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 import '../../models/earn_model.dart';
 import '../../services/coin_services.dart';
 import '../../services/firebase_service.dart';
 import '../../widgets/earn_card.dart';
 import 'earn_details_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class EarnPage extends StatefulWidget {
@@ -36,9 +38,10 @@ class _EarnPageState extends State<EarnPage> {
 
   @override
   Widget build(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color(0xff001E34),
+          backgroundColor: CustomColors.bgcolor,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -72,11 +75,14 @@ class _EarnPageState extends State<EarnPage> {
                                   exchangeName: earns.exchangeName),
                             ));
                       })
-                      : const Padding(
-                    padding: EdgeInsets.all(8.0),
+                      : Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: Text(
-                          "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+                        mText.isApiRequestFailed,
+                        style: const TextStyle(
+                            color: CustomColors.mWhitePrimary
+                        ),),
                     ),
                   ),
                 ),
@@ -95,6 +101,7 @@ class _welcomePart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var firebaseService = FirebaseService().firebaseAuth;
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Row(
@@ -105,20 +112,20 @@ class _welcomePart extends StatelessWidget {
               Text(
                 firebaseService.currentUser?.displayName ??
                     firebaseService.currentUser?.email ??
-                    'Crypto Lover',
+                    mText.cryptoLover,
                 style: const TextStyle(
                     fontSize: 13,
-                    color: Colors.white,
+                    color: CustomColors.mWhitePrimary,
                     fontWeight: FontWeight.w300),
               ),
               const SizedBox(
                 height: 5,
               ),
-              const Text(
-                "Here Your Crypto Rewards 🎁",
-                style: TextStyle(
+               Text(
+                mText.cryptoRewards,
+                style: const TextStyle(
                     fontSize: 15,
-                    color: Colors.white,
+                    color: CustomColors.mWhitePrimary,
                     fontWeight: FontWeight.w500),
               ),
             ],

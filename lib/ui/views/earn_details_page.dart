@@ -1,6 +1,9 @@
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/earn_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EarnDetailsPage extends StatefulWidget {
   final EarnModel earnModel;
@@ -23,9 +26,10 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
   Widget build(BuildContext context) {
     double myHeight = MediaQuery.sizeOf(context).height;
     double myWidth = MediaQuery.sizeOf(context).width;
+    var mText = AppLocalizations.of(context)!;
     return SafeArea(
         child: Scaffold(
-          backgroundColor: const Color(0xff001E34),
+          backgroundColor: CustomColors.bgcolor,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -52,7 +56,7 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                               borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(15),
                                   topRight: Radius.circular(15)),
-                              color: Colors.transparent.withOpacity(0.7),
+                              color: Colors.transparent.withOpacity(0.5),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -60,7 +64,9 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                                 widget.earnModel.title,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                                    fontSize: 22,
+                                    color: CustomColors.mWhitePrimary,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -85,10 +91,10 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                       children: [
                         Row(
                           children: [
-                            const Icon(
+                             const Icon(
                               Icons.location_pin,
                               size: 17,
-                              color: Color(0xffFFD400),
+                              color: CustomColors.mYellow,
                             ),
                             const SizedBox(
                               width: 10,
@@ -96,8 +102,8 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                             Container(
                               height: 40,
                               width: 140,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white30
+                              decoration:  BoxDecoration(
+                                  color: CustomColors.mWhitePrimary.withOpacity(0.2),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(3),
@@ -111,18 +117,11 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                               width: 5,
                             ),
                             if(
-                            widget.earnModel.exchangeName == "OKX"
-                                || widget.earnModel.exchangeName == "BINANCE"
-                                || widget.earnModel.exchangeName == "Mexc"
-                                || widget.earnModel.exchangeName == "Kucoin"
-                                || widget.earnModel.exchangeName == "Gate io"
-                                || widget.earnModel.exchangeName == "Bitget"
-                                || widget.earnModel.exchangeName == "Telegram"
-                                || widget.earnModel.exchangeName == "Cro")
+                            CustomTexts().exchangeList.contains(widget.earnModel.exchangeName))
                               const Text("")else Text(
                               widget.earnModel.exchangeName,
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: CustomColors.mWhitePrimary,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w300),
                             ),
@@ -130,12 +129,11 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                         ),
                         const Spacer(),
                         Row(
-
                           children: [
                             const Icon(
                               Icons.date_range_rounded,
                               size: 15,
-                              color: Color(0xffFFD400),
+                              color: CustomColors.mYellow,
                             ),
                             const SizedBox(
                               width: 5,
@@ -143,7 +141,7 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                             Text(
                               widget.earnModel.dateTime,
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: CustomColors.mWhitePrimary,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w300),
                             ),
@@ -159,16 +157,16 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 15, left: 15),
+                         Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 15),
                           child: Row(
                             children: [
                               Text(
-                                "Description",
-                                style: TextStyle(
+                                mText.description,
+                                style: const TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.pink),
+                                    color: CustomColors.mPinkPrimary),
                               ),
                             ],
                           ),
@@ -182,7 +180,7 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                             child: Text(
                               widget.earnModel.description,
                               style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
+                                  fontSize: 15, fontWeight: FontWeight.w300,color: CustomColors.mWhitePrimary),
                               maxLines: 16,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -193,46 +191,46 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                   ),
                 ),
                 const Divider(
-                    thickness: 1, color: Color.fromARGB(255, 135, 116, 25)),
+                    thickness: 1, color: CustomColors.mLightYellow),
                 Container(
                   height: myHeight / 4,
                   width: myWidth,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 5, left: 15),
+                         Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 15),
                           child: Row(
                             children: [
                               Text(
-                                "Missions",
+                                mText.missions,
                                 style: const TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.pink),
+                                    color: CustomColors.mPinkPrimary),
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                            padding: EdgeInsets.only(top: 1, right: 20, left: 20),
+                            padding: const EdgeInsets.only(top: 1, right: 20, left: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "-  To complete the tasks, you must sign up the exchange and complete KYC procedures.You can sign up",
-                                  style: TextStyle(
-                                      fontSize: 14, fontWeight: FontWeight.w400),
+                                 Text(
+                                  mText.missionsDescription,
+                                  style: const TextStyle(
+                                      fontSize: 14, fontWeight: FontWeight.w300,color: CustomColors.mWhitePrimary),
                                 ),
                                 InkWell(
                                   onTap: () {
                                     _launchWebUrl(Uri.parse(widget.earnModel.refLink));
                                   },
-                                  child: const Text(
-                                    "here",
-                                    style: TextStyle(
+                                  child:  Text(
+                                    mText.here,
+                                    style: const TextStyle(
                                         fontSize: 14,
-                                        color: Color(0xffFFD400),
+                                        color: CustomColors.mYellow,
                                         fontWeight: FontWeight.w400),
                                   ),
                                 ),
@@ -246,7 +244,7 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                             child: Text(
                               widget.earnModel.missions,
                               style: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
+                                  fontSize: 14, fontWeight: FontWeight.w300,color: CustomColors.mWhitePrimary),
                               maxLines: 16,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -265,14 +263,14 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
                       onPressed: () {
                         _launchWebUrl(Uri.parse(widget.earnModel.missionsLink));
                       },
-                      child:  Text(
-                        "Go to Missions",
-                        style: TextStyle(color: Colors.pinkAccent.shade700, fontSize: 20),
-                      ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xffFFD400),
+                          backgroundColor: CustomColors.mYellow,
                           elevation: 5,
                           shadowColor: Colors.red),
+                      child:  Text(
+                       mText.goToMissions,
+                        style: TextStyle(color: CustomColors.mPinkPrimary.withOpacity(0.9), fontSize: 20),
+                      ),
                     ),
                   ),
                 )

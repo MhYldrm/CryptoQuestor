@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:crypto_questor/ui/views/intro_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
+import 'package:crypto_questor/utils/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:random_string/random_string.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../models/chart_model.dart';
 import '../../services/firebase_service.dart';
 
@@ -35,14 +36,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   List<ChartModel>? itemChart;
   //for too many request free api
   String? statusCodeError;
-  List<String> times = [
-    "D",
-    "W",
-    "M",
-    "3M",
-    "6M",
-    "Y",
-  ];
+
   List<bool> timesBool = [true, false, false, false, false, false];
   int days = 1;
 
@@ -73,19 +67,16 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
       });
     }
   }
-
   bool isLoading = true;
   Future<void> getChart() async {
-    String url =
-        '${'https://api.coingecko.com/api/v3/coins/' + widget.selectCoin.id}/ohlc?vs_currency=usd&days=$days';
-
+    String url = CustomTexts().getApiUrl(widget.selectCoin.id, days);
     setState(() {
       isLoading = true;
     });
 
     var response = await http.get(Uri.parse(url), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      CustomTexts().apiHeaders[0] : CustomTexts().apiHeaders[1],
+      CustomTexts().apiHeaders[2]: CustomTexts().apiHeaders[3]
     });
     setState(() {
       isLoading = false;
@@ -99,7 +90,6 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
       });
     } else {
       setState(() {
-        print(response.statusCode);
         statusCodeError = response.statusCode.toString();
       });
     }
@@ -124,7 +114,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: const Color(0xff001E34),
+            backgroundColor: CustomColors.bgcolor,
             body: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -136,7 +126,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                   _addSizedBox(30),
                   isLoading == true
                       ? _circularIndicator()
-                      : itemChart == null || statusCodeError == "429"
+                      : itemChart == null || statusCodeError == CustomTexts().statusCode
                       ? _showErrorWidget()
                       : _chartWidget(),
                   _addSizedBox(10),
@@ -151,226 +141,229 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   }
 
   _showAlertDialog(BuildContext context) {
+    var mText = AppLocalizations.of(context)!;
     double deviceHight = MediaQuery.sizeOf(context).height;
     AlertDialog alert = AlertDialog(
-      backgroundColor: const Color(0xff001E34),
+      backgroundColor: CustomColors.bgcolor,
       title: Row(
         children: [
           Text(
-            "Add ${widget.selectCoin.symbol.toString().toUpperCase()} to Portfolio",
+          "${mText.addPortfolioCoin}${widget.selectCoin.symbol.toString().toUpperCase()}",
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 1.5),
+            padding: const EdgeInsets.only(top: 1.3),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close_outlined,
                   size: 20,
-                  color: Colors.red.shade300,
+                  color: CustomColors.mPinkPrimary,
                 )),
           )
         ],
       ),
       content: SizedBox(
         height: deviceHight / 2,
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Price Per Coin",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                ),
-                _addSizedBox(5),
-                Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 6, 43, 69),
-                    borderRadius: BorderRadius.circular(12),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(
+                    mText.pricePerCoin,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 50,
-                          child: TextField(
-                            controller: sheetPriceController,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              if (value.isNotEmpty) {
-                                setState(() {
-                                  sheetPriceController.text = value;
-                                  calculatePortfolioTotalSpent(
-                                      sheetPriceController,
-                                      sheetQuantityController,
-                                      sheetTotalSpentController);
-                                });
-                              } else {
-                                setState(() {
-                                  sheetPriceController.text = "0";
-                                });
-                              }
-                            },
-                            cursorColor: Colors.deepPurpleAccent,
-                            decoration: InputDecoration(
-                              hintMaxLines: 1,
-                              border: InputBorder.none,
-                              hintText: "${widget.selectCoin.currentPrice}",
+                  _addSizedBox(5),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: CustomColors.mLightGrey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 50,
+                            child: TextField(
+                              controller: sheetPriceController,
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  setState(() {
+                                    sheetPriceController.text = value;
+                                    calculatePortfolioTotalSpent(
+                                        sheetPriceController,
+                                        sheetQuantityController,
+                                        sheetTotalSpentController);
+                                  });
+                                } else {
+                                  setState(() {
+                                    sheetPriceController.text = "0";
+                                  });
+                                }
+                              },
+                              cursorColor:  CustomColors.mPurple,
+                              decoration: InputDecoration(
+                                hintMaxLines: 1,
+                                border: InputBorder.none,
+                                hintText: "${widget.selectCoin.currentPrice}",
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 55,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: VerticalDivider(
-                            thickness: 1.5,
-                            color: Colors.white12,
+                          const SizedBox(
+                            width: 55,
                           ),
-                        ),
-                        const Text(
-                          "USD",
-                          style: TextStyle(fontWeight: FontWeight.w300),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            _addSizedBox(20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Quantity",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                ),
-                _addSizedBox(5),
-                Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 6, 43, 69),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 50,
-                          child: TextField(
-                            controller: sheetQuantityController,
-                            keyboardType: TextInputType.number,
-                            cursorColor: Colors.deepPurpleAccent,
-                            onChanged: (value) {
-                              if (value.isNotEmpty) {
-                                setState(() {
-                                  sheetQuantityController.text = value;
-                                  calculatePortfolioTotalSpent(
-                                      sheetPriceController,
-                                      sheetQuantityController,
-                                      sheetTotalSpentController);
-                                });
-                              } else {
-                                setState(() {
-                                  sheetQuantityController.text = "0";
-                                });
-                              }
-                            },
-                            decoration: const InputDecoration(
-                              hintMaxLines: 1,
-                              border: InputBorder.none,
-                              hintText: "0",
+                           Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: VerticalDivider(
+                              thickness: 1.5,
+                              color: CustomColors.mWhitePrimary.withOpacity(0.1),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 55,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: VerticalDivider(
-                            thickness: 1.5,
-                            color: Colors.white12,
-                          ),
-                        ),
-                        Text(
-                          widget.selectCoin.symbol.toString().toUpperCase(),
-                          style: const TextStyle(fontWeight: FontWeight.w300),
-                        )
-                      ],
+                           Text(
+                            CustomTexts().usd,
+                            style: const TextStyle(fontWeight: FontWeight.w300),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            _addSizedBox(20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Total Spent",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                ),
-                _addSizedBox(5),
-                Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 6, 43, 69),
-                    borderRadius: BorderRadius.circular(12),
+                ],
+              ),
+              _addSizedBox(20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(
+                    mText.quantityText,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 50,
-                          child: TextField(
-                            controller: sheetTotalSpentController,
-                            cursorColor: Colors.deepPurpleAccent,
-                            decoration: const InputDecoration(
-                              hintMaxLines: 1,
-                              border: InputBorder.none,
-                              hintText: "0",
+                  _addSizedBox(5),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: CustomColors.mLightGrey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 50,
+                            child: TextField(
+                              controller: sheetQuantityController,
+                              keyboardType: TextInputType.number,
+                              cursorColor: Colors.deepPurpleAccent,
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  setState(() {
+                                    sheetQuantityController.text = value;
+                                    calculatePortfolioTotalSpent(
+                                        sheetPriceController,
+                                        sheetQuantityController,
+                                        sheetTotalSpentController);
+                                  });
+                                } else {
+                                  setState(() {
+                                    sheetQuantityController.text = "0";
+                                  });
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                hintMaxLines: 1,
+                                border: InputBorder.none,
+                                hintText: "0",
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 55,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: VerticalDivider(
-                            thickness: 1.5,
-                            color: Colors.white12,
+                          const SizedBox(
+                            width: 55,
                           ),
-                        ),
-                        const Text(
-                          "USD",
-                          style: TextStyle(fontWeight: FontWeight.w300),
-                        )
-                      ],
+                           Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: VerticalDivider(
+                              thickness: 1.5,
+                              color: CustomColors.mWhitePrimary.withOpacity(0.1),
+                            ),
+                          ),
+                          Text(
+                            widget.selectCoin.symbol.toString().toUpperCase(),
+                            style: const TextStyle(fontWeight: FontWeight.w300),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              _addSizedBox(20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(
+                    mText.totalSpent,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                  _addSizedBox(5),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: CustomColors.mLightGrey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 50,
+                            child: TextField(
+                              controller: sheetTotalSpentController,
+                              cursorColor: CustomColors.mPurple,
+                              decoration: const InputDecoration(
+                                hintMaxLines: 1,
+                                border: InputBorder.none,
+                                hintText: "0",
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 55,
+                          ),
+                           Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: VerticalDivider(
+                              thickness: 1.5,
+                              color: CustomColors.mWhitePrimary.withOpacity(0.1),
+                            ),
+                          ),
+                           Text(
+                            CustomTexts().usd,
+                            style: const TextStyle(fontWeight: FontWeight.w300),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       actionsAlignment: MainAxisAlignment.center,
@@ -379,11 +372,11 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("Cancel"),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white12,
+            backgroundColor: CustomColors.mWhitePrimary.withOpacity(0.2),
             elevation: 1,
           ),
+          child: Text(mText.cancel),
         ),
         ElevatedButton(
           onPressed: () async {
@@ -400,17 +393,17 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
             await FirebaseService().upToPortfolioCoin(upToInfo,uid);
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.deepPurple.shade500,
+                backgroundColor: CustomColors.mYellow,
                 duration: const Duration(milliseconds: 800),
                 content: Text(
-                "${widget.selectCoin.symbol.toString().toUpperCase()} Added to Portfolio 👍",
-                  style: const TextStyle(color: Colors.white),)));
+                  "${widget.selectCoin.symbol.toString().toUpperCase()} ${mText.addedPortfolioCoin}",
+                  style:  const TextStyle(color: CustomColors.bgcolor),)));
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple.shade500,
+              backgroundColor: CustomColors.mPurple,
               elevation: 2.5,
-              shadowColor: Colors.deepPurpleAccent),
-          child: const Text("Submit"),
+              shadowColor: CustomColors.mPurple,),
+          child:  Text(mText.submit),
         ),
       ],
     );
@@ -423,8 +416,9 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   }
 
   Padding _buttonWidget() {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 60),
+      padding: const EdgeInsets.symmetric(horizontal: 55),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
@@ -432,26 +426,27 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
             _showAlertDialog(context);
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple.shade500,
-              elevation: 2.5,
-              shadowColor: Colors.deepPurpleAccent),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 51),
+              backgroundColor: CustomColors.mLightPurple.withOpacity(0.6),
+              elevation: 5,
+              ),
+          child:  Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 61),
             child: Row(
               children: [
                 Text(
-                  "Add Portfolio",
-                  style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.white,
+                  mText.addPortfolioButtonText,
+                  style: const TextStyle(
+                      fontSize: 15,
+                      color: CustomColors.mWhitePrimary,
                       fontWeight: FontWeight.w400),
                 ),
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 2),
+                const Spacer(),
+                 Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
                   child: Icon(
                     FontAwesomeIcons.wallet,
-                    size: 20,
+                    size: 18,
+                    color: CustomColors.mWhitePrimary.withOpacity(0.6),
                   ),
                 )
               ],
@@ -471,7 +466,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
             height: 70,
             width: 160,
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 6, 43, 69),
+              color: CustomColors.mLightGrey,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
@@ -496,7 +491,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                         }
                       },
                       keyboardType: TextInputType.number,
-                      cursorColor: Colors.deepPurpleAccent,
+                      cursorColor: CustomColors.mPurple,
                       decoration: const InputDecoration(
                         hintMaxLines: 1,
                         border: InputBorder.none,
@@ -504,9 +499,9 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                       ),
                     ),
                   ),
-                  const VerticalDivider(
+                   VerticalDivider(
                     thickness: 1.5,
-                    color: Colors.white12,
+                    color: CustomColors.mGreyPrimary.withOpacity(0.5),
                   ),
                   const SizedBox(
                     width: 5,
@@ -526,7 +521,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
             height: 70,
             width: 160,
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 6, 43, 69),
+              color: CustomColors.mLightGrey,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
@@ -551,7 +546,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                         }
                       },
                       keyboardType: TextInputType.number,
-                      cursorColor: Colors.deepPurpleAccent,
+                      cursorColor: CustomColors.mPurple,
                       decoration: const InputDecoration(
                         hintMaxLines: 1,
                         border: InputBorder.none,
@@ -559,16 +554,16 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                       ),
                     ),
                   ),
-                  const VerticalDivider(
+                   VerticalDivider(
                     thickness: 1.5,
-                    color: Colors.white12,
+                    color: CustomColors.mGreyPrimary.withOpacity(0.5),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
-                  const Text(
-                    "USD",
-                    style: TextStyle(fontWeight: FontWeight.w300),
+                   Text(
+                    CustomTexts().usd,
+                    style: const TextStyle(fontWeight: FontWeight.w300),
                   ),
                 ],
               ),
@@ -582,22 +577,22 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   Container _circularIndicator() {
     return Container(
       height: 250,
-      child: Center(
+      child: const Center(
         child: CircularProgressIndicator(
-          color: const Color(0xffD4BBFF).withOpacity(0.35),
+          color: CustomColors.mLilacPrimary,
         ),
       ),
     );
   }
 
   Container _showErrorWidget() {
+    var mText = AppLocalizations.of(context)!;
     return Container(
       height: 250,
-      child: const Center(
+      child:  Center(
         child: Padding(
-          padding: EdgeInsets.all(25.0),
-          child: Text(
-              "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"),
+          padding: const EdgeInsets.all(25.0),
+          child: Text(mText.isApiRequestFailed),
         ),
       ),
     );
@@ -614,7 +609,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Divider(
         thickness: 0.5,
-        color: const Color(0xffD4BBFF).withOpacity(0.35),
+        color: CustomColors.mLilacPrimary.withOpacity(0.7),
       ),
     );
   }
@@ -625,7 +620,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: times.length,
+        itemCount: CustomTexts().times.length,
         itemBuilder: (context, indeks) {
           return InkWell(
             onTap: () {
@@ -633,7 +628,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                 timesBool = [false, false, false, false, false, false];
                 timesBool[indeks] = true;
               });
-              setDays(times[indeks]);
+              setDays(CustomTexts().times[indeks]);
               getChart();
             },
             child: Padding(
@@ -643,11 +638,11 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: timesBool[indeks] == true
-                      ? Colors.deepPurpleAccent.shade700
-                      : const Color(0xffD4BBFF).withOpacity(0.35),
+                      ? CustomColors.mPurple
+                      : CustomColors.mLilacPrimary.withOpacity(0.25),
                 ),
                 child: Text(
-                  times[indeks],
+                  CustomTexts().times[indeks],
                   style: const TextStyle(fontSize: 15),
                 ),
               ),
@@ -686,6 +681,7 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
   }
 
   Padding _topDescription() {
+    var mText = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.only(top: 10, right: 7, left: 7),
       child: SizedBox(
@@ -697,24 +693,24 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Container(
-                  height: 50,
-                  width: 55,
+                  height: 45,
+                  width: 50,
                   decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent,
+                    color: CustomColors.mPurple,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(5.5),
+                  child:  Padding(
+                    padding: const EdgeInsets.all(5.5),
                     child: Column(
                       children: [
                         Text(
-                          "24H",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          mText.twentyHoursText,
+                          style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
                         ),
                         Text(
-                          "Details",
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w300),
+                            mText.details,
+                          style: const TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w300),
                         )
                       ],
                     ),
@@ -723,17 +719,17 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
               ),
               Column(
                 children: [
-                  const Text(
-                    "Low",
-                    style: TextStyle(
-                        fontSize: 17,
+                   Text(
+                  mText.low,
+                    style: const TextStyle(
+                        fontSize: 13,
                         fontWeight: FontWeight.w300,
-                        color: Colors.grey),
+                        color: CustomColors.mGreyPrimary),
                   ),
                   Text(
                     "\$${widget.selectCoin.low24H.toString()}",
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Colors.red.shade300),
                   ),
@@ -741,17 +737,17 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
               ),
               Column(
                 children: [
-                  const Text(
-                    "High",
-                    style: TextStyle(
-                        fontSize: 17,
+                   Text(
+                     mText.high,
+                    style: const TextStyle(
+                        fontSize: 13,
                         fontWeight: FontWeight.w300,
-                        color: Colors.grey),
+                        color: CustomColors.mGreyPrimary),
                   ),
                   Text(
                     "\$${widget.selectCoin.high24H.toString()}",
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Colors.green.shade300),
                   ),
@@ -759,17 +755,17 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
               ),
               Column(
                 children: [
-                  const Text(
-                    "Vol",
-                    style: TextStyle(
-                        fontSize: 17,
+                   Text(
+                     CustomTexts().vol,
+                    style: const TextStyle(
+                        fontSize: 13,
                         fontWeight: FontWeight.w300,
-                        color: Colors.grey),
+                        color: CustomColors.mGreyPrimary),
                   ),
                   Text(
                     "\$${widget.selectCoin.totalVolume.toString()} M",
                     style: const TextStyle(
-                      fontSize: 17,
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -803,8 +799,8 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                   backgroundColor: Colors.transparent,
                   child: Image.network(
                     widget.selectCoin.image,
-                    height: 65,
-                    width: 65,
+                    height: 55,
+                    width: 55,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -812,29 +808,29 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
                   width: 25,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         widget.selectCoin.symbol.toString().toUpperCase(),
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(widget.selectCoin.name,
                           style: widget.selectCoin.name.length < 14
                               ? const TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 15)
+                              fontWeight: FontWeight.w300, fontSize: 13)
                               : widget.selectCoin.name.length < 21
                               ? const TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 12)
+                              fontWeight: FontWeight.w300, fontSize: 10)
                               : widget.selectCoin.name.length < 25
                               ? const TextStyle(
                               fontWeight: FontWeight.w300,
-                              fontSize: 11)
+                              fontSize: 9)
                               : const TextStyle(
                               fontWeight: FontWeight.w300,
-                              fontSize: 10)),
+                              fontSize: 7)),
                     ],
                   ),
                 ),
@@ -844,25 +840,25 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top:10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         "${widget.selectCoin.currentPrice.toString()} \$",
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "${double.parse(widget.selectCoin.marketCapChangePercentage24H.toString()).toStringAsFixed(2)}%",
                         style:
                         widget.selectCoin.marketCapChangePercentage24H >= 0
                             ? TextStyle(
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: FontWeight.w300,
                             color: Colors.green.shade300)
                             : TextStyle(
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: FontWeight.w300,
                             color: Colors.red.shade300),
                       ),
@@ -877,31 +873,25 @@ class _CoinDetailPageState extends State<CoinDetailPage> {
     );
   }
 
-  TextEditingController convertBalance(
-      double x, TextEditingController controller, double price) {
+  TextEditingController convertBalance(double x, TextEditingController controller, double price) {
     double sonuc = x / price;
     controller.text = sonuc.toString();
     return controller;
   }
 
-  TextEditingController con(
-      double x, TextEditingController controller, double y) {
+  TextEditingController con(double x, TextEditingController controller, double y) {
     double sonuc = x * y;
     controller.text = sonuc.toString();
     return controller;
   }
 
-  TextEditingController convertCoin(
-      double x, TextEditingController controller, double price) {
+  TextEditingController convertCoin(double x, TextEditingController controller, double price) {
     double sonuc = x * price;
     controller.text = sonuc.toString();
     return controller;
   }
 
-  TextEditingController calculatePortfolioTotalSpent(
-      TextEditingController priceController,
-      TextEditingController quantityController,
-      TextEditingController totalSpentcontroller) {
+  TextEditingController calculatePortfolioTotalSpent(TextEditingController priceController, TextEditingController quantityController, TextEditingController totalSpentcontroller) {
     if (quantityController.text != null) {
       double sonuc = double.parse(priceController.text) *
           double.parse(quantityController.text);

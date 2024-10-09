@@ -1,7 +1,8 @@
 import 'package:crypto_questor/services/firebase_service.dart';
 import 'package:crypto_questor/ui/views/intro_page.dart';
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/customappbar.dart';
 
 class PortfolioCoinHistoryPage extends StatefulWidget {
@@ -16,17 +17,18 @@ class _PortfolioCoinHistoryPageState extends State<PortfolioCoinHistoryPage> {
   @override
   Widget build(BuildContext context) {
     var _firebaseService = FirebaseService();
+    var mText = AppLocalizations.of(context)!;
     double widht = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
     return SafeArea(child: Scaffold(
-      backgroundColor: const Color(0xff001E34),
+      backgroundColor: CustomColors.bgcolor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
-              title: "Transactions",
+              title: mText.transactions,
               icon: Icons.pending_actions_rounded,
               iconSize: 30,
-              iconColor: Colors.black)),
+              iconColor: CustomColors.mBlackPrimary)),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -46,15 +48,15 @@ class _PortfolioCoinHistoryPageState extends State<PortfolioCoinHistoryPage> {
                           InkWell(
                             onTap: (){
                               var snackBar = SnackBar(
-                                  backgroundColor: const Color(0xff001E34),
+                                  backgroundColor: CustomColors.mYellow,
                                   content: Row(
                                 children: [
-                                  Text("Did you want DELETE this transaction ?",style: TextStyle(color: Colors.white),),
+                                  Text(mText.isDeletingTransaction,style: const TextStyle(color: CustomColors.bgcolor),),
                                   const Spacer(),
                                   TextButton(onPressed: (){
                                     _firebaseService.deleteCoinTransaction(coin['uid']);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> IntroPage()));
-                                  }, child: Text("Accept",style: TextStyle(color: Colors.red),)),
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const IntroPage()));
+                                  }, child: Text(mText.accept,style: const TextStyle(color: CustomColors.mRedPrimary),)),
                                 ],
                               ));
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -65,36 +67,36 @@ class _PortfolioCoinHistoryPageState extends State<PortfolioCoinHistoryPage> {
                               TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xffFFD400).withOpacity(0.8),
+                                color: CustomColors.mYellow.withOpacity(0.8),
                               ),),
                               subtitle: Text(coin['dateTime'],style:
                               const TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.grey
+                                  color: CustomColors.mGreyPrimary
                               ),),
                               trailing: Padding(
                                 padding: const EdgeInsets.only(top: 10.5),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Quantity: ${double.parse(coin['quantity']).toStringAsFixed(3)}",style:
+                                    Text("${mText.quantity} ${double.parse(coin['quantity']).toStringAsFixed(3)}",style:
                                     const TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700
                                     ),),
-                                    Text("Total Spent: ${double.parse(coin['totalSpent']).toStringAsFixed(2)}",
+                                    Text("${mText.totalSpentForHistory}: ${double.parse(coin['totalSpent']).toStringAsFixed(2)}",
                                       style: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.grey
+                                          color: CustomColors.mGreyPrimary
                                       ),),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                          const Divider(thickness: 0.5,color: Colors.grey,),
+                          const Divider(thickness: 0.5,color: CustomColors.mGreyPrimary,),
                         ],
                       ),
                     );

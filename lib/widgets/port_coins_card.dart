@@ -1,3 +1,4 @@
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class PortCoinsCard extends StatefulWidget {
@@ -25,7 +26,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
-        color: const Color(0xff0B255B).withOpacity(0.4),
+        color: CustomColors.coinsCardColor,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),

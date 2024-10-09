@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
-              <build path="$PROJECT_DIR$/../../../flutter/packages/flutter_tools/gradle" name="gradle">
+              <build path="$USER_HOME$/Desktop/flutter/packages/flutter_tools/gradle" name="gradle">
                 <projects>
-                  <project path="$PROJECT_DIR$/../../../flutter/packages/flutter_tools/gradle" />
+                  <project path="$USER_HOME$/Desktop/flutter/packages/flutter_tools/gradle" />
                 </projects>
               </build>
             </builds>
@@ -24,7 +25,7 @@
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.9/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../../../flutter/packages/flutter_tools/gradle" />
+            <option value="$USER_HOME$/Desktop/flutter/packages/flutter_tools/gradle" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

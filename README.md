@@ -1,5 +1,5 @@
 # Crypto Questor
 
-New Gen Crypto Portfolio Tracker
+New Gen Crypto Portfolio
 
 

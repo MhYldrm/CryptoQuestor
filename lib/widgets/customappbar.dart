@@ -1,3 +1,4 @@
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/views/intro_page.dart';
@@ -31,14 +32,14 @@ class CustomAppBar extends StatelessWidget{
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(90),
           ),
-          color: const Color(0xffFFD400).withOpacity(0.8),
+          color: CustomColors.mYellow.withOpacity(0.8),
         ),
       ),
       leading: Padding(
         padding: const EdgeInsets.only(top: 23),
         child: IconButton(onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=> const IntroPage()));
-        }, icon:const Icon(Icons.arrow_back_ios_rounded,size: 26,color: Color(0xff001E34),)),
+        }, icon:const Icon(Icons.arrow_back_ios_rounded,size: 26,color: CustomColors.bgcolor,)),
       ),
       title:  Padding(
         padding:  const EdgeInsets.only(top: 30,left: 10),
@@ -53,7 +54,7 @@ class CustomAppBar extends StatelessWidget{
             Text(
               title,
               style: const TextStyle(
-                  color: Color(0xff001E34),
+                  color: CustomColors.bgcolor,
                   fontSize: 23,fontWeight: FontWeight.w800),),
           ],
         ),

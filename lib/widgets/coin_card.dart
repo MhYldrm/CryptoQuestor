@@ -1,3 +1,4 @@
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CoinCard extends StatelessWidget {
@@ -27,12 +28,7 @@ class CoinCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: [0, 0.25, 0.75, 1],
-              colors: [
-                Color(0x99FFFFFF),
-                Color(0x00FFFFFF),
-                Color(0x00FFFFFF),
-                Color(0x99FFFFFF),
-              ],
+              colors: CustomColors.cardGradientColors
             ),
           ),
           child: ClipRRect(

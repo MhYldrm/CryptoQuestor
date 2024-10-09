@@ -1,3 +1,4 @@
+import 'package:crypto_questor/utils/colors.dart';
 import 'package:flutter/material.dart';
 import '../ui/views/coin_details_page.dart';
 
@@ -25,7 +26,7 @@ class Item extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(20),
-            color: const Color(0xff0B255B).withOpacity(0.4),
+            color: CustomColors.coinsCardColor,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -97,8 +98,8 @@ class Item extends StatelessWidget {
                             fontSize: 13,
                             fontWeight: FontWeight.w300,
                             color: item.marketCapChangePercentage24H > 0
-                                ? Colors.green
-                                : Colors.red.shade300),
+                                ? CustomColors.mGreenPrimary
+                                : CustomColors.mRedPrimary.withOpacity(0.8)),
                       )
                     ],
                   ),
