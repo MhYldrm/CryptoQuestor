@@ -18,11 +18,9 @@ New Gen. Cryptocurrency Portfolio Tracking Application
 
 - Framework: Flutter
 - Network: dart:io (dart core library)
-- State management: Provider
-- Dependency injection: GetIt
-- Localization: easy_localization
-- Testing: flutter_test
+- Localization
 - Firebase Auth
+- 
 Check the pubspec.yaml files for the dependencies used in the project and modules.
 
 ## Localized Languages
