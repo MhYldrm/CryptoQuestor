@@ -1,10 +1,10 @@
-import 'package:crypto_questor/core/components/localization/localization_settings.dart';
-import 'package:crypto_questor/core/init/app_initialize.dart';
-import 'package:crypto_questor/core/models/user_provider.dart';
-import 'package:crypto_questor/view/screens/sign_in_page/sign_in_page.dart';
+import 'package:crypto_questor/product/components/localization/localization_settings.dart';
+import 'package:crypto_questor/product/components/styles/application_constants.dart';
+import 'package:crypto_questor/product/init/app_initialize.dart';
+import 'package:crypto_questor/product/models/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'core/components/styles/application_constants.dart';
+import 'feature/screens/sign_in_page/sign_in_page.dart';
 
 void main() async {
   await AppInitialize.makeIt();
