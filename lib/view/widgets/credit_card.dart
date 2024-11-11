@@ -1,9 +1,9 @@
 import 'package:crypto_questor/core/components/styles/custom_colors.dart';
-import 'package:crypto_questor/core/components/styles/custom_texts.dart';
+import 'package:crypto_questor/core/components/styles/application_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../screens/portfolio_page.dart';
+import '../screens/portfolio_page/portfolio_page.dart';
 
 
 class CreditCard extends StatelessWidget {
@@ -74,7 +74,7 @@ class CreditCard extends StatelessWidget {
             height: 80,
             width: 140,
             child: Image.asset(
-              ApplicationCustomTexts().blockchainImagePath,
+              ApplicationConstants.blockchainImagePath,
               fit: BoxFit.fill,
             ),
           ),

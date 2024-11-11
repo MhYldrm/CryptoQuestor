@@ -1,9 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+
+import '../models/portfolio_coins_model.dart';
 
 class FirebaseService {
   final firebaseAuth = FirebaseAuth.instance;
   final firebaseFireStore = FirebaseFirestore.instance;
+
+
+  Future<List> getInfo(String uid) async {
+    List personInfo = [];
+    var data = await FirebaseFirestore.instance.collection("Users").doc(uid).get();
+    if (data.exists) {
+      personInfo.add(data.data() as Map<String, dynamic>);
+    }
+    return personInfo;
+  }
+
+
+  Future<List<PortfolioCoinsModel>> getPortfolioCoins () async{
+    final firebaseAuth = FirebaseAuth.instance;
+    final snapshot = await FirebaseFirestore.instance
+        .collection(firebaseAuth.currentUser!.uid)
+        .orderBy("name")
+        .get();
+    return compute(_convertToPortfolioCoinsModel, snapshot.docs);
+  }
+
+  List<PortfolioCoinsModel> _convertToPortfolioCoinsModel(List<QueryDocumentSnapshot> docs) {
+    return docs.map((doc) => PortfolioCoinsModel.fromJson(doc.data() as Map<String, dynamic>)).toList();
+  }
 
   Future<void> upToPortfolioCoin(Map<String, dynamic> upToInfo,String uid) async {
     await firebaseFireStore
@@ -82,4 +109,6 @@ class FirebaseService {
   Future<void> signOut() async {
     await firebaseAuth.signOut();
   }
+
+
 }

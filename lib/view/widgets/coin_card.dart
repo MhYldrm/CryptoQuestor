@@ -53,7 +53,7 @@ class CoinCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    EmptyWidget(value: 20),
+                    EmptyWidget(height: 20),
                     Expanded(
                       flex: 1,
                       child: showTitlePart(context),

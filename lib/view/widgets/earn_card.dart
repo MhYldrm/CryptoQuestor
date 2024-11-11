@@ -1,5 +1,5 @@
 import 'package:crypto_questor/core/components/styles/custom_colors.dart';
-import 'package:crypto_questor/core/components/styles/custom_texts.dart';
+import 'package:crypto_questor/core/components/styles/application_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

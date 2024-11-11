@@ -1,22 +1,24 @@
 import 'package:crypto_questor/core/extension/my_extensions.dart';
 import 'package:crypto_questor/core/components/styles/custom_colors.dart';
 import 'package:flutter/material.dart';
-import '../screens/coin_details_page.dart';
+import '../screens/coin_details_page/coin_details_page.dart';
 
 final class CoinListCard extends StatelessWidget {
-  final dynamic item;
   const CoinListCard({super.key, this.item});
+  final dynamic item;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CoinDetailPage(
-                      selectCoin: item,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => CoinDetailPage(
+              selectCoin: item,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -24,9 +26,8 @@ final class CoinListCard extends StatelessWidget {
           height: 80,
           width: context.deviceWidht * 0.9,
           decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(20),
-            color: CustomColors.coinsCardColor,
+            color: CustomColors.coinsCardColor.withOpacity(0.5),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -115,8 +116,4 @@ final class CoinListCard extends StatelessWidget {
       ],
     );
   }
-
-
-
-
 }

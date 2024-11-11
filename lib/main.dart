@@ -1,20 +1,21 @@
-import 'package:crypto_questor/view/screens/sign_in_page.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:crypto_questor/core/components/localization/localization_settings.dart';
+import 'package:crypto_questor/core/init/app_initialize.dart';
+import 'package:crypto_questor/core/models/user_provider.dart';
+import 'package:crypto_questor/view/screens/sign_in_page/sign_in_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'firebase_options.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:provider/provider.dart';
+import 'core/components/styles/application_constants.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await AppInitialize.makeIt();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
   );
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,17 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Crypto Questor',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: const [
-       Locale("en","US"),
-       Locale("tr","TR")
-      ],
+      title: ApplicationConstants.appTitle,
+      localizationsDelegates: LocalizationSettings.localizationsDelegates,
+      supportedLocales: LocalizationSettings.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: const SignInPage(),

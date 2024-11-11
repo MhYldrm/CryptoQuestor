@@ -1,11 +1,13 @@
-final class ChartModel {
-  final int time;
-  final double? open;
-  final double? high;
-  final double? low;
-  final double? close;
+import 'package:equatable/equatable.dart';
 
-  ChartModel({
+final class ChartModel extends Equatable {
+  final int time;
+  final double open;
+  final double high;
+  final double low;
+  final double close;
+
+  const ChartModel({
     required this.time,
     required this.open,
     required this.high,
@@ -13,13 +15,16 @@ final class ChartModel {
     required this.close,
   });
 
-  factory ChartModel.fromJson(List x) {
+  factory ChartModel.fromJson(List<dynamic> value) {
     return ChartModel(
-      time: x[0],
-      open: x[1],
-      high: x[2],
-      low: x[3],
-      close: x[4],
+      time: value[0] as int,
+      open: value[1] as double,
+      high: value[2] as double,
+      low: value[3] as double,
+      close: value[4] as double,
     );
   }
+
+  @override
+  List<Object?> get props => [time, open, high, low, close];
 }

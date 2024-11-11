@@ -26,7 +26,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
-        color: CustomColors.coinsCardColor,
+        color: CustomColors.coinsCardColor.withOpacity(0.5),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
