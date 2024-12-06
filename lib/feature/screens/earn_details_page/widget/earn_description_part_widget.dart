@@ -21,14 +21,12 @@ class EarnDescriptionPartWidget extends StatelessWidget {
           children: [
             Text(
               context.mLocalizations.description,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
+              style: context.textThemeTitleLarge
                   ?.copyWith(color: CustomColors.mPinkPrimary),
             ),
             Text(
               descriptionTexts,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: context.textThemeBodyMedium?.copyWith(
                   color: CustomColors.mWhitePrimary,
                   fontWeight: FontWeight.w300),
               maxLines: 16,

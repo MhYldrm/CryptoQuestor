@@ -28,16 +28,12 @@ class EarnMissionsPartWidget extends StatelessWidget {
           children: [
             Text(
               context.mLocalizations.missions,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
+              style: context.textThemeTitleLarge
                   ?.copyWith(color: CustomColors.mPinkPrimary),
             ),
             Text(
               context.mLocalizations.missionsDescription,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
+              style: context.textThemeBodyMedium
                   ?.copyWith(color: CustomColors.mWhitePrimary),
             ),
             InkWell(
@@ -46,15 +42,13 @@ class EarnMissionsPartWidget extends StatelessWidget {
               },
               child: Text(
                 context.mLocalizations.here,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
+                style: context.textThemeBodyMedium
                     ?.copyWith(color: CustomColors.mYellow),
               ),
             ),
             Text(
               missionsText,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: context.textThemeBodyMedium?.copyWith(
                   color: CustomColors.mWhitePrimary,
                   fontWeight: FontWeight.w300),
               maxLines: 16,

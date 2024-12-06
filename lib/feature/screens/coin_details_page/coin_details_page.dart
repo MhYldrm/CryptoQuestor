@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/chart_widget.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_low_high_description_widget.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_title_price_part_widget.dart';
@@ -5,15 +6,14 @@ import 'package:crypto_questor/feature/screens/coin_details_page/widget/converts
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_circular_indicator.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_error_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:random_string/random_string.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/styles/application_constants.dart';
 import '../../../product/components/styles/custom_colors.dart';
-import '../../../product/services/firebase_service.dart';
-import '../../widgets/empty_widget.dart';
 import 'mixin/coin_details_page_mixin.dart';
 
+@RoutePage()
 class CoinDetailPage extends StatefulWidget {
   final dynamic selectCoin;
   const CoinDetailPage({super.key, this.selectCoin});
@@ -38,11 +38,12 @@ class _CoinDetailPageState extends State<CoinDetailPage>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CoinTitlePricePartWidget(
-                          imageUrl: widget.selectCoin.image,
-                          symbol: widget.selectCoin.symbol,
-                          name: widget.selectCoin.name,
-                          currentPrice: widget.selectCoin.currentPrice,
-                          marketCapChangePercentage24H: widget.selectCoin.marketCapChangePercentage24H,
+                        imageUrl: widget.selectCoin.image,
+                        symbol: widget.selectCoin.symbol,
+                        name: widget.selectCoin.name,
+                        currentPrice: widget.selectCoin.currentPrice,
+                        marketCapChangePercentage24H:
+                            widget.selectCoin.marketCapChangePercentage24H,
                       ),
                       _buildConvertsWidgets(),
                     ],
@@ -70,7 +71,9 @@ class _CoinDetailPageState extends State<CoinDetailPage>
                     children: [
                       MyCustomButton(
                         onPressed: () {
-                          _showAlertDialogForAddPortfolio(context);
+                          context.router.push(
+                            AddPortfolioRoute(selectCoin: widget.selectCoin),
+                          );
                         },
                         buttonText:
                             context.mLocalizations.addPortfolioButtonText,
@@ -94,286 +97,6 @@ class _CoinDetailPageState extends State<CoinDetailPage>
 
     return ChartWidget(
         itemChart: itemChart, trackballBehavior: trackballBehavior);
-  }
-
-  _showAlertDialogForAddPortfolio(BuildContext context) {
-    double deviceHight = MediaQuery.sizeOf(context).height;
-    AlertDialog alert = AlertDialog(
-      backgroundColor: CustomColors.bgcolor,
-      title: Row(
-        children: [
-          Text(
-            "${context.mLocalizations.addPortfolioCoin}${widget.selectCoin.symbol.toString().toUpperCase()}",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 1.3),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.close_outlined,
-                  size: 20,
-                  color: CustomColors.mPinkPrimary,
-                )),
-          )
-        ],
-      ),
-      content: SizedBox(
-        height: deviceHight / 2,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.mLocalizations.pricePerCoin,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const EmptyWidget(height: 5),
-                  Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: CustomColors.mLightGrey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 50,
-                            child: TextField(
-                              controller: sheetPriceController,
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  setState(() {
-                                    sheetPriceController.text = value;
-                                    calculatePortfolioTotalSpent(
-                                        sheetPriceController,
-                                        sheetQuantityController,
-                                        sheetTotalSpentController);
-                                  });
-                                } else {
-                                  setState(() {
-                                    sheetPriceController.text = "0";
-                                  });
-                                }
-                              },
-                              cursorColor: CustomColors.mPurple,
-                              decoration: InputDecoration(
-                                hintMaxLines: 1,
-                                border: InputBorder.none,
-                                hintText: "${widget.selectCoin.currentPrice}",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 55,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: VerticalDivider(
-                              thickness: 1.5,
-                              color:
-                                  CustomColors.mWhitePrimary.withOpacity(0.1),
-                            ),
-                          ),
-                          const Text(
-                            ApplicationConstants.usd,
-                            style: TextStyle(fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const EmptyWidget(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.mLocalizations.quantityText,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const EmptyWidget(height: 5),
-                  Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: CustomColors.mLightGrey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 50,
-                            child: TextField(
-                              controller: sheetQuantityController,
-                              keyboardType: TextInputType.number,
-                              cursorColor: Colors.deepPurpleAccent,
-                              onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  setState(() {
-                                    sheetQuantityController.text = value;
-                                    calculatePortfolioTotalSpent(
-                                        sheetPriceController,
-                                        sheetQuantityController,
-                                        sheetTotalSpentController);
-                                  });
-                                } else {
-                                  setState(() {
-                                    sheetQuantityController.text = "0";
-                                  });
-                                }
-                              },
-                              decoration: const InputDecoration(
-                                hintMaxLines: 1,
-                                border: InputBorder.none,
-                                hintText: "0",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 55,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: VerticalDivider(
-                              thickness: 1.5,
-                              color:
-                                  CustomColors.mWhitePrimary.withOpacity(0.1),
-                            ),
-                          ),
-                          Text(
-                            widget.selectCoin.symbol.toString().toUpperCase(),
-                            style: const TextStyle(fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const EmptyWidget(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    context.mLocalizations.totalSpent,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const EmptyWidget(height: 5),
-                  Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: CustomColors.mLightGrey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 50,
-                            child: TextField(
-                              controller: sheetTotalSpentController,
-                              cursorColor: CustomColors.mPurple,
-                              decoration: const InputDecoration(
-                                hintMaxLines: 1,
-                                border: InputBorder.none,
-                                hintText: "0",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 55,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: VerticalDivider(
-                              thickness: 1.5,
-                              color:
-                                  CustomColors.mWhitePrimary.withOpacity(0.1),
-                            ),
-                          ),
-                          const Text(
-                            ApplicationConstants.usd,
-                            style: TextStyle(fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      actionsAlignment: MainAxisAlignment.center,
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: CustomColors.mWhitePrimary.withOpacity(0.2),
-            elevation: 1,
-          ),
-          child: Text(context.mLocalizations.cancel),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            String uid = randomAlphaNumeric(10);
-            Map<String, dynamic> upToInfo = {
-              'dateTime': formattedDate,
-              'imageUrl': widget.selectCoin.image,
-              'name': widget.selectCoin.name,
-              'symbol': widget.selectCoin.symbol,
-              'quantity': sheetQuantityController.text,
-              'totalSpent': sheetTotalSpentController.text,
-              'uid': uid,
-            };
-            if (upToInfo['totalSpent'] != null &&
-                upToInfo['totalSpent'].isNotEmpty) {
-              await FirebaseService().upToPortfolioCoin(upToInfo, uid);
-            }
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: CustomColors.mYellow,
-                duration: const Duration(milliseconds: 800),
-                content: Text(
-                  "${widget.selectCoin.symbol.toString().toUpperCase()} ${context.mLocalizations.addedPortfolioCoin}",
-                  style: const TextStyle(color: CustomColors.bgcolor),
-                )));
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: CustomColors.mPurple,
-            elevation: 2.5,
-            shadowColor: CustomColors.mPurple,
-          ),
-          child: Text(context.mLocalizations.submit),
-        ),
-      ],
-    );
-
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
   }
 
   // Converts Widget's

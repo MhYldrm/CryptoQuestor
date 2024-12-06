@@ -137,17 +137,4 @@ mixin CoinDetailsPageMixin on State<CoinDetailPage> {
     controller.text = sonuc.toString();
     return controller;
   }
-
-  // Amount to be added to the portfolio
-  TextEditingController calculatePortfolioTotalSpent(
-      TextEditingController priceController,
-      TextEditingController quantityController,
-      TextEditingController totalSpentController) {
-    if (quantityController.text.isNotEmpty) {
-      double sonuc = double.parse(priceController.text) *
-          double.parse(quantityController.text);
-      totalSpentController.text = sonuc.toString();
-    } else {}
-    return totalSpentController;
-  }
 }

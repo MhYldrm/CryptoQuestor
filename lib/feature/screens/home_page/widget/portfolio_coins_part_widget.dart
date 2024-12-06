@@ -34,9 +34,7 @@ class PortfolioCoinsPartWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Text(
             context.mLocalizations.myPortfolio,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge
+            style: context.textThemeBodyLarge
                 ?.copyWith(color: CustomColors.mWhitePrimary.withOpacity(0.9)),
           ),
         ),

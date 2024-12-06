@@ -70,9 +70,7 @@ final class UserInfoWidget extends StatelessWidget {
                                         personInfo[index]
                                             ['name'], // Display user's name
                                         overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
+                                        style: context.textThemeBodyLarge
                                             ?.copyWith(
                                                 color:
                                                     CustomColors.mWhitePrimary),
@@ -81,9 +79,7 @@ final class UserInfoWidget extends StatelessWidget {
                                     Text(
                                       personInfo[index]
                                           ['email'], // Display user's email
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
+                                      style: context.textThemeLabelMedium
                                           ?.copyWith(
                                             color: CustomColors.mGreyPrimary,
                                             fontWeight: FontWeight.w400,
@@ -120,9 +116,7 @@ final class UserInfoWidget extends StatelessWidget {
                                           Text(
                                             context.mLocalizations
                                                 .changeGenderImage,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium,
+                                            style: context.textThemeLabelMedium,
                                           ),
                                         ],
                                       ),

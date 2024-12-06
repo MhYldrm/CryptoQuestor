@@ -38,9 +38,7 @@ final class BottomSheetListWidget extends StatelessWidget {
                   content: Text(
                     context
                         .mLocalizations.copiedBoard, // Localized copied message
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
+                    style: context.textThemeBodyMedium
                         ?.copyWith(color: CustomColors.bgcolor),
                   ),
                 ),
@@ -67,14 +65,14 @@ final class BottomSheetListWidget extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      style: context.textThemeBodyLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.mWhitePrimary),
                     ),
                     Text(
                       walletAddress,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      style: context.textThemeBodySmall!.copyWith(
                           fontWeight: FontWeight.w400,
                           color: CustomColors.mGreyPrimary),
                     ),

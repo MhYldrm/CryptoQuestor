@@ -51,9 +51,7 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
             // Support message
             Text(
               context.mLocalizations.supportUs,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
+              style: context.textThemeBodyLarge!
                   .copyWith(color: CustomColors.mGreyPrimary),
             ),
             const EmptyWidget(height: 10), // Spacer widget

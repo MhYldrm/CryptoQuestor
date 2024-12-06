@@ -1,7 +1,7 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/application_constants.dart';
 import '../../../../product/components/styles/custom_colors.dart';
-
 
 /// [exchangeName] Name of the exchange where the Earn campaign is located
 /// [exchangeIconUrl] Icon-Image Url of the exchange where the Earn campaign is located
@@ -56,9 +56,7 @@ class MarketDetailsPartWidget extends StatelessWidget {
                     ? const Text("")
                     : Text(
                         exchangeName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
+                        style: context.textThemeTitleMedium
                             ?.copyWith(color: CustomColors.mWhitePrimary),
                       ),
               ],
@@ -76,9 +74,7 @@ class MarketDetailsPartWidget extends StatelessWidget {
                 ),
                 Text(
                   dateTime,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
+                  style: context.textThemeBodyMedium
                       ?.copyWith(color: CustomColors.mWhitePrimary),
                 ),
               ],

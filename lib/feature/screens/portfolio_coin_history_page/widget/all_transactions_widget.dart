@@ -40,16 +40,12 @@ class AllTransactionsWidget extends StatelessWidget {
                     ),
                     title: Text(
                       "${coin.symbol}".toUpperCase(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge
+                      style: context.textThemeLabelLarge
                           ?.copyWith(color: CustomColors.mYellow),
                     ),
                     subtitle: Text(
                       coin.dateTime,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall
+                      style: context.textThemeLabelSmall
                           ?.copyWith(color: CustomColors.mGreyPrimary),
                     ),
                     trailing: Padding(
@@ -59,16 +55,12 @@ class AllTransactionsWidget extends StatelessWidget {
                         children: [
                           Text(
                             "${context.mLocalizations.quantity} ${double.parse(coin.quantity).toStringAsFixed(3)}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
+                            style: context.textThemeLabelLarge
                                 ?.copyWith(color: CustomColors.mWhitePrimary),
                           ),
                           Text(
                             "${context.mLocalizations.totalSpentForHistory} ${double.parse(coin.totalSpent).toStringAsFixed(2)}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
+                            style: context.textThemeBodyMedium
                                 ?.copyWith(color: CustomColors.mGreyPrimary),
                           ),
                         ],

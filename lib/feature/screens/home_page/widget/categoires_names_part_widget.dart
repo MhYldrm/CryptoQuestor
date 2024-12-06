@@ -30,36 +30,28 @@ class CategoriesNamesPartWidget extends StatelessWidget {
               onPressed: () => changePage(0),
               child: Text(
                 ApplicationConstants.top100,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
+                style: context.textThemeLabelSmall
                     ?.copyWith(color: CustomColors.mLilacPrimary),
               )),
           TextButton(
               onPressed: () => changePage(1),
               child: Text(
                 "${context.mLocalizations.hotCoins} 🔥",
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
+                style: context.textThemeLabelSmall
                     ?.copyWith(color: CustomColors.mYellow),
               )),
           TextButton(
               onPressed: () => changePage(2),
               child: Text(
                 context.mLocalizations.gainersCoin,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
+                style: context.textThemeLabelSmall
                     ?.copyWith(color: CustomColors.mGreenPrimary),
               )),
           TextButton(
             onPressed: () => changePage(3),
             child: Text(
               context.mLocalizations.losersCoin,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelSmall
+              style: context.textThemeLabelSmall
                   ?.copyWith(color: CustomColors.mRedPrimary.withOpacity(0.9)),
             ),
           ),

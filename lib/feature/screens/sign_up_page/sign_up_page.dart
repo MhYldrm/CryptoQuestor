@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/feature/screens/sign_up_page/widget/block_chain_image_wigdets.dart';
 import 'package:crypto_questor/feature/screens/sign_up_page/widget/existing_account_link_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
@@ -11,7 +12,7 @@ import '../../../product/models/user_provider.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/sign_up_form_fields_mixin.dart';
 
-
+@RoutePage()
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 

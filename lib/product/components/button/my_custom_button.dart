@@ -27,10 +27,7 @@ class MyCustomButton extends StatelessWidget {
           ),
           child: Text(
             buttonText,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: CustomColors.mPurple), // Purple Text color
+            style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mPurple), // Purple Text color
           ),
         ),
       ),

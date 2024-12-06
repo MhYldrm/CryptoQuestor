@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/custom_colors.dart';
-import '../screens/coin_details_page/coin_details_page.dart';
 
 /// A card widget that represents a coin in the coin list
 ///
@@ -15,13 +16,8 @@ final class CoinListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CoinDetailPage(
-              selectCoin: item,
-            ),
-          ),
+        context.router.push(
+          CoinDetailRoute(selectCoin: item),
         );
       },
       child: Padding(
@@ -79,9 +75,7 @@ final class CoinListCard extends StatelessWidget {
       children: [
         Text(
           "${item.symbol}".toUpperCase(),
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
+          style: context.textThemeTitleMedium
               ?.copyWith(color: CustomColors.mWhitePrimary),
         ),
         SizedBox(
@@ -89,7 +83,7 @@ final class CoinListCard extends StatelessWidget {
           child: Text(
             item.name,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: context.textThemeLabelSmall?.copyWith(
                 color: CustomColors.mGreyPrimary, fontWeight: FontWeight.w500),
           ),
         ),
@@ -105,14 +99,12 @@ final class CoinListCard extends StatelessWidget {
       children: [
         Text(
           "\$ ${item.currentPrice.toString()}",
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
+          style: context.textThemeTitleMedium
               ?.copyWith(color: CustomColors.mWhitePrimary),
         ),
         Text(
           "${double.parse(item.marketCapChangePercentage24H.toString()).toStringAsFixed(2)}%",
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          style: context.textThemeLabelMedium?.copyWith(
               color: item.marketCapChangePercentage24H > 0
                   ? CustomColors.mGreenPrimary
                   : CustomColors.mRedPrimary.withOpacity(0.8)),

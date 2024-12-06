@@ -1,3 +1,4 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/custom_colors.dart';
 import 'empty_widget.dart';
@@ -104,15 +105,13 @@ class CoinCard extends StatelessWidget {
             children: [
               Text(
                 symbol.toUpperCase(), // Display the coin's symbol in uppercase
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
+                style: context.textThemeTitleLarge
                     ?.copyWith(color: CustomColors.mWhitePrimary),
               ),
               FittedBox(
                 child: Text(
                   name, // Display the coin's name
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  style: context.textThemeLabelLarge?.copyWith(
                       color: CustomColors.mWhitePrimary,
                       fontWeight: FontWeight.w300),
                 ),
@@ -131,15 +130,13 @@ class CoinCard extends StatelessWidget {
         // Total amount spent on the coin
         Text(
           "\$ $price",
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
+          style: context.textThemeTitleMedium
               ?.copyWith(color: CustomColors.mWhitePrimary),
         ),
         // Current balance of the coin in the portfolio
         Text(
           "$balance ${symbol.toUpperCase()}",
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+          style: context.textThemeLabelLarge?.copyWith(
               color: CustomColors.mGreyPrimary, fontWeight: FontWeight.w500),
         ),
       ],

@@ -20,14 +20,14 @@ class TotalSpentDescriptionWidget extends StatelessWidget {
         children: [
           Text(
             context.mLocalizations.totalSpent,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: CustomColors.mWhitePrimary,fontWeight: FontWeight.w300),
+            style: context.textThemeBodyLarge?.copyWith(color: CustomColors.mWhitePrimary,fontWeight: FontWeight.w300),
           ),
           const Spacer(),
           Text(
             " \$ ${totalValue.toStringAsFixed(3)}",
             overflow: TextOverflow.ellipsis,
             style:
-            Theme.of(context).textTheme.bodyLarge?.copyWith(color: CustomColors.mWhitePrimary),
+            context.textThemeBodyLarge?.copyWith(color: CustomColors.mWhitePrimary),
           ),
         ],
       ),

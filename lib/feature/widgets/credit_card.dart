@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/application_constants.dart';
 import '../../product/components/styles/custom_colors.dart';
-import '../screens/portfolio_page/portfolio_page.dart';
 
 /// A widget representing a credit card-like UI element
 /// Shows the total spent balance, and includes a navigation button to the portfolio page.
@@ -41,10 +42,7 @@ class CreditCard extends StatelessWidget {
               color: const Color.fromARGB(255, 138, 124, 54)),
           child: IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PortfolioPage()));
+               context.router.push(const PortfolioRoute());
               },
               icon: const Icon(
                 Icons.chevron_right_rounded,
@@ -61,14 +59,11 @@ class CreditCard extends StatelessWidget {
         children: [
            Text(
             context.mLocalizations.totalSpent,
-            style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+            style: context.textThemeHeadLineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
             "$balance \$",
-            style: const TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w300,
-            ),
+            style: context.textThemeTitleLarge?.copyWith(fontWeight: FontWeight.w200),
           ),
           const Spacer(),
           SizedBox(

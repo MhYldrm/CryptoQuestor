@@ -35,7 +35,7 @@ class EarnImagePartWidget extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: CustomColors.mWhitePrimary,fontWeight: FontWeight.bold),
+                style: context.textThemeTitleLarge?.copyWith(color: CustomColors.mWhitePrimary,fontWeight: FontWeight.bold),
               ),
             ),
           ),

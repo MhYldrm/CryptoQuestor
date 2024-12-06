@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/earn_model.dart';
 import '../../../widgets/earn_card.dart';
@@ -25,11 +27,7 @@ class EarnsListWidget extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              EarnDetailsPage(earnModel: earns)));
+                  context.router.push(EarnDetailsRoute(earnModel: earns));
                 },
                 child: EarnCard(
                     imageUrl: earns.imageUrl,

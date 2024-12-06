@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../product/components/padding/project_paddings.dart';
@@ -27,7 +29,7 @@ class DashboardWidget extends StatelessWidget {
           // Dashboard title
           Text(
             context.mLocalizations.dashboard,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: CustomColors.mGreyPrimary),
+            style: context.textThemeTitleLarge?.copyWith(color: CustomColors.mGreyPrimary),
           ),
           const EmptyWidget(height: 20), // Spacer widget
           // About Us link
@@ -47,7 +49,7 @@ class DashboardWidget extends StatelessWidget {
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.aboutUs,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: CustomColors.mWhitePrimary),
+                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mWhitePrimary),
                 ),
               ],
             ),
@@ -72,7 +74,7 @@ class DashboardWidget extends StatelessWidget {
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.contactUs,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: CustomColors.mWhitePrimary),
+                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mWhitePrimary),
                 ),
               ],
             ),
@@ -83,10 +85,7 @@ class DashboardWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               FirebaseService().signOut().then((value) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SignInPage()));
+                context.router.replace(const SignInRoute());
               });
             }, // Trigger logout on tap
             child: Row(
@@ -102,7 +101,7 @@ class DashboardWidget extends StatelessWidget {
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.logout,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: CustomColors.mRedPrimary),
+                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mRedPrimary),
                 ),
               ],
             ),

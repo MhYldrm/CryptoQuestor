@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_button_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_description_part_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_image_part_widget.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/models/earn_model.dart';
 
+@RoutePage()
 class EarnDetailsPage extends StatefulWidget {
   final EarnModel earnModel;
   const EarnDetailsPage({super.key, required this.earnModel});

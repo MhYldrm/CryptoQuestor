@@ -46,16 +46,12 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                           children: [
                             Text(
                               context.mLocalizations.twentyHoursText,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              style: context.textThemeBodySmall
                                   ?.copyWith(color: CustomColors.mWhitePrimary),
                             ),
                             Text(
                               context.mLocalizations.details,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
+                              style: context.textThemeLabelSmall
                                   ?.copyWith(
                                   color: CustomColors.mWhitePrimary,
                                   fontWeight: FontWeight.w400),
@@ -69,13 +65,13 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                     children: [
                       Text(
                         context.mLocalizations.low,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        style: context.textThemeTitleSmall?.copyWith(
                             color: CustomColors.mGreyPrimary,
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
                         "\$${low24H.toString()}",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: context.textThemeBodyMedium?.copyWith(
                             color: Colors.red.shade300,
                             fontWeight: FontWeight.bold),
                       ),
@@ -85,13 +81,13 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                     children: [
                       Text(
                         context.mLocalizations.high,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        style: context.textThemeTitleSmall?.copyWith(
                             color: CustomColors.mGreyPrimary,
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
                         "\$${high24H.toString()}",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: context.textThemeBodyMedium?.copyWith(
                             color: Colors.green.shade300,
                             fontWeight: FontWeight.bold),
                       ),
@@ -101,13 +97,13 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                     children: [
                       Text(
                         ApplicationConstants.vol,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        style: context.textThemeTitleSmall?.copyWith(
                             color: CustomColors.mGreyPrimary,
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
                         "\$${totalVolume.toString()} M",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: context.textThemeBodyMedium?.copyWith(
                             color: CustomColors.mWhitePrimary,
                             fontWeight: FontWeight.bold),
                       ),

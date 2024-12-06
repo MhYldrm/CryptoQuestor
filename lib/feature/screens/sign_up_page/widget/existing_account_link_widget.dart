@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../sign_in_page/sign_in_page.dart';
@@ -25,19 +27,18 @@ class ExistingAccountLinkWidget extends StatelessWidget {
         children: [
           Text(
             context.mLocalizations.isHaveAccount,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(color: CustomColors.mGreyPrimary),
+            style: context.textThemeTitleSmall?.copyWith(color: CustomColors.mGreyPrimary),
           ),
           TextButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const SignInPage()));
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignInPage()),
+                );
               },
               child: Text(
                 context.mLocalizations.login,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: CustomColors.mYellow,fontWeight: FontWeight.bold),
+                style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mYellow,fontWeight: FontWeight.bold),
               )),
         ],
       ),

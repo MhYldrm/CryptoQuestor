@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/user_provider.dart';
 import '../../../../product/services/firebase_service.dart';
@@ -37,11 +39,12 @@ mixin SignUpFormFieldsMixin {
     }
     return null;
   }
+
   Future<void> signUp(
-      BuildContext context,
-      GlobalKey<FormState> formKey,
-      UserProvider userProvider,
-      ) async {
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    UserProvider userProvider,
+  ) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       var result = await FirebaseService().signUp(
@@ -57,10 +60,7 @@ mixin SignUpFormFieldsMixin {
         ScaffoldMessenger.of(context).showSnackBar(
           UserCreatedSnackBarWidget(context: context),
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SignInPage()),
-        );
+        context.router.push(const SignInRoute());
       } else {
         showDialog(
           context: context,

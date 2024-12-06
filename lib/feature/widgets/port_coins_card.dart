@@ -1,3 +1,4 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/custom_colors.dart';
 
@@ -77,8 +78,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                   // Quantity of the cryptocurrency in the user's portfolio
                   Text(
                     widget.quantity.toString(),
-                    style: const TextStyle(
-                      fontSize: 15,
+                    style: context.textThemeBodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -88,8 +88,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
 
                   Text(
                     "\$ ${widget.totalSpent.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontSize: 13,
+                    style: context.textThemeBodyMedium?.copyWith(
                       fontWeight: FontWeight.w300,
                     ),
                   ),

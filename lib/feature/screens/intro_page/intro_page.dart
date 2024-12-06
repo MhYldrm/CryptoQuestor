@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/feature/screens/intro_page/widget/custom_material_button.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../portfolio_page/portfolio_page.dart';
 import '../profile_page/profile_page.dart';
 import 'mixin/intro_page_mixin.dart';
 
+@RoutePage()
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
   @override

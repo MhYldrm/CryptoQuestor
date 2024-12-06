@@ -1,7 +1,6 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
-import '../../intro_page/intro_page.dart';
 
 /// [imageUrl] Get coin image URL.
 /// [symbol] Indicates Coin Symbol.
@@ -13,14 +12,14 @@ import '../../intro_page/intro_page.dart';
 /// [red.shade300] if Coin Percentage 24H. is negative => percentage text Red Color
 /// [green.shade300] if Coin Percentage 24H. is positive => percentage text Green Color
 ///
-final class CoinTitlePricePartWidget extends StatelessWidget {
-  const CoinTitlePricePartWidget(
+final class AddPortfolioPageHeaderWidget extends StatelessWidget {
+  const AddPortfolioPageHeaderWidget(
       {super.key,
-      required this.imageUrl,
-      required this.symbol,
-      required this.name,
-      required this.currentPrice,
-      this.marketCapChangePercentage24H});
+        required this.imageUrl,
+        required this.symbol,
+        required this.name,
+        required this.currentPrice,
+        this.marketCapChangePercentage24H});
 
   final String imageUrl;
   final String symbol;
@@ -44,10 +43,7 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const IntroPage()));
+                        Navigator.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back_ios_new_outlined)),
                 ),
@@ -77,8 +73,8 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                               symbol.toString().toUpperCase(),
                               style: context.textThemeTitleMedium
                                   ?.copyWith(
-                                      color: CustomColors.mWhitePrimary,
-                                      fontWeight: FontWeight.bold),
+                                  color: CustomColors.mWhitePrimary,
+                                  fontWeight: FontWeight.bold),
                             ),
                             FittedBox(
                               child: Text(
@@ -86,8 +82,8 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: context.textThemeLabelLarge
                                     ?.copyWith(
-                                        color: CustomColors.mGreyPrimary,
-                                        fontWeight: FontWeight.w500),
+                                    color: CustomColors.mGreyPrimary,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],
@@ -108,8 +104,8 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                             "${currentPrice.toString()} \$",
                             style: context.textThemeTitleMedium
                                 ?.copyWith(
-                                    color: CustomColors.mWhitePrimary,
-                                    fontWeight: FontWeight.bold),
+                                color: CustomColors.mWhitePrimary,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "${marketCapChangePercentage24H?.toStringAsFixed(2)}%",

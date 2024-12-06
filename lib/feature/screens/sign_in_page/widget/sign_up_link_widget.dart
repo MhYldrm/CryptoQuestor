@@ -26,9 +26,7 @@ class SignUpLinkWidget extends StatelessWidget {
         children: [
           Text(
             context.mLocalizations.isNotHaveAccount,
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall
+            style: context.textThemeTitleSmall
                 ?.copyWith(color: CustomColors.mGreyPrimary),
           ),
           const SizedBox(
@@ -43,9 +41,7 @@ class SignUpLinkWidget extends StatelessWidget {
               },
               child: Text(
                 context.mLocalizations.signUp,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
+                style: context.textThemeTitleMedium
                     ?.copyWith(color: CustomColors.mYellow),
               ))
         ],

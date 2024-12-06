@@ -44,4 +44,11 @@ final class ProjectBoxDecorations {
       ),
     );
   }
+
+  static BoxDecoration get addPortfolioPagesBoxDecoration {
+    return BoxDecoration(
+      color: CustomColors.mLightGrey,
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
 }

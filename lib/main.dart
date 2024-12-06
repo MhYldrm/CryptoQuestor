@@ -2,9 +2,9 @@ import 'package:crypto_questor/product/components/localization/localization_sett
 import 'package:crypto_questor/product/components/styles/application_constants.dart';
 import 'package:crypto_questor/product/init/app_initialize.dart';
 import 'package:crypto_questor/product/models/user_provider.dart';
+import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'feature/screens/sign_in_page/sign_in_page.dart';
 
 void main() async {
   await AppInitialize.makeIt();
@@ -23,13 +23,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter().config(),
       title: ApplicationConstants.appTitle,
       localizationsDelegates: LocalizationSettings.localizationsDelegates,
       supportedLocales: LocalizationSettings.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: const SignInPage(),
     );
   }
 }

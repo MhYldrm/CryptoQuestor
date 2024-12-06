@@ -29,13 +29,13 @@ class EarnPageTitlePartWidget extends StatelessWidget {
                 firebaseService.currentUser?.displayName ??
                     firebaseService.currentUser?.email ??
                     context.mLocalizations.cryptoLover,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                style: context.textThemeBodyMedium?.copyWith(
                     color: CustomColors.mGreyPrimary,
                     fontWeight: FontWeight.w400),
               ),
               Text(
                 context.mLocalizations.cryptoRewards,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                style: context.textThemeTitleMedium?.copyWith(
                     color: CustomColors.mWhitePrimary,
                     fontWeight: FontWeight.w500),
               ),
