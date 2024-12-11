@@ -65,6 +65,8 @@ final class ApplicationConstants {
   // A mail link used for opening the default mail client with a pre-filled email address.
   static const String mailTo = "mailto";
 
+  static const String getStarted = "GET STARTED";
+
   /// Home Page Text
   ///
   // The label used for the "Top 100" section, often used to display the top 100 cryptocurrencies by market cap.

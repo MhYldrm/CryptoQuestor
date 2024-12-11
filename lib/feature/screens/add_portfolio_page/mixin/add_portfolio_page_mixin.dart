@@ -9,13 +9,13 @@ import '../../../../product/services/firebase_service.dart';
 mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
   TextEditingController currentPriceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
-  String totalSpent = "0";
+  String totalSpent = '0';
 
   @override
   void initState() {
     super.initState();
     currentPriceController.text = widget.selectCoin.currentPrice.toString();
-    quantityController.text = "0";
+    quantityController.text = '0';
   }
 
   String formattedDate =
@@ -39,7 +39,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       'uid': uid,
     };
 
-    if (upToInfo['totalSpent'] != null && totalSpent != "0") {
+    if (upToInfo['totalSpent'] != null && totalSpent != '0') {
       await FirebaseService().upToPortfolioCoin(upToInfo, uid);
     }
     if (!mounted) return;
@@ -49,7 +49,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
         backgroundColor: CustomColors.mYellow,
         duration: const Duration(milliseconds: 800),
         content: Text(
-          "${widget.selectCoin.symbol.toString().toUpperCase()} ${context.mLocalizations.addedPortfolioCoin}",
+          '${widget.selectCoin.symbol.toString().toUpperCase()} ${context.mLocalizations.addedPortfolioCoin}',
           style: const TextStyle(color: CustomColors.bgcolor),
         ),
       ));
@@ -66,7 +66,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       });
     } else {
       setState(() {
-        currentPriceController.text = "0";
+        currentPriceController.text = '0';
       });
     }
   }
@@ -81,7 +81,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       });
     } else {
       setState(() {
-        quantityController.text = "0";
+        quantityController.text = '0';
       });
     }
   }

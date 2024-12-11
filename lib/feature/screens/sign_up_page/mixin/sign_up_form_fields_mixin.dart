@@ -3,7 +3,6 @@ import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/user_provider.dart';
 import '../../../../product/services/firebase_service.dart';
-import '../../sign_in_page/sign_in_page.dart';
 import '../widget/sign_show_error_dialog_widget.dart';
 import '../widget/user_created_snackbar_widget.dart';
 
