@@ -1,17 +1,17 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
+import 'package:crypto_questor/feature/screens/sign_up_page/sign_up_page.dart';
 import 'package:crypto_questor/feature/screens/splash_page/widgets/animated_indicator_widget.dart';
 import 'package:crypto_questor/feature/screens/splash_page/widgets/carousel_slider_widget.dart';
+import 'package:crypto_questor/feature/widgets/change_theme_switch_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/padding/project_paddings.dart';
 import '../../../product/components/styles/application_constants.dart';
-import '../../../product/components/styles/custom_colors.dart';
-import '../../../product/navigation/app_router.dart';
+import '../../../product/services/firebase_service.dart';
 import '../sign_up_page/widget/existing_account_link_widget.dart';
 import 'mixin/splash_page_mixin.dart';
 
-@RoutePage()
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -20,11 +20,19 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with SplashPageMixin {
+  final FirebaseService _authService = FirebaseService();
   @override
   Widget build(BuildContext context) {
+    bool isDarkTheme = context.isDarkMode;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      bool isAuthenticated = _authService.isAuthenticated();
+      if (isAuthenticated) {
+        context.pushReplacement(const IntroPage());
+      }
+    });
     return SafeArea(
       child: Scaffold(
-        backgroundColor: CustomColors.bgcolor,
+        backgroundColor: context.projectTheme!.primaryColor,
         body: Padding(
           padding: const ProjectPaddings.allMedium(),
           child: Column(
@@ -46,6 +54,7 @@ class _SplashPageState extends State<SplashPage> with SplashPageMixin {
                       activeIndex: currentIndex,
                       count: imagesList.length,
                     ),
+                    ChangeThemeSwitchWidget(isDarkTheme: isDarkTheme),
                   ],
                 ),
               ),
@@ -55,7 +64,7 @@ class _SplashPageState extends State<SplashPage> with SplashPageMixin {
                   children: [
                     MyCustomButton(
                       onPressed: () {
-                        context.router.push(const SignUpRoute());
+                        context.pushReplacement(const SignUpPage());
                       },
                       buttonText: ApplicationConstants.getStarted,
                     ),

@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
+import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/user_provider.dart';
 import '../../../../product/services/firebase_service.dart';
@@ -41,7 +41,7 @@ mixin SignInFormFieldsMixin {
 
       if (result == "success") {
         formKey.currentState!.reset();
-        context.router.push(const IntroRoute());
+        context.push(const IntroPage());
       } else {
         showDialog(
           context: context,

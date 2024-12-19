@@ -27,7 +27,9 @@ class EarnDescriptionPartWidget extends StatelessWidget {
             Text(
               descriptionTexts,
               style: context.textThemeBodyMedium?.copyWith(
-                  color: CustomColors.mWhitePrimary,
+                  color: context.isDarkMode
+                  ? CustomColors.mWhitePrimary
+                  : CustomColors.bgcolor,
                   fontWeight: FontWeight.w300),
               maxLines: 16,
               overflow: TextOverflow.ellipsis,

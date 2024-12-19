@@ -31,10 +31,12 @@ class MarketDetailsPartWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Icon(
+                Icon(
                   Icons.location_pin,
                   size: 17,
-                  color: CustomColors.mYellow,
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mRedPrimary,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -57,7 +59,11 @@ class MarketDetailsPartWidget extends StatelessWidget {
                     : Text(
                         exchangeName,
                         style: context.textThemeTitleMedium
-                            ?.copyWith(color: CustomColors.mWhitePrimary),
+                            ?.copyWith(
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.mPurple,
+                        ),
                       ),
               ],
             ),
@@ -67,15 +73,21 @@ class MarketDetailsPartWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Icon(
+                Icon(
                   Icons.date_range_rounded,
                   size: 15,
-                  color: CustomColors.mYellow,
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mRedPrimary,
                 ),
                 Text(
                   dateTime,
                   style: context.textThemeBodyMedium
-                      ?.copyWith(color: CustomColors.mWhitePrimary),
+                      ?.copyWith(
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.mPurple,
+                  ),
                 ),
               ],
             ),

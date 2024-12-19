@@ -40,40 +40,35 @@ class CoinCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: [0, 0.25, 0.75, 1],
-              colors: CustomColors.cardGradientColors, // Gradient background
+              colors: CustomColors.earnCardGradientColors, // Gradient background
             ),
           ),
           child: ClipRRect(
             borderRadius:
                 BorderRadius.circular(34), // Rounded corners for the clip
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
-                  colors: [
-                    Color.fromARGB(255, 5, 8, 28), // Darker blue gradient
-                    Color.fromARGB(255, 17, 53, 87), // Lighter blue gradient
-                  ],
+                  colors: context.isDarkMode
+                      ? CustomColors.creditCardGradientDarkThemeColors
+                      : CustomColors.creditCardGradientLightThemeColors,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 15), // Padding on the left
+                padding: const EdgeInsets.only(left: 15),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment
-                      .start, // Align children to the start (left)
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const EmptyWidget(
-                        height: 20), // Placeholder widget with empty space
+                    const EmptyWidget(height: 20),
                     Expanded(
                       flex: 1,
-                      child: showTitlePart(
-                          context), // Coin symbol and name section
+                      child: showTitlePart(context),
                     ),
                     Expanded(
                       flex: 1,
-                      child: showSubtitlePart(
-                          context), // Price and balance section
+                      child: showSubtitlePart(context),
                     ),
                   ],
                 ),
@@ -88,8 +83,7 @@ class CoinCard extends StatelessWidget {
   // Displays the title part with the coin's symbol and name
   Row showTitlePart(BuildContext context) {
     return Row(
-      crossAxisAlignment:
-          CrossAxisAlignment.start, // Align items to the start (top)
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Cryptocurrency logo image (URL)
         Image.network(
@@ -98,22 +92,28 @@ class CoinCard extends StatelessWidget {
           height: 45,
           width: 45,
         ),
-        const SizedBox(width: 20), // Space between logo and text
+        const SizedBox(width: 20),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 symbol.toUpperCase(), // Display the coin's symbol in uppercase
-                style: context.textThemeTitleLarge
-                    ?.copyWith(color: CustomColors.mWhitePrimary),
+                style: context.textThemeTitleLarge?.copyWith(
+                  color: context.isDarkMode
+                      ? CustomColors.mWhitePrimary
+                      : CustomColors.bgcolor,
+                ),
               ),
               FittedBox(
                 child: Text(
                   name, // Display the coin's name
                   style: context.textThemeLabelLarge?.copyWith(
-                      color: CustomColors.mWhitePrimary,
-                      fontWeight: FontWeight.w300),
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.bgcolor,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ),
             ],
@@ -126,18 +126,26 @@ class CoinCard extends StatelessWidget {
   // Displays the price and the current balance of the coin
   Column showSubtitlePart(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Total amount spent on the coin
         Text(
           "\$ $price",
-          style: context.textThemeTitleMedium
-              ?.copyWith(color: CustomColors.mWhitePrimary),
+          style: context.textThemeTitleMedium?.copyWith(
+            color: context.isDarkMode
+                ? CustomColors.mWhitePrimary
+                : CustomColors.mPurple,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         // Current balance of the coin in the portfolio
         Text(
           "$balance ${symbol.toUpperCase()}",
           style: context.textThemeLabelLarge?.copyWith(
-              color: CustomColors.mGreyPrimary, fontWeight: FontWeight.w500),
+            color: context.isDarkMode
+                ? CustomColors.mGreyPrimary
+                : CustomColors.bgcolor,
+          ),
         ),
       ],
     );

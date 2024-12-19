@@ -1,6 +1,5 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/feature/screens/coin_details_page/coin_details_page.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/custom_colors.dart';
 
@@ -16,8 +15,10 @@ final class CoinListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.router.push(
-          CoinDetailRoute(selectCoin: item),
+        context.push(
+          CoinDetailPage(
+            selectCoin: item,
+          ),
         );
       },
       child: Padding(
@@ -27,7 +28,9 @@ final class CoinListCard extends StatelessWidget {
           width: context.deviceWidht * 0.9,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: CustomColors.coinsCardColor.withOpacity(0.5),
+            color: context.isDarkMode
+                ? CustomColors.coinsCardColor.withOpacity(0.5)
+                : const Color(0xFFF5F5F5),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -75,8 +78,11 @@ final class CoinListCard extends StatelessWidget {
       children: [
         Text(
           "${item.symbol}".toUpperCase(),
-          style: context.textThemeTitleMedium
-              ?.copyWith(color: CustomColors.mWhitePrimary),
+          style: context.textThemeTitleMedium?.copyWith(
+            color: context.isDarkMode
+                ? CustomColors.mWhitePrimary
+                : CustomColors.bgcolor,
+          ),
         ),
         SizedBox(
           width: 120,
@@ -99,15 +105,19 @@ final class CoinListCard extends StatelessWidget {
       children: [
         Text(
           "\$ ${item.currentPrice.toString()}",
-          style: context.textThemeTitleMedium
-              ?.copyWith(color: CustomColors.mWhitePrimary),
+          style: context.textThemeTitleMedium?.copyWith(
+            color: context.isDarkMode
+                ? CustomColors.mWhitePrimary
+                : CustomColors.bgcolor,
+          ),
         ),
         Text(
           "${double.parse(item.marketCapChangePercentage24H.toString()).toStringAsFixed(2)}%",
           style: context.textThemeLabelMedium?.copyWith(
-              color: item.marketCapChangePercentage24H > 0
-                  ? CustomColors.mGreenPrimary
-                  : CustomColors.mRedPrimary.withOpacity(0.8)),
+            color: item.marketCapChangePercentage24H > 0
+                ? CustomColors.mGreenPrimary.withOpacity(0.9)
+                : CustomColors.mRedPrimary.withOpacity(0.8),
+          ),
         ),
       ],
     );

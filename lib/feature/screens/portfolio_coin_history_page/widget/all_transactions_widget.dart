@@ -40,8 +40,11 @@ class AllTransactionsWidget extends StatelessWidget {
                     ),
                     title: Text(
                       "${coin.symbol}".toUpperCase(),
-                      style: context.textThemeLabelLarge
-                          ?.copyWith(color: CustomColors.mYellow),
+                      style: context.textThemeLabelLarge?.copyWith(
+                        color: context.isDarkMode
+                            ? CustomColors.mWhitePrimary
+                            : CustomColors.bgcolor,
+                      ),
                     ),
                     subtitle: Text(
                       coin.dateTime,
@@ -55,8 +58,12 @@ class AllTransactionsWidget extends StatelessWidget {
                         children: [
                           Text(
                             "${context.mLocalizations.quantity} ${double.parse(coin.quantity).toStringAsFixed(3)}",
-                            style: context.textThemeLabelLarge
-                                ?.copyWith(color: CustomColors.mWhitePrimary),
+                            style: context.textThemeLabelLarge?.copyWith(
+                              color: context.isDarkMode
+                                  ? CustomColors.mWhitePrimary
+                                  : CustomColors.bgcolor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             "${context.mLocalizations.totalSpentForHistory} ${double.parse(coin.totalSpent).toStringAsFixed(2)}",

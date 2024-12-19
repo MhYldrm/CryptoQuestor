@@ -1,15 +1,14 @@
-import 'package:auto_route/annotations.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_button_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_description_part_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_image_part_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_missions_part_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_details_page/widget/market_details_part_widget.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/models/earn_model.dart';
 
-@RoutePage()
-class EarnDetailsPage extends StatefulWidget {
+final class EarnDetailsPage extends StatefulWidget {
   final EarnModel earnModel;
   const EarnDetailsPage({super.key, required this.earnModel});
 
@@ -22,7 +21,7 @@ class _EarnDetailsPageState extends State<EarnDetailsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: CustomColors.bgcolor,
+      backgroundColor: context.projectTheme!.primaryColor,
       body: Column(
         children: [
           Expanded(

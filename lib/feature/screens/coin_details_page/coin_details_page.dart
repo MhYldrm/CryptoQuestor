@@ -1,4 +1,4 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/feature/screens/add_portfolio_page/add_portfolio_page.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/chart_widget.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_low_high_description_widget.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_title_price_part_widget.dart';
@@ -6,15 +6,13 @@ import 'package:crypto_questor/feature/screens/coin_details_page/widget/converts
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_circular_indicator.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_error_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/styles/application_constants.dart';
 import '../../../product/components/styles/custom_colors.dart';
 import 'mixin/coin_details_page_mixin.dart';
 
-@RoutePage()
-class CoinDetailPage extends StatefulWidget {
+final class CoinDetailPage extends StatefulWidget {
   final dynamic selectCoin;
   const CoinDetailPage({super.key, this.selectCoin});
 
@@ -29,7 +27,7 @@ class _CoinDetailPageState extends State<CoinDetailPage>
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: CustomColors.bgcolor,
+            backgroundColor: context.projectTheme!.primaryColor,
             body: Column(
               children: [
                 Expanded(
@@ -71,8 +69,10 @@ class _CoinDetailPageState extends State<CoinDetailPage>
                     children: [
                       MyCustomButton(
                         onPressed: () {
-                          context.router.push(
-                            AddPortfolioRoute(selectCoin: widget.selectCoin),
+                          context.push(
+                            AddPortfolioPage(
+                              selectCoin: widget.selectCoin,
+                            ),
                           );
                         },
                         buttonText:
@@ -159,9 +159,13 @@ class _CoinDetailPageState extends State<CoinDetailPage>
                         const EdgeInsets.symmetric(horizontal: 9, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: timesBool[index] == true
-                          ? CustomColors.mPurple
-                          : CustomColors.mLilacPrimary.withOpacity(0.25),
+                      color: context.isDarkMode
+                          ? timesBool[index] == true
+                              ? CustomColors.mPurple
+                              : CustomColors.mLilacPrimary.withOpacity(0.25)
+                          : timesBool[index] == true
+                              ? CustomColors.mYellow
+                              : CustomColors.mLilacPrimary.withOpacity(0.25),
                     ),
                     child: Text(
                       ApplicationConstants.times[index],

@@ -1,6 +1,4 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../sign_in_page/sign_in_page.dart';
@@ -22,12 +20,14 @@ class ExistingAccountLinkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left: widht),
+      padding: EdgeInsets.only(left: widht),
       child: Row(
         children: [
           Text(
             context.mLocalizations.isHaveAccount,
-            style: context.textThemeTitleSmall?.copyWith(color: CustomColors.mGreyPrimary),
+            style: context.textThemeTitleSmall?.copyWith(
+              color: CustomColors.mGreyPrimary,
+            ),
           ),
           TextButton(
               onPressed: () {
@@ -38,7 +38,10 @@ class ExistingAccountLinkWidget extends StatelessWidget {
               },
               child: Text(
                 context.mLocalizations.login,
-                style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mYellow,fontWeight: FontWeight.bold),
+                style: context.textThemeTitleMedium?.copyWith(
+                  color: context.isDarkMode ? CustomColors.mYellow : CustomColors.mPinkPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               )),
         ],
       ),

@@ -1,16 +1,13 @@
-import 'package:auto_route/annotations.dart';
 import 'package:crypto_questor/feature/screens/add_portfolio_page/mixin/add_portfolio_page_mixin.dart';
 import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/add_portfolio_page_header_widget.dart';
 import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/cost_calculate_text_fields_widget.dart';
 import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/cost_calculator_widget.dart';
 import 'package:crypto_questor/product/components/button/my_custom_button.dart';
 import 'package:crypto_questor/product/components/padding/project_paddings.dart';
-import 'package:crypto_questor/product/components/styles/custom_colors.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
-class AddPortfolioPage extends StatefulWidget {
+final class AddPortfolioPage extends StatefulWidget {
   final dynamic selectCoin;
   const AddPortfolioPage({super.key, this.selectCoin});
 
@@ -25,7 +22,7 @@ class _AddPortfolioPageState extends State<AddPortfolioPage>
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: CustomColors.bgcolor,
+        backgroundColor: context.projectTheme!.primaryColor,
         body: Column(
           children: [
             Expanded(

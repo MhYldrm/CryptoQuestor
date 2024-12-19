@@ -1,3 +1,4 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/application_constants.dart';
 import '../../../../product/components/styles/custom_colors.dart';
@@ -36,7 +37,9 @@ class ConvertsWidget extends StatelessWidget {
             height: 70,
             width: 160,
             decoration: BoxDecoration(
-              color: CustomColors.mLightGrey,
+              color: context.isDarkMode
+                  ? CustomColors.mLightGrey
+                  : CustomColors.mYellow,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
@@ -80,7 +83,9 @@ class ConvertsWidget extends StatelessWidget {
             height: 70,
             width: 160,
             decoration: BoxDecoration(
-              color: CustomColors.mLightGrey,
+              color: context.isDarkMode
+                  ? CustomColors.mLightGrey
+                  : CustomColors.mYellow,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
@@ -109,9 +114,14 @@ class ConvertsWidget extends StatelessWidget {
                   const SizedBox(
                     width: 5,
                   ),
-                  const Text(
+                  Text(
                     ApplicationConstants.usd,
-                    style: TextStyle(fontWeight: FontWeight.w300),
+                    style: context.textThemeBodyMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),

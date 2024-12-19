@@ -1,5 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/earn_model.dart';
 import '../../../widgets/earn_card.dart';
@@ -11,7 +10,7 @@ import '../../earn_details_page/earn_details_page.dart';
 /// [EarnCard] Displays the project's image, title, and exchange name.
 /// [EarnDetailsPage] Navigates to this page to show detailed information about the selected project.
 ///
-class EarnsListWidget extends StatelessWidget {
+final class EarnsListWidget extends StatelessWidget {
   const EarnsListWidget({super.key, required this.earnList});
 
   final List<EarnModel> earnList;
@@ -27,7 +26,9 @@ class EarnsListWidget extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
               child: InkWell(
                 onTap: () {
-                  context.router.push(EarnDetailsRoute(earnModel: earns));
+                  context.push(
+                    EarnDetailsPage(earnModel: earns),
+                  );
                 },
                 child: EarnCard(
                     imageUrl: earns.imageUrl,

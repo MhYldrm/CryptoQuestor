@@ -1,8 +1,8 @@
 import 'package:crypto_questor/feature/screens/profile_page/widgets/buy_me_coffee_widget.dart';
 import 'package:crypto_questor/feature/screens/profile_page/widgets/dashboard_widget.dart';
 import 'package:crypto_questor/feature/screens/profile_page/widgets/user_info_widget.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import 'mixin/profile_page_mixin.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> with ProfilePageMixin {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        backgroundColor: CustomColors.bgcolor,
+        backgroundColor: context.projectTheme!.primaryColor,
         appBar: showCustomAppBar(context),
         body: Column(
           children: [
@@ -44,7 +44,8 @@ class _ProfilePageState extends State<ProfilePage> with ProfilePageMixin {
             ),
             const Expanded(
               flex: 2,
-              child: BuyMeCoffeeWidget(), // Show Bottom Sheet when pressed -Buy Me Coffee- button
+              child:
+                  BuyMeCoffeeWidget(), // Show Bottom Sheet when pressed -Buy Me Coffee- button
             ),
           ],
         ),

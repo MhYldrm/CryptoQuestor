@@ -1,5 +1,6 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+
 import '../../product/components/styles/custom_colors.dart';
 
 /// A custom card widget to display information about a cryptocurrency coin in the portfolio.
@@ -39,7 +40,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
-        color: CustomColors.coinsCardColor.withOpacity(0.5),
+        color: context.projectTheme!.colorScheme.secondary,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -62,9 +63,10 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                 // Coin symbol (e.g., "BTC", "ETH")
                 Text(
                   widget.symbol.toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                  style: context.textThemeTitleMedium?.copyWith(
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.bgcolor,
                   ),
                 ),
               ],
@@ -79,7 +81,10 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                   Text(
                     widget.quantity.toString(),
                     style: context.textThemeBodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(
@@ -89,6 +94,9 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                   Text(
                     "\$ ${widget.totalSpent.toStringAsFixed(2)}",
                     style: context.textThemeBodyMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
                       fontWeight: FontWeight.w300,
                     ),
                   ),

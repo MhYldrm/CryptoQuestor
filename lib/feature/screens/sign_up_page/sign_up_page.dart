@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/feature/screens/sign_up_page/widget/block_chain_image_wigdets.dart';
 import 'package:crypto_questor/feature/screens/sign_up_page/widget/existing_account_link_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
@@ -7,12 +6,10 @@ import 'package:provider/provider.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/project_decoration/project_box_decorations.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/models/user_provider.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/sign_up_form_fields_mixin.dart';
 
-@RoutePage()
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -34,7 +31,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin{
             child: SafeArea(
                 child: Scaffold(
               resizeToAvoidBottomInset: false,
-              backgroundColor: CustomColors.bgcolor,
+              backgroundColor: context.projectTheme!.primaryColor,
               body: Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Column(

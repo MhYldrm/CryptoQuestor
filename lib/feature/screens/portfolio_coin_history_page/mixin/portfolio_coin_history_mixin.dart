@@ -8,14 +8,16 @@ import '../portfolio_coin_history_page.dart';
 /// [showCustomAppBar] Showing Custom AppBar
 /// [mBlackPrimary] App Bar Custom İcon Black Color
 ///
-mixin PortfolioCoinHistoryMixin on State<PortfolioCoinHistoryPage>{
+mixin PortfolioCoinHistoryMixin on State<PortfolioCoinHistoryPage> {
   PreferredSize showCustomAppBar() {
     return PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: CustomAppBar(
-            title: context.mLocalizations.transactions,
-            icon: Icons.pending_actions_rounded,
-            iconSize: 30,
-            iconColor: CustomColors.mBlackPrimary));
+      preferredSize: const Size.fromHeight(100),
+      child: CustomAppBar(
+        title: context.mLocalizations.transactions,
+        icon: Icons.pending_actions_rounded,
+        iconSize: 30,
+        iconColor: CustomColors.mBlackPrimary,
+      ),
+    );
   }
 }

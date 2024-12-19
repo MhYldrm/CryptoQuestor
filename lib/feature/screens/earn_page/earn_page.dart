@@ -1,7 +1,7 @@
 import 'package:crypto_questor/feature/screens/earn_page/widget/earn_page_title_part_widget.dart';
 import 'package:crypto_questor/feature/screens/earn_page/widget/earns_list_widget.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/models/earn_model.dart';
 import '../coin_details_page/widget/show_error_widget.dart';
 import 'mixin/earn_page_mixin.dart';
@@ -18,7 +18,7 @@ class _EarnPageState extends State<EarnPage> with EarnPageMixin{
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: CustomColors.bgcolor,
+          backgroundColor: context.projectTheme!.primaryColor,
           body: Column(
             children: [
               const Expanded(

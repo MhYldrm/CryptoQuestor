@@ -36,7 +36,9 @@ class EarnPageTitlePartWidget extends StatelessWidget {
               Text(
                 context.mLocalizations.cryptoRewards,
                 style: context.textThemeTitleMedium?.copyWith(
-                    color: CustomColors.mWhitePrimary,
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.bgcolor,
                     fontWeight: FontWeight.w500),
               ),
             ],

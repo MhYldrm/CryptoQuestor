@@ -45,14 +45,16 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
     if (!mounted) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: CustomColors.mYellow,
-        duration: const Duration(milliseconds: 800),
-        content: Text(
-          '${widget.selectCoin.symbol.toString().toUpperCase()} ${context.mLocalizations.addedPortfolioCoin}',
-          style: const TextStyle(color: CustomColors.bgcolor),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: CustomColors.mYellow,
+          duration: const Duration(milliseconds: 800),
+          content: Text(
+            '${widget.selectCoin.symbol.toString().toUpperCase()} ${context.mLocalizations.addedPortfolioCoin}',
+            style: const TextStyle(color: CustomColors.bgcolor),
+          ),
         ),
-      ));
+      );
     });
   }
 
@@ -61,8 +63,8 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
     if (value.isNotEmpty) {
       setState(() {
         currentPriceController.text = value;
-        totalSpent =
-            calculateSpent(currentPriceController, quantityController).toString();
+        totalSpent = calculateSpent(currentPriceController, quantityController)
+            .toString();
       });
     } else {
       setState(() {
@@ -76,8 +78,8 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
     if (value.isNotEmpty) {
       setState(() {
         quantityController.text = value;
-        totalSpent =
-            calculateSpent(currentPriceController, quantityController).toString();
+        totalSpent = calculateSpent(currentPriceController, quantityController)
+            .toString();
       });
     } else {
       setState(() {

@@ -1,9 +1,8 @@
+import 'package:crypto_questor/feature/screens/portfolio_coin_history_page/portfolio_coin_history_page.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/models/portfolio_coins_model.dart';
 import '../../../widgets/coin_card.dart';
-import '../../portfolio_coin_history_page/portfolio_coin_history_page.dart';
 
 /// A widget that displays the user's portfolio of coins.
 ///
@@ -14,7 +13,7 @@ import '../../portfolio_coin_history_page/portfolio_coin_history_page.dart';
 /// [resultList] - A list of processed portfolio coin models that include additional information like totalSpent, name, etc.
 /// [isLoading] - A boolean flag that indicates whether the data is being loaded.
 ///
-class PortfolioCoinsPartWidget extends StatelessWidget {
+final class PortfolioCoinsPartWidget extends StatelessWidget {
   const PortfolioCoinsPartWidget(
       {super.key,
       required this.portfolioCoins,
@@ -34,8 +33,10 @@ class PortfolioCoinsPartWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Text(
             context.mLocalizations.myPortfolio,
-            style: context.textThemeBodyLarge
-                ?.copyWith(color: CustomColors.mWhitePrimary.withOpacity(0.9)),
+            style: context.textThemeBodyLarge?.copyWith(
+              color: context.projectTheme!.secondaryHeaderColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         SizedBox(
@@ -55,12 +56,7 @@ class PortfolioCoinsPartWidget extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(10, 0, 12, 0),
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PortfolioCoinHistoryPage(
-                                              coinData: portfolioCoins)));
+                              context.push(PortfolioCoinHistoryPage(coinData: portfolioCoins),);
                             },
                             child: CoinCard(
                               symbol: portfolio.symbol,
@@ -77,7 +73,13 @@ class PortfolioCoinsPartWidget extends StatelessWidget {
                   // If there are no coins in the portfolio show text : You have not any coin in portfolio
                   Center(
                       child: FittedBox(
-                        child: Text(context.mLocalizations.isNotHaveAnyCoins),
+                        child: Text(
+                          context.mLocalizations.isNotHaveAnyCoins,
+                          style: context.textThemeTitleMedium!.copyWith(
+                            color: context.projectTheme!.secondaryHeaderColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                     ),
         ),

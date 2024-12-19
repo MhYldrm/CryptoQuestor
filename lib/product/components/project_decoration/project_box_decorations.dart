@@ -10,10 +10,21 @@ import '../styles/custom_colors.dart';
 final class ProjectBoxDecorations {
   const ProjectBoxDecorations._();
 
-  static BoxDecoration get profilePageBoxDecoration {
+  static BoxDecoration get profilePageDarkThemeBoxDecoration {
     return const BoxDecoration(
       shape: BoxShape.rectangle, // Rectangle shape for the box.
       color: CustomColors.bgcolor, // Custom background color from CustomColors.
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20), // Rounded top-left corner.
+        topRight: Radius.circular(20), // Rounded top-right corner.
+      ),
+    );
+  }
+
+  static BoxDecoration get profilePageLightThemeBoxDecoration {
+    return const BoxDecoration(
+      shape: BoxShape.rectangle,
+      color: Colors.white,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(20), // Rounded top-left corner.
         topRight: Radius.circular(20), // Rounded top-right corner.
@@ -45,9 +56,16 @@ final class ProjectBoxDecorations {
     );
   }
 
-  static BoxDecoration get addPortfolioPagesBoxDecoration {
+  static BoxDecoration get addPortfolioPagesBoxDarkThemeDecoration {
     return BoxDecoration(
       color: CustomColors.mLightGrey,
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
+
+  static BoxDecoration get addPortfolioPagesLightThemeBoxDecoration {
+    return BoxDecoration(
+      color: CustomColors.mYellow.withOpacity(0.2),
       borderRadius: BorderRadius.circular(12),
     );
   }

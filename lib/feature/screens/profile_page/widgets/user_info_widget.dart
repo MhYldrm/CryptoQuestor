@@ -72,8 +72,10 @@ final class UserInfoWidget extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         style: context.textThemeBodyLarge
                                             ?.copyWith(
-                                                color:
-                                                    CustomColors.mWhitePrimary),
+                                          color: context.isDarkMode
+                                              ? CustomColors.mWhitePrimary
+                                              : CustomColors.bgcolor,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -81,9 +83,9 @@ final class UserInfoWidget extends StatelessWidget {
                                           ['email'], // Display user's email
                                       style: context.textThemeLabelMedium
                                           ?.copyWith(
-                                            color: CustomColors.mGreyPrimary,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                        color: CustomColors.mGreyPrimary,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -91,10 +93,12 @@ final class UserInfoWidget extends StatelessWidget {
                               Expanded(
                                 flex: 1,
                                 child: PopupMenuButton(
-                                  child: const Icon(
-                                      Icons.manage_accounts_rounded,
-                                      color: CustomColors
-                                          .mYellow), // Icon for managing accounts
+                                  child: Icon(
+                                    Icons.manage_accounts_rounded,
+                                    color: context.isDarkMode
+                                        ? CustomColors.mYellow
+                                        : CustomColors.mPinkPrimary,
+                                  ), // Icon for managing accounts
                                   onSelected: (value) {
                                     if (value ==
                                         context
@@ -110,9 +114,12 @@ final class UserInfoWidget extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          const Icon(
-                                              Icons.change_circle_rounded,
-                                              color: CustomColors.mYellow),
+                                          Icon(
+                                            Icons.change_circle_rounded,
+                                            color: context.isDarkMode
+                                                ? CustomColors.mYellow
+                                                : CustomColors.mPinkPrimary,
+                                          ),
                                           Text(
                                             context.mLocalizations
                                                 .changeGenderImage,

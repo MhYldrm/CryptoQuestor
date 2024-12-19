@@ -41,8 +41,9 @@ class SignUpLinkWidget extends StatelessWidget {
               },
               child: Text(
                 context.mLocalizations.signUp,
-                style: context.textThemeTitleMedium
-                    ?.copyWith(color: CustomColors.mYellow),
+                style: context.textThemeTitleMedium?.copyWith(
+                  color: context.isDarkMode ? CustomColors.mYellow : CustomColors.mPinkPrimary,
+                ),
               ))
         ],
       ),

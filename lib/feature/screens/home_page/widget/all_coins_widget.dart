@@ -12,7 +12,8 @@ import '../../../widgets/coin_list_card.dart';
 /// This widget shows either a loading indicator, a list of coins, or an error message
 /// if the API request fails.
 class AllCoinsWidget extends StatelessWidget {
-  const AllCoinsWidget({super.key,
+  const AllCoinsWidget({
+    super.key,
     required this.isLoading,
     required this.coinMarket,
   });
@@ -27,29 +28,32 @@ class AllCoinsWidget extends StatelessWidget {
       width: double.infinity,
       child: isLoading == null
           ? const Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : isLoading == true
-          ? ListView.builder(
-          itemCount: coinMarket!.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: CoinListCard(
-                  item: coinMarket![index],
-                ));
-          })
-          : Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            context.mLocalizations.isApiRequestFailed,
-            style: const TextStyle(
-                color: CustomColors.mWhitePrimary
-            ),),
-        ),
-      ),
+              ? ListView.builder(
+                  itemCount: coinMarket!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: CoinListCard(
+                          item: coinMarket![index],
+                        ));
+                  })
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      context.mLocalizations.isApiRequestFailed,
+                      style: TextStyle(
+                        color: context.isDarkMode
+                            ? CustomColors.mWhitePrimary
+                            : CustomColors.bgcolor,
+                      ),
+                    ),
+                  ),
+                ),
     );
   }
 }

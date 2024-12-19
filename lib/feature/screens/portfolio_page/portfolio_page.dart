@@ -1,13 +1,11 @@
-import 'package:auto_route/annotations.dart';
 import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_coins_listview_widget.dart';
 import 'package:crypto_questor/feature/screens/portfolio_page/widgets/total_spent_description_widget.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/components/styles/my_functions.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/portfolio_page_mixin.dart';
 
-@RoutePage()
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
 
@@ -32,7 +30,7 @@ class _PortfolioPageState extends State<PortfolioPage> with PortfolioPageMixin {
     }
     return SafeArea(
       child: Scaffold(
-        backgroundColor: CustomColors.bgcolor,
+        backgroundColor: context.projectTheme!.primaryColor,
         appBar: buildCustomAppBar(context),
         body: Column(
           children: [

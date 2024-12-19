@@ -66,8 +66,11 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                       Text(
                         context.mLocalizations.low,
                         style: context.textThemeTitleSmall?.copyWith(
-                            color: CustomColors.mGreyPrimary,
-                            fontWeight: FontWeight.w300),
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       Text(
                         "\$${low24H.toString()}",
@@ -82,8 +85,11 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                       Text(
                         context.mLocalizations.high,
                         style: context.textThemeTitleSmall?.copyWith(
-                            color: CustomColors.mGreyPrimary,
-                            fontWeight: FontWeight.w300),
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       Text(
                         "\$${high24H.toString()}",
@@ -98,14 +104,20 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                       Text(
                         ApplicationConstants.vol,
                         style: context.textThemeTitleSmall?.copyWith(
-                            color: CustomColors.mGreyPrimary,
-                            fontWeight: FontWeight.w300),
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       Text(
                         "\$${totalVolume.toString()} M",
                         style: context.textThemeBodyMedium?.copyWith(
-                            color: CustomColors.mWhitePrimary,
-                            fontWeight: FontWeight.bold),
+                          color: context.isDarkMode
+                              ? CustomColors.mGreyPrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

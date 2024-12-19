@@ -1,3 +1,4 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 
@@ -35,15 +36,21 @@ class CustomMaterialButton extends StatelessWidget {
           Icon(
             icon,
             size: 20,
-            color:
-                isSelected ? CustomColors.mYellow : CustomColors.mGreyPrimary,
+            color: isSelected
+                ? context.isDarkMode
+                    ? CustomColors.mYellow
+                    : CustomColors.bgcolor
+                : CustomColors.mGreyPrimary,
           ),
           Text(
             label,
             style: TextStyle(
               fontSize: 11,
-              color:
-                  isSelected ? CustomColors.mYellow : CustomColors.mGreyPrimary,
+              color: isSelected
+                  ? context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.bgcolor
+                  : CustomColors.mGreyPrimary,
             ),
           ),
         ],

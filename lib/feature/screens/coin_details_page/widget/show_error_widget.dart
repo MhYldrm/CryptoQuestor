@@ -1,3 +1,4 @@
+import 'package:crypto_questor/product/components/styles/custom_colors.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,14 @@ class _ShowErrorWidgetState extends State<ShowErrorWidget> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(25.0),
-            child: Text(context.mLocalizations.isApiRequestFailed),
+            child: Text(
+              context.mLocalizations.isApiRequestFailed,
+              style: TextStyle(
+                color: context.isDarkMode
+                    ? CustomColors.mWhitePrimary
+                    : CustomColors.bgcolor,
+              ),
+            ),
           ),
         ),
       ),

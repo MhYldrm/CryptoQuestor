@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget {
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(90),
           ),
-          color: CustomColors.mYellow.withOpacity(0.8),
+          color: context.projectTheme!.appBarTheme.backgroundColor, // theme'den değiştir
         ),
       ),
       leading: Padding(
@@ -51,7 +51,7 @@ class CustomAppBar extends StatelessWidget {
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
               size: 26,
-              color: CustomColors.bgcolor,
+              color: CustomColors.bgcolor, // themeden değiştir
             )),
       ),
       title: Padding(
@@ -76,6 +76,6 @@ class CustomAppBar extends StatelessWidget {
           ],
         ),
       ),
-    ); // Your custom widget implementation.
+    );
   }
 }

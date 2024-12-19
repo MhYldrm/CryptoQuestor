@@ -53,5 +53,7 @@
   "here" : "here",
   "goToMissions" : "Go to Missions",
   "missionsDescription" : "-  To complete the tasks, you must sign up the exchange and complete KYC procedures.You can sign up",
-  "isApiRequestFailed" : "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later"
+  "isApiRequestFailed" : "Attention this APİ is free, so you cannot send multiple requests per second, please wait and try again later",
+  "changeThemeToDarkMode" : "Dark Theme ->",
+  "changeThemeToLightMode" : "Light Theme ->"
 }

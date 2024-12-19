@@ -1,6 +1,7 @@
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
+import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/models/chart_model.dart';
 
 /// [itemChart] Indicates information of coin price chart
@@ -29,6 +30,24 @@ final class ChartWidget extends StatelessWidget {
         trackballBehavior: trackballBehavior,
         zoomPanBehavior:
             ZoomPanBehavior(enablePinching: true, zoomMode: ZoomMode.x),
+        primaryXAxis: CategoryAxis(
+          labelStyle: TextStyle(
+            color: context.isDarkMode
+                ? CustomColors.mGreyPrimary
+                : CustomColors.bgcolor,
+            fontSize: 8,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+        primaryYAxis: NumericAxis(
+          labelStyle: TextStyle(
+            color: context.isDarkMode
+                ? CustomColors.mGreyPrimary
+                : CustomColors.bgcolor,
+            fontSize: 8,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
         series: <CandleSeries>[
           CandleSeries<ChartModel, int>(
             enableSolidCandles: true,

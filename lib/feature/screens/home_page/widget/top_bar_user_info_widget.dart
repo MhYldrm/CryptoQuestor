@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/services/firebase_service.dart';
 
-
 /// A widget that displays user information in the top bar of the app.
 ///
 /// This widget is responsible for showing a greeting message and the user's display name or email address
@@ -26,10 +25,13 @@ final class TopBarUserInfo extends StatelessWidget {
             children: [
               Text(
                 context.mLocalizations.welcome,
-                style: const TextStyle(
-                    fontSize: 17,
-                    color: CustomColors.mGreyPrimary,
-                    fontWeight: FontWeight.w300),
+                style: TextStyle(
+                  fontSize: 17,
+                  color: context.isDarkMode
+                      ? CustomColors.mGreyPrimary
+                      : CustomColors.bgcolor,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
               const SizedBox(
                 height: 5,
@@ -38,11 +40,14 @@ final class TopBarUserInfo extends StatelessWidget {
                 firebaseService.currentUser?.displayName ??
                     firebaseService.currentUser?.email ??
                     context.mLocalizations.cryptoLover,
-                style: const TextStyle(
-                    fontSize: 15,
-                    color: CustomColors.mWhitePrimary,
-                    fontWeight: FontWeight.bold),
-              )
+                style: TextStyle(
+                  fontSize: 15,
+                  color: context.isDarkMode
+                      ? CustomColors.mGreyPrimary
+                      : CustomColors.bgcolor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ],

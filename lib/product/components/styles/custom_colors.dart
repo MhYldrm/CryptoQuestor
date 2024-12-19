@@ -48,11 +48,30 @@ final class CustomColors {
   /// [coinsCardColor] Dark blue color, used for the coins card background.
   static const Color coinsCardColor = Color(0xff0B255B);
 
-  /// [cardGradientColors] Gradient colors used for decorative card backgrounds with a fading effect.
-  static const List<Color> cardGradientColors = [
+  /// [earnCardGradientColors] Gradient colors used for decorative card backgrounds with a fading effect.
+  static const List<Color> earnCardGradientColors = [
     Color(0x99FFFFFF),
     Color(0x00FFFFFF),
     Color(0x00FFFFFF),
     Color(0x99FFFFFF),
+  ];
+
+  static const List<Color> creditCardGradientLightThemeColors = [
+    Color(0xFFF5F5F5),
+    Color(0xFFB3B6B5),
+    Color(0xFFF5F5F5),
+    Color(0xFFF5F5F5),
+    Color(0xFFF5F5F5),
+  ];
+
+  static const List<Color> creditCardGradientDarkThemeColors = [
+    Color.fromARGB(255, 5, 8, 28), // Darker blue gradient
+    Color.fromARGB(255, 17, 53, 87),
+  ];
+
+  static const List<Color> earnCardGradientLightThemeColors = [
+    Color(0xFFB3B6B5),
+    Color(0xFFF5F5F5),
+    Color(0xFFB3B6B5),
   ];
 }

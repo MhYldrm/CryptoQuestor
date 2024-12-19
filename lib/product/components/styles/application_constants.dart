@@ -66,6 +66,8 @@ final class ApplicationConstants {
   static const String mailTo = "mailto";
 
   static const String getStarted = "GET STARTED";
+  static const String darkMode = "Dark Mode";
+  static const String lightMode = "Light Mode";
 
   /// Home Page Text
   ///

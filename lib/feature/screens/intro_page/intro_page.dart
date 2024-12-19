@@ -1,16 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_questor/feature/screens/intro_page/widget/custom_material_button.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import '../earn_page/earn_page.dart';
 import '../home_page/home_page.dart';
 import '../portfolio_page/portfolio_page.dart';
 import '../profile_page/profile_page.dart';
 import 'mixin/intro_page_mixin.dart';
 
-@RoutePage()
-class IntroPage extends StatefulWidget {
+final class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
   @override
   State<IntroPage> createState() => _IntroPageState();
@@ -25,7 +22,7 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         notchMargin: 17,
-        color: CustomColors.bgcolor,
+        color: context.projectTheme!.primaryColor,
         shape: const CircularNotchedRectangle(),
         child: SizedBox(
           height: 60,

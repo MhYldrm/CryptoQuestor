@@ -31,14 +31,22 @@ class CategoriesNamesPartWidget extends StatelessWidget {
               child: Text(
                 ApplicationConstants.top100,
                 style: context.textThemeLabelSmall
-                    ?.copyWith(color: CustomColors.mLilacPrimary),
+                    ?.copyWith(
+                    color: context.isDarkMode
+                  ? CustomColors.mLilacPrimary
+                  : CustomColors.bgcolor,
+                ),
               )),
           TextButton(
               onPressed: () => changePage(1),
               child: Text(
                 "${context.mLocalizations.hotCoins} 🔥",
                 style: context.textThemeLabelSmall
-                    ?.copyWith(color: CustomColors.mYellow),
+                    ?.copyWith(
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.bgcolor,
+                ),
               )),
           TextButton(
               onPressed: () => changePage(2),

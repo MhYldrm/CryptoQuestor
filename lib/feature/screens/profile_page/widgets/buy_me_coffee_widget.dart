@@ -27,7 +27,9 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
             builder: (BuildContext context) {
               return Container(
                 height: context.deviceHeight / 2,
-                decoration: ProjectBoxDecorations.profilePageBoxDecoration,
+                decoration: context.isDarkMode
+                ? ProjectBoxDecorations.profilePageDarkThemeBoxDecoration
+                : ProjectBoxDecorations.profilePageLightThemeBoxDecoration,
                 child: ListView.builder(
                   itemCount:
                       ApplicationConstants.buyMeCoffeeWalletAddress.length,

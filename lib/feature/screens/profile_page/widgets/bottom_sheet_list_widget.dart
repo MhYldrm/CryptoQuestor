@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import '../../../../product/components/padding/project_paddings.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 
-
 /// A widget that represents a list item in a bottom sheet. It displays a cryptocurrency's logo,
 /// name, and wallet address. When tapped, it copies the wallet address to the clipboard and shows
 /// a snack bar notification confirming the action.
@@ -15,7 +14,10 @@ import '../../../../product/components/styles/custom_colors.dart';
 ///
 final class BottomSheetListWidget extends StatelessWidget {
   const BottomSheetListWidget(
-      {super.key, required this.url, required this.name, required this.walletAddress});
+      {super.key,
+      required this.url,
+      required this.name,
+      required this.walletAddress});
 
   final String url;
   final String name;
@@ -66,15 +68,19 @@ final class BottomSheetListWidget extends StatelessWidget {
                     Text(
                       name,
                       style: context.textThemeBodyLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: CustomColors.mWhitePrimary),
+                        fontWeight: FontWeight.bold,
+                        color: context.isDarkMode
+                            ? CustomColors.mWhitePrimary
+                            : CustomColors.bgcolor,
+                      ),
                     ),
                     Text(
                       walletAddress,
                       overflow: TextOverflow.ellipsis,
                       style: context.textThemeBodySmall!.copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: CustomColors.mGreyPrimary),
+                        fontWeight: FontWeight.w400,
+                        color: CustomColors.mGreyPrimary,
+                      ),
                     ),
                   ],
                 ),

@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../product/components/padding/project_paddings.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 
-
 /// [refLink] URL to the Missions on Exchange web page
 /// [missionsText] Earn Campaign Missions Texts
 /// [mPinkPrimary] Missions Title Texts Pink Color
@@ -28,13 +27,17 @@ class EarnMissionsPartWidget extends StatelessWidget {
           children: [
             Text(
               context.mLocalizations.missions,
-              style: context.textThemeTitleLarge
-                  ?.copyWith(color: CustomColors.mPinkPrimary),
+              style: context.textThemeTitleLarge?.copyWith(
+                color: CustomColors.mPinkPrimary,
+              ),
             ),
             Text(
               context.mLocalizations.missionsDescription,
-              style: context.textThemeBodyMedium
-                  ?.copyWith(color: CustomColors.mWhitePrimary),
+              style: context.textThemeBodyMedium?.copyWith(
+                color: context.isDarkMode
+                    ? CustomColors.mWhitePrimary
+                    : CustomColors.bgcolor,
+              ),
             ),
             InkWell(
               onTap: () {
@@ -42,15 +45,19 @@ class EarnMissionsPartWidget extends StatelessWidget {
               },
               child: Text(
                 context.mLocalizations.here,
-                style: context.textThemeBodyMedium
-                    ?.copyWith(color: CustomColors.mYellow),
+                style: context.textThemeBodyMedium?.copyWith(
+                  color: CustomColors.mYellow,
+                ),
               ),
             ),
             Text(
               missionsText,
               style: context.textThemeBodyMedium?.copyWith(
-                  color: CustomColors.mWhitePrimary,
-                  fontWeight: FontWeight.w300),
+                color: context.isDarkMode
+                    ? CustomColors.mWhitePrimary
+                    : CustomColors.bgcolor,
+                fontWeight: FontWeight.w300,
+              ),
               maxLines: 16,
               overflow: TextOverflow.ellipsis,
             ),
@@ -59,6 +66,7 @@ class EarnMissionsPartWidget extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _launchWebUrl(Uri url) async {
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');

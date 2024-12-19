@@ -2,8 +2,8 @@ import 'package:crypto_questor/feature/screens/home_page/widget/categoires_names
 import 'package:crypto_questor/feature/screens/home_page/widget/categories_coins_part_widget.dart';
 import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_part_widget.dart';
 import 'package:crypto_questor/feature/screens/home_page/widget/top_bar_user_info_widget.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
 import '../../../product/components/styles/my_functions.dart';
 import '../../../product/models/gecko_models.dart';
 import '../../../product/models/portfolio_coins_model.dart';
@@ -27,7 +27,8 @@ import 'mixin/home_page_mixin.dart';
 /// [sortedGainersCoins], [sortedLosersCoins], [sortedHotCoins] - Lists of coins sorted by gainers, losers, and hot coins respectively.
 /// [_pageController] // PageController for the CategoriesCoins section page-view
 ///
-class HomePage extends StatefulWidget {
+
+final class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
     }
     return SafeArea(
         child: Scaffold(
-      backgroundColor: CustomColors.bgcolor,
+      backgroundColor: context.projectTheme!.primaryColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

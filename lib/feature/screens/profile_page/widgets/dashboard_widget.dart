@@ -1,14 +1,13 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:crypto_questor/feature/screens/splash_page/splash_page.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../product/components/padding/project_paddings.dart';
 import '../../../../product/components/styles/application_constants.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/services/firebase_service.dart';
+import '../../../widgets/change_theme_switch_widget.dart';
 import '../../../widgets/empty_widget.dart';
-import '../../sign_in_page/sign_in_page.dart';
 
 /// A widget representing the dashboard section of the application.
 /// Displays key options like "About Us", "Contact Us", and a logout button.
@@ -29,79 +28,140 @@ class DashboardWidget extends StatelessWidget {
           // Dashboard title
           Text(
             context.mLocalizations.dashboard,
-            style: context.textThemeTitleLarge?.copyWith(color: CustomColors.mGreyPrimary),
+            style: context.textThemeTitleLarge?.copyWith(
+              color: CustomColors.mGreyPrimary,
+            ),
           ),
           const EmptyWidget(height: 20), // Spacer widget
           // About Us link
           InkWell(
-            onTap: (){
+            onTap: () {
               _launchWeb(ApplicationConstants.myPortfolioLink);
             }, // Trigger web URL launch on tap
             child: Row(
               children: [
                 Image.asset(
-                    ApplicationConstants.aboutUsImagePath,
-                    height: 35,
-                    width: 35,
-                    fit: BoxFit.fill,
-                    color: CustomColors.mYellow
+                  ApplicationConstants.aboutUsImagePath,
+                  height: 35,
+                  width: 35,
+                  fit: BoxFit.fill,
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mPinkPrimary,
                 ),
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.aboutUs,
-                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mWhitePrimary),
+                  style: context.textThemeTitleMedium?.copyWith(
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.bgcolor,
+                  ),
                 ),
               ],
             ),
           ),
           const EmptyWidget(height: 25), // Spacer widget
           InkWell(
-            onTap: (){
+            onTap: () {
               _launchMail(ApplicationConstants.myEmail);
             }, // Trigger mail URL launch on tap
             child: Row(
               children: [
                 CircleAvatar(
-                    backgroundColor: CustomColors.mYellow,
-                    child: Image.asset(
-                        ApplicationConstants.contactUsImagePath,
-                        height: 30,
-                        width: 30,
-                        fit: BoxFit.fill,
-                        color: CustomColors.mBlackPrimary
-                    )
+                  backgroundColor: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mPinkPrimary,
+                  child: Image.asset(
+                    ApplicationConstants.contactUsImagePath,
+                    height: 30,
+                    width: 30,
+                    fit: BoxFit.fill,
+                    color: context.isDarkMode
+                        ? CustomColors.mBlackPrimary
+                        : CustomColors.mWhitePrimary,
+                  ),
                 ),
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.contactUs,
-                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mWhitePrimary),
+                  style: context.textThemeTitleMedium?.copyWith(
+                    color: context.isDarkMode
+                        ? CustomColors.mWhitePrimary
+                        : CustomColors.bgcolor,
+                  ),
                 ),
               ],
             ),
           ),
           const EmptyWidget(height: 25), // Spacer widget
-
           // Logout option
+          Row(
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: context.isDarkMode
+                        ? CustomColors.mYellow
+                        : CustomColors.mPinkPrimary,
+                    child: Icon(
+                      context.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                      size: 23,
+                      color: context.isDarkMode
+                          ? CustomColors.mBlackPrimary
+                          : CustomColors.mWhitePrimary,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ), // Space between icon and text
+                  Text(
+                    context.isDarkMode
+                        ? context.mLocalizations.changeThemeToLightMode
+                        : context.mLocalizations.changeThemeToDarkMode,
+                    style: context.textThemeTitleMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              ChangeThemeSwitchWidget(
+                isDarkTheme: context.isDarkMode,
+              ),
+            ],
+          ),
+          const EmptyWidget(height: 25),
           InkWell(
-            onTap: (){
-              FirebaseService().signOut().then((value) {
-                context.router.replace(const SignInRoute());
-              });
+            onTap: () async {
+              await FirebaseService().signOut();
+              if (context.mounted) {
+                context.pushReplacement(const SplashPage());
+              }
             }, // Trigger logout on tap
             child: Row(
               children: [
-                const CircleAvatar(
-                    backgroundColor: CustomColors.mYellow,
+                CircleAvatar(
+                    backgroundColor: context.isDarkMode
+                        ? CustomColors.mYellow
+                        : CustomColors.mPinkPrimary,
                     child: Icon(
                       Icons.logout_outlined,
                       size: 23,
-                      color: CustomColors.mBlackPrimary,
-                    )
-                ),
+                      color: context.isDarkMode
+                          ? CustomColors.mBlackPrimary
+                          : CustomColors.mWhitePrimary,
+                    )),
                 const SizedBox(width: 20), // Space between icon and text
                 Text(
                   context.mLocalizations.logout,
-                  style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mRedPrimary),
+                  style: context.textThemeTitleMedium?.copyWith(
+                    color: CustomColors.mPinkPrimary,
+                  ),
                 ),
               ],
             ),
@@ -110,12 +170,14 @@ class DashboardWidget extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _launchMail(String email) async {
     final Uri mailUrl = Uri(scheme: 'mailto', path: email);
     if (!await launchUrl(mailUrl)) {
       throw Exception('Could not launch $mailUrl');
     }
   }
+
   Future<void> _launchWeb(String url) async {
     final Uri webUrl = Uri.parse(url);
     if (!await launchUrl(webUrl)) {

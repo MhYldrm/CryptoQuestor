@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import '../components/theme/project_theme.dart';
+import '../components/theme/theme_provider.dart';
 
 /// Localizations
 // This allows for simple access to translations in any widget or context.
@@ -13,6 +16,42 @@ extension LocalizedBuildContext on BuildContext {
 extension DeviceFrame on BuildContext {
   double get deviceHeight => MediaQuery.sizeOf(this).height;
   double get deviceWidht => MediaQuery.sizeOf(this).width;
+}
+
+extension ThemeDataExtension on BuildContext {
+  /// ThemeData'ya kolayca erişim sağlar.
+  ThemeData? get projectTheme => Theme.of(this);
+}
+
+extension ThemeContextExtensions on BuildContext {
+  bool get isDarkMode {
+    final themeProvider = Provider.of<ThemeProvider>(this, listen: false);
+    return themeProvider.themeData == darkTheme;
+  }
+}
+
+extension NavigatorExtension on BuildContext {
+  Future<T?> push<T>(Widget page) {
+    return Navigator.push(
+      this,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  Future<T?> pushReplacement<T, TO>(Widget page) {
+    return Navigator.pushReplacement(
+      this,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  Future<T?> pushAndRemoveUntil<T>(Widget page, bool Function(Route<dynamic>) predicate) {
+    return Navigator.pushAndRemoveUntil(
+      this,
+      MaterialPageRoute(builder: (context) => page),
+      predicate,
+    );
+  }
 }
 
 /// Text Styles
@@ -36,5 +75,6 @@ extension TextThemeStyles on BuildContext {
   TextStyle? get textThemeLabelSmall => Theme.of(this).textTheme.labelSmall;
   TextStyle? get textThemeLabelMedium => Theme.of(this).textTheme.labelMedium;
   TextStyle? get textThemeLabelLarge => Theme.of(this).textTheme.labelLarge;
-  TextStyle? get textThemeHeadLineSmall => Theme.of(this).textTheme.headlineSmall;
+  TextStyle? get textThemeHeadLineSmall =>
+      Theme.of(this).textTheme.headlineSmall;
 }

@@ -15,11 +15,11 @@ import '../../../../product/components/styles/custom_colors.dart';
 final class AddPortfolioPageHeaderWidget extends StatelessWidget {
   const AddPortfolioPageHeaderWidget(
       {super.key,
-        required this.imageUrl,
-        required this.symbol,
-        required this.name,
-        required this.currentPrice,
-        this.marketCapChangePercentage24H});
+      required this.imageUrl,
+      required this.symbol,
+      required this.name,
+      required this.currentPrice,
+      this.marketCapChangePercentage24H});
 
   final String imageUrl;
   final String symbol;
@@ -42,10 +42,16 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                    ),
+                  ),
                 ),
                 Row(
                   children: [
@@ -71,19 +77,21 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
                           children: [
                             Text(
                               symbol.toString().toUpperCase(),
-                              style: context.textThemeTitleMedium
-                                  ?.copyWith(
-                                  color: CustomColors.mWhitePrimary,
-                                  fontWeight: FontWeight.bold),
+                              style: context.textThemeTitleMedium?.copyWith(
+                                color: context.isDarkMode
+                                    ? CustomColors.mWhitePrimary
+                                    : CustomColors.bgcolor,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             FittedBox(
                               child: Text(
                                 name,
                                 overflow: TextOverflow.ellipsis,
-                                style: context.textThemeLabelLarge
-                                    ?.copyWith(
-                                    color: CustomColors.mGreyPrimary,
-                                    fontWeight: FontWeight.w500),
+                                style: context.textThemeLabelLarge?.copyWith(
+                                  color: CustomColors.mGreyPrimary,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ],
@@ -102,23 +110,22 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
                         children: [
                           Text(
                             "${currentPrice.toString()} \$",
-                            style: context.textThemeTitleMedium
-                                ?.copyWith(
-                                color: CustomColors.mWhitePrimary,
-                                fontWeight: FontWeight.bold),
+                            style: context.textThemeTitleMedium?.copyWith(
+                              color: context.isDarkMode
+                                  ? CustomColors.mWhitePrimary
+                                  : CustomColors.bgcolor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             "${marketCapChangePercentage24H?.toStringAsFixed(2)}%",
                             style: marketCapChangePercentage24H! >= 0
-                                ? context.textThemeBodyLarge
-                                ?.copyWith(
-                                color: Colors.green.shade300,
-                                fontWeight: FontWeight.w300)
-                                : context.textThemeBodyMedium
-                                ?.copyWith(
-                                color: Colors.red.shade300,
-                                fontWeight: FontWeight.w300),
-
+                                ? context.textThemeBodyLarge?.copyWith(
+                                    color: Colors.green.shade500,
+                                    fontWeight: FontWeight.w300)
+                                : context.textThemeBodyMedium?.copyWith(
+                                    color: Colors.red.shade400,
+                                    fontWeight: FontWeight.w300),
                           ),
                         ],
                       ),

@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:crypto_questor/product/navigation/app_router.dart';
+import 'package:crypto_questor/feature/screens/sign_in_page/sign_in_page.dart';
+import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../product/models/user_provider.dart';
 import '../../../../product/services/firebase_service.dart';
@@ -59,7 +59,7 @@ mixin SignUpFormFieldsMixin {
         ScaffoldMessenger.of(context).showSnackBar(
           UserCreatedSnackBarWidget(context: context),
         );
-        context.router.push(const SignInRoute());
+        context.push(const SignInPage());
       } else {
         showDialog(
           context: context,

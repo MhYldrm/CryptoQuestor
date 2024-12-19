@@ -43,8 +43,11 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.5,
-                decoration:
-                    ProjectBoxDecorations.addPortfolioPagesBoxDecoration,
+                decoration: context.isDarkMode
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -66,8 +69,12 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                       ),
                       Text(
                         ApplicationConstants.usd,
-                        style: context.textThemeBodyLarge
-                            ?.copyWith(fontWeight: FontWeight.w300),
+                        style: context.textThemeBodyLarge?.copyWith(
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ],
                   ),
@@ -88,8 +95,11 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.5,
-                decoration:
-                    ProjectBoxDecorations.addPortfolioPagesBoxDecoration,
+                decoration: context.isDarkMode
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -111,8 +121,12 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                       ),
                       Text(
                         widget.coinSymbol.toString().toUpperCase(),
-                        style: context.textThemeBodyLarge
-                            ?.copyWith(fontWeight: FontWeight.w300),
+                        style: context.textThemeBodyLarge?.copyWith(
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ],
                   ),
@@ -133,8 +147,11 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.1,
-                decoration:
-                    ProjectBoxDecorations.addPortfolioPagesBoxDecoration,
+                decoration: context.isDarkMode
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -143,8 +160,12 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                     children: [
                       Text(
                         widget.totalSpent,
-                        style: context.textThemeBodyLarge
-                            ?.copyWith(fontWeight: FontWeight.w400),
+                        style: context.textThemeBodyLarge?.copyWith(
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       VerticalDivider(
                         thickness: 1.5,
@@ -152,8 +173,12 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                       ),
                       Text(
                         ApplicationConstants.usd,
-                        style: context.textThemeBodyLarge
-                            ?.copyWith(fontWeight: FontWeight.w300),
+                        style: context.textThemeBodyLarge?.copyWith(
+                          color: context.isDarkMode
+                              ? CustomColors.mWhitePrimary
+                              : CustomColors.bgcolor,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ],
                   ),
