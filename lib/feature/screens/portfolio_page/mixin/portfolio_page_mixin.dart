@@ -1,5 +1,6 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../../../product/models/portfolio_coins_model.dart';
 import '../../../../product/services/firebase_service.dart';
 import '../../../widgets/custom_app_bar.dart';
@@ -14,6 +15,14 @@ import '../portfolio_page.dart';
 mixin PortfolioPageMixin on State<PortfolioPage> {
   List<PortfolioCoinsModel> allCoinsInPortfolio = [];
   bool isLoading = true;
+  late TooltipBehavior toolTipBehavior;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPortfolioCoinsFromFirebase();
+    toolTipBehavior = TooltipBehavior(enable: true);
+  }
 
   Future<void> fetchPortfolioCoinsFromFirebase() async {
     allCoinsInPortfolio = await FirebaseService().getPortfolioCoins();
