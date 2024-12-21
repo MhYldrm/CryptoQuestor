@@ -23,7 +23,7 @@ final class PieChartWidget extends StatelessWidget {
       series: <CircularSeries>[
         PieSeries<PortfolioCoinsModel, String>(
           dataSource: coinList,
-          xValueMapper: (PortfolioCoinsModel data, _) => data.quantity,
+          xValueMapper: (PortfolioCoinsModel data, _) => '${data.symbol.toUpperCase()} : ${data.quantity}',
           yValueMapper: (PortfolioCoinsModel data, _) =>
               double.parse(data.totalSpent),
           dataLabelMapper: (PortfolioCoinsModel data, _) => data.symbol.toUpperCase(),
@@ -69,7 +69,7 @@ final class PieChartWidget extends StatelessWidget {
                       children: [
                         Text(tappedCoin.quantity),
                         const SizedBox(height: 10),
-                        Text(tappedCoin.totalSpent),
+                        Text('\$ ${tappedCoin.totalSpent}'),
                       ],
                     ),
                   ],

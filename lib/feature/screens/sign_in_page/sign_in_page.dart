@@ -1,3 +1,4 @@
+import 'package:crypto_questor/feature/screens/sign_in_page/widget/forgot_password_widget.dart';
 import 'package:crypto_questor/feature/screens/sign_in_page/widget/sign_up_link_widget.dart';
 import 'package:crypto_questor/feature/screens/sign_in_page/widget/wallet_image_widgets.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
@@ -54,6 +55,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
                         _buildEmailPart(myWidht, context, userProvider),
                         const EmptyWidget(height: 20),
                         _buildPasswordPart(myWidht, context, userProvider),
+                        const ForgotPasswordWidget(),
                       ],
                     ),
                   ),

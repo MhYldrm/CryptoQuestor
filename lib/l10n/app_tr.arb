@@ -55,7 +55,9 @@
   "missionsDescription" : "- Görevleri tamamlamak için borsaya kaydolmalı ve KYC prosedürlerini tamamlamalısınız. Kayıt olabilirsiniz",
   "isApiRequestFailed" : "Dikkat bu API ücretsizdir, bu nedenle saniyede birden fazla istek gönderemezsiniz, lütfen bekleyin ve daha sonra tekrar deneyin.",
   "changeThemeToDarkMode" : "Koyu Mod ->",
-  "changeThemeToLightMode" : "Aydınlık Mod ->"
+  "changeThemeToLightMode" : "Aydınlık Mod ->",
+  "forgotPassword" : "Şifremi Unuttum",
+  "sendResetPasswordEmail" : "E-postanıza şifre sıfırlama talebi gönderildi!"
 }
 
 
