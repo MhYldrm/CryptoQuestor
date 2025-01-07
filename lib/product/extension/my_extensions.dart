@@ -1,16 +1,20 @@
+import 'package:crypto_questor/feature/providers/gecko_coins_provider.dart';
+import 'package:crypto_questor/feature/providers/portfolio_coins_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../components/theme/project_theme.dart';
-import '../components/theme/theme_provider.dart';
+import '../../feature/providers/project_theme_provider.dart';
 
 /// Localizations
-// This allows for simple access to translations in any widget or context.
+// This extension provides easy access to translations in any widget or context.
+// [mLocalizations] Retrieves the current localization instance (translations) for the context.
 extension LocalizedBuildContext on BuildContext {
   AppLocalizations get mLocalizations => AppLocalizations.of(this)!;
 }
 
-/// [DeviceFrame] for getting the device's height and width, using [MediaQuery].
+/// Device Frame
+// This extension allows access to the device's height and width using [MediaQuery].
 // [deviceHeight] Returns the height of the device's screen in logical pixels.
 // [deviceWidht] Returns the width of the device's screen in logical pixels.
 extension DeviceFrame on BuildContext {
@@ -18,19 +22,22 @@ extension DeviceFrame on BuildContext {
   double get deviceWidht => MediaQuery.sizeOf(this).width;
 }
 
+/// Theme Data Extension
+// This extension provides an easy way to access the current [ThemeData] of the app.
 extension ThemeDataExtension on BuildContext {
-  /// ThemeData'ya kolayca erişim sağlar.
   ThemeData? get projectTheme => Theme.of(this);
 }
 
 extension ThemeContextExtensions on BuildContext {
+  /// Checks if the current theme is dark mode.
   bool get isDarkMode {
-    final themeProvider = Provider.of<ThemeProvider>(this, listen: false);
+    final themeProvider = Provider.of<ProjectThemeProvider>(this, listen: false);
     return themeProvider.themeData == darkTheme;
   }
 }
 
 extension NavigatorExtension on BuildContext {
+  /// Pushes a new page onto the navigator stack and returns the result of the navigation.
   Future<T?> push<T>(Widget page) {
     return Navigator.push(
       this,
@@ -38,6 +45,7 @@ extension NavigatorExtension on BuildContext {
     );
   }
 
+  /// Replaces the current page with a new page and returns the result of the navigation.
   Future<T?> pushReplacement<T, TO>(Widget page) {
     return Navigator.pushReplacement(
       this,
@@ -45,6 +53,7 @@ extension NavigatorExtension on BuildContext {
     );
   }
 
+  /// Pushes a new page and removes all previous pages from the stack until the predicate condition is met.
   Future<T?> pushAndRemoveUntil<T>(Widget page, bool Function(Route<dynamic>) predicate) {
     return Navigator.pushAndRemoveUntil(
       this,
@@ -55,6 +64,7 @@ extension NavigatorExtension on BuildContext {
 }
 
 /// Text Styles
+// Extensions for easy access to the app's text styles (based on the theme).
 // [TextThemeTitleSmall] font Size: 14
 // [TextThemeTitleMedium] font Size: 16
 // [TextThemeTitleLarge] font Size: 20
@@ -65,6 +75,7 @@ extension NavigatorExtension on BuildContext {
 // [TextThemeLabelMedium] font Size: 12
 // [TextThemeLabelLarge] font Size: 14
 // [textThemeHeadLineSmall] font Size: 24
+
 extension TextThemeStyles on BuildContext {
   TextStyle? get textThemeTitleSmall => Theme.of(this).textTheme.titleSmall;
   TextStyle? get textThemeTitleMedium => Theme.of(this).textTheme.titleMedium;
@@ -77,4 +88,14 @@ extension TextThemeStyles on BuildContext {
   TextStyle? get textThemeLabelLarge => Theme.of(this).textTheme.labelLarge;
   TextStyle? get textThemeHeadLineSmall =>
       Theme.of(this).textTheme.headlineSmall;
+}
+
+extension ProviderExtensions on BuildContext {
+  /// Provides access to the [GeckoCoinsProvider] without listening to changes.
+  GeckoCoinsProvider get geckoProvider =>
+      Provider.of<GeckoCoinsProvider>(this, listen: false);
+
+  /// Provides access to the [PortfolioCoinsProvider] without listening to changes.
+  PortfolioCoinsProvider get portfolioCoinsProvider =>
+      Provider.of<PortfolioCoinsProvider>(this, listen: false);
 }

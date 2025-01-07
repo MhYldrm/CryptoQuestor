@@ -1,16 +1,29 @@
+import 'package:crypto_questor/product/components/styles/my_functions.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-
 import '../../product/components/styles/custom_colors.dart';
 
-/// A custom card widget to display information about a cryptocurrency coin in the portfolio.
-/// Displays the coin's symbol, quantity, and total spent value.
+/// [PortCoinsCard] is a stateful widget that displays detailed information about a cryptocurrency
+/// in the user's portfolio. It shows the coin's symbol, quantity, total spent value, and calculates
+/// the percentage change in value based on the current price and the amount spent.
+///
+/// ### Key Responsibilities:
+/// - Displays the coin's symbol and logo (from the provided URL).
+/// - Shows the quantity of the cryptocurrency the user owns.
+/// - Displays the total amount the user has spent on the coin.
+/// - Shows the current value of the coin and calculates the percentage change (Profit/Loss) based on
+///   the current value and the total spent.
+///
+/// ### Parameters:
 /// [name] The name of the coin (e.g., "Bitcoin")
 /// [symbol] The symbol of the coin (e.g., "BTC")
 /// [imageUrl] URL of the coin's image (e.g., the logo)
 /// [quantity] The quantity of coins the user has
 /// [totalSpent] The total amount spent on this cryptocurrency
+/// [currentValue] The current value of one coin
+/// [priceChange24H] The price change in the last 24 hours
 ///
+
 class PortCoinsCard extends StatefulWidget {
   const PortCoinsCard({
     super.key,
@@ -19,13 +32,17 @@ class PortCoinsCard extends StatefulWidget {
     required this.imageUrl,
     required this.quantity,
     required this.totalSpent,
+    required this.currentValue,
+    required this.priceChange24H,
   });
 
-  final String name; // Name of the coin
-  final String symbol; // Symbol of the coin (e.g., "BTC")
-  final String imageUrl; // Image URL for the coin (usually its logo)
-  final double quantity; // The quantity of coins in the user's portfolio
-  final double totalSpent; // The total amount the user has spent on the coins
+  final String name;
+  final String symbol;
+  final String imageUrl;
+  final double quantity;
+  final double totalSpent;
+  final String currentValue;
+  final double priceChange24H;
 
   @override
   State<PortCoinsCard> createState() => _PortCoinsCardState();
@@ -34,13 +51,20 @@ class PortCoinsCard extends StatefulWidget {
 class _PortCoinsCardState extends State<PortCoinsCard> {
   @override
   Widget build(BuildContext context) {
+    // Calculate the percentage difference between current value and total spent
+    double percentage = MyFunctions().calculatePercentage(
+      double.parse(widget.currentValue),
+      widget.totalSpent,
+    );
+
+    // Build the card layout with coin details
     return Container(
-      height: 75, // Fixed height for the card
+      height: 125, // Fixed height for the card
       width: double.infinity,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
-        color: context.projectTheme!.colorScheme.secondary,
+        color: context.projectTheme!.colorScheme.secondary, // Theme-based background color
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -71,15 +95,14 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                 ),
               ],
             ),
-            // Right section containing coin quantity and total spent
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Quantity of the cryptocurrency in the user's portfolio
                   Text(
-                    widget.quantity.toString(),
+                    context.mLocalizations.quantityText,
                     style: context.textThemeBodyMedium?.copyWith(
                       color: context.isDarkMode
                           ? CustomColors.mWhitePrimary
@@ -90,13 +113,95 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                   const SizedBox(
                     height: 5,
                   ),
-
+                  Text(
+                    context.mLocalizations.currentValue,
+                    style: context.textThemeBodyMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    context.mLocalizations.totalSpent,
+                    style: context.textThemeBodyMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    context.mLocalizations.pnl,
+                    style: context.textThemeBodySmall?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Right section containing coin quantity, current value, and total spent
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // Quantity of the cryptocurrency in the user's portfolio
+                  Text(
+                    '${widget.quantity.toString()} ${widget.symbol.toUpperCase()}',
+                    style: context.textThemeBodyMedium?.copyWith(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  // Current value of the cryptocurrency
+                  Text(
+                    "\$ ${widget.currentValue}",
+                    style: context.textThemeBodyMedium?.copyWith(
+                      color: double.tryParse(widget.currentValue)! >=
+                          widget.totalSpent
+                          ? CustomColors.mGreenPrimary // Green if current value is higher
+                          : CustomColors.mRedPrimary, // Red if current value is lower
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  // Total spent on the cryptocurrency
                   Text(
                     "\$ ${widget.totalSpent.toStringAsFixed(2)}",
                     style: context.textThemeBodyMedium?.copyWith(
                       color: context.isDarkMode
                           ? CustomColors.mWhitePrimary
                           : CustomColors.bgcolor,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  // Percentage difference between current value and total spent
+                  Text(
+                    "% ${percentage.toStringAsFixed(2)}",
+                    style: context.textThemeBodySmall?.copyWith(
+                      color: percentage >= 0
+                          ? CustomColors.mGreenPrimary // Green if the value is positive
+                          : CustomColors.mRedPrimary, // Red if the value is negative
                       fontWeight: FontWeight.w300,
                     ),
                   ),

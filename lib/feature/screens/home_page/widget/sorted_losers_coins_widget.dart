@@ -1,17 +1,27 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
+import '../../../providers/gecko_coins_provider.dart';
 import '../../../widgets/coin_list_card.dart';
 
-/// A widget that displays a list of the coins that have the largest loss in value.
+/// [SortedLosersCoinsWidget] is a stateless widget that displays a list of coins
+/// with the largest losses in value (losers) over the past 24 hours.
 ///
-/// This widget shows the list of coins that have experienced the largest decrease
-/// in market cap over the past 24 hours, also known as "losers."
-/// It handles the loading state and displays an error message if the API request fails.
+/// ### Key Responsibilities:
+/// - Displays a list of "losers" coins sorted by their largest market cap loss.
+/// - Handles loading and error states appropriately.
 ///
-/// [isLoading] - A flag that indicates whether the data is still being loaded.
-/// [sortedLosersCoins] - A list of coins that are sorted by their market cap loss (losers).
+/// ### Parameters:
+/// - [isLoading] A boolean flag indicating whether the data is being fetched.
+/// - [sortedLosersCoins] A list of coins sorted by their market cap loss.
 ///
+/// ### UI Details:
+/// - Shows a [CircularProgressIndicator] while data is being loaded.
+/// - Displays a vertical list of [CoinListCard] widgets when data is available.
+/// - Displays an error message if the API too many request fails.
+///
+
 class SortedLosersCoinsWidget extends StatelessWidget {
   const SortedLosersCoinsWidget({
     super.key,
@@ -24,25 +34,35 @@ class SortedLosersCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final geckoProvider = Provider.of<GeckoCoinsProvider>(context);
+
     return SizedBox(
       height: 400,
       width: double.infinity,
-      child: isLoading == null
-          ? const Center(
+      child: isLoading == true
+          ?
+          // Loading state
+          const Center(
               child: CircularProgressIndicator(),
             )
-          : isLoading == true
-              ? ListView.builder(
+          : geckoProvider.coins != null
+              ?
+              // Display the sorted losers coins list
+              ListView.builder(
                   itemCount: sortedLosersCoins.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: CoinListCard(
-                          item: sortedLosersCoins[index],
-                        ));
-                  })
-              : Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: CoinListCard(
+                        item: sortedLosersCoins[index],
+                      ),
+                    );
+                  },
+                )
+              :
+              // Error state when API request fails
+              Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(

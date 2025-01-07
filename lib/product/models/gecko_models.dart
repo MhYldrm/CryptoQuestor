@@ -1,14 +1,22 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
+/// [GeckoCoinModels] A utility class for handling JSON serialization and deserialization of [GeckoModel] objects.
+/// It provides methods to convert a JSON string into a list of [GeckoModel] objects and vice versa.
 class GeckoCoinModels {
+  /// Converts a JSON string into a list of [GeckoModel] objects.
+  /// [str] The JSON string representing a list of GeckoModel objects.
   static List<GeckoModel> fromJsonList(String str) =>
       List<GeckoModel>.from(json.decode(str).map((x) => GeckoModel.fromJson(x)));
 
+  /// Converts a list of [GeckoModel] objects into a JSON string.
+  /// [data] The list of [GeckoModel] objects to be converted into JSON.
   static String toJsonList(List<GeckoModel> data) =>
       json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 }
 
+/// [GeckoModel] Represents a model for cryptocurrency data, including price and market information.
+/// It includes the coin's symbol, current price, market cap, volume, and other relevant statistics.
 final class GeckoModel extends Equatable {
 
   const GeckoModel({
@@ -26,6 +34,8 @@ final class GeckoModel extends Equatable {
     required this.sparklineIn7D,
   });
 
+  /// Creates a [GeckoModel] instance from a JSON map.
+  /// [json] The JSON map containing the coin's data.
   factory GeckoModel.fromJson(Map<String, dynamic> json) => GeckoModel(
     id: json["id"],
     symbol: json["symbol"],
@@ -42,19 +52,21 @@ final class GeckoModel extends Equatable {
     sparklineIn7D: SparklineIn7D.fromJson(json["sparkline_in_7d"]),
   );
 
-  final String id;
-  final String symbol;
-  final String name;
-  final String image;
-  final double currentPrice;
-  final int marketCapRank;
-  final double totalVolume;
-  final double high24H;
-  final double low24H;
-  final double? priceChange24H;
-  final double? marketCapChangePercentage24H;
-  final SparklineIn7D sparklineIn7D;
+  final String id;  // Unique identifier for the coin
+  final String symbol;  // Symbol of the coin (e.g., BTC, ETH)
+  final String name;  // Name of the coin (e.g., Bitcoin, Ethereum)
+  final String image;  // URL of the coin's image/logo
+  final double currentPrice;  // Current price of the coin
+  final int marketCapRank;  // Market capitalization rank of the coin
+  final double totalVolume;  // Total volume of the coin traded
+  final double high24H;  // Highest price in the last 24 hours
+  final double low24H;  // Lowest price in the last 24 hours
+  final double? priceChange24H;  // Price change in the last 24 hours
+  final double? marketCapChangePercentage24H;  // Market cap change percentage in the last 24 hours
+  final SparklineIn7D sparklineIn7D;  // Price trend in the last 7 days
 
+  /// Converts the [GeckoModel] instance to a JSON map.
+  /// Returns a map that represents the coin's data in JSON format.
   Map<String, dynamic> toJson() => {
     'id': id,
     'symbol': symbol,
@@ -71,6 +83,7 @@ final class GeckoModel extends Equatable {
   };
 
   @override
+  // Override Equatable to compare instances based on their properties.
   List<Object?> get props => [
     id,
     symbol,
@@ -87,17 +100,23 @@ final class GeckoModel extends Equatable {
   ];
 }
 
+/// [SparklineIn7D] Represents the price trend of a coin over the last 7 days.
+/// This model contains a list of prices over the last 7 days.
 class SparklineIn7D {
   SparklineIn7D({
     required this.price,
   });
 
+  /// Creates a [SparklineIn7D] instance from a JSON map.
+  /// [json] The JSON map containing the price data.
   factory SparklineIn7D.fromJson(Map<String, dynamic> json) => SparklineIn7D(
     price: List<double>.from(json["price"].map((x) => x?.toDouble())),
   );
 
-  final List<double> price;
+  final List<double> price;  // List of prices over the last 7 days
 
+  /// Converts the [SparklineIn7D] instance to a JSON map.
+  /// Returns a map representing the price trend in JSON format.
   Map<String, dynamic> toJson() => {
     "price": List<dynamic>.from(price.map((x) => x)),
   };

@@ -6,27 +6,42 @@ import 'package:flutter/material.dart';
 import '../../../../product/models/gecko_models.dart';
 import 'all_coins_widget.dart';
 
-/// A widget that displays different categories of coins as separate pages inside a PageView.
+/// [CategoriesCoinsPartWidget] is a stateless widget that displays different categories
+/// of cryptocurrencies in separate pages within a [PageView].
 ///
-/// This widget allows users to view different categories of coins, such as all coins, hot coins, gainers, and losers.
-/// Each category has its own list of coins displayed in a separate page.
+/// ### Key Responsibilities:
+/// - Provides a paginated view for different coin categories, including:
+///   - All Coins
+///   - Hot Coins (sorted by volume)
+///   - Gainers (sorted by market cap change percentage)
+///   - Losers (sorted by market cap change percentage)
 ///
-/// [pageController] - The [PageController] used to control the PageView.
-/// [isLoading] - A boolean flag to indicate whether the data is still loading.
-/// [allCoinsList] - A list containing all the coins.
-/// [sortedHotCoins] - A sorted list of "Hot Coins" based on volume.
-/// [sortedGainersCoins] - A sorted list of "Gainers Coins" based on market cap change percentage.
-/// [sortedLosersCoins] - A sorted list of "Losers Coins" based on market cap change percentage.
+/// ### Parameters:
+/// - [pageController] A [PageController] instance to control page navigation.
+/// - [isLoading] A boolean indicating if the data is still being fetched.
+/// - [allCoinsList] A list of all available cryptocurrency data ([GeckoModel]).
+/// - [sortedHotCoins] A list of the "Hot Coins," sorted based on their volume.
+/// - [sortedGainersCoins] A list of the "Gainers," sorted by market cap change percentage.
+/// - [sortedLosersCoins] A list of the "Losers," sorted by market cap change percentage.
 ///
+/// ### UI Details:
+/// - The widget uses a [PageView] to display the following children:
+///   - [AllCoinsWidget] Displays all coins.
+///   - [SortedHotCoinsWidget] Displays the sorted "Hot Coins."
+///   - [SortedGainersCoinsWidget] Displays the sorted "Gainers."
+///   - [SortedLosersCoinsWidget] Displays the sorted "Losers."
+///
+
 class CategoriesCoinsPartWidget extends StatelessWidget {
-  const CategoriesCoinsPartWidget(
-      {super.key,
-      required this.pageController,
-      required this.isLoading,
-      required this.allCoinsList,
-      required this.sortedHotCoins,
-      required this.sortedGainersCoins,
-      required this.sortedLosersCoins});
+  const CategoriesCoinsPartWidget({
+    super.key,
+    required this.pageController,
+    required this.isLoading,
+    required this.allCoinsList,
+    required this.sortedHotCoins,
+    required this.sortedGainersCoins,
+    required this.sortedLosersCoins,
+  });
 
   final PageController pageController;
   final bool isLoading;
@@ -43,13 +58,26 @@ class CategoriesCoinsPartWidget extends StatelessWidget {
       child: PageView(
         controller: pageController,
         children: [
-          AllCoinsWidget(isLoading: isLoading, coinMarket: allCoinsList),
+          // All Coins Page
+          AllCoinsWidget(
+            isLoading: isLoading,
+            coinMarket: allCoinsList,
+          ),
+          // Hot Coins Page
           SortedHotCoinsWidget(
-              isLoading: isLoading, sortedHotCoins: sortedHotCoins),
+            isLoading: isLoading,
+            sortedHotCoins: sortedHotCoins,
+          ),
+          // Gainers Coins Page
           SortedGainersCoinsWidget(
-              isLoading: isLoading, sortedGainersCoins: sortedGainersCoins),
+            isLoading: isLoading,
+            sortedGainersCoins: sortedGainersCoins,
+          ),
+          // Losers Coins Page
           SortedLosersCoinsWidget(
-              isLoading: isLoading, sortedLosersCoins: sortedLosersCoins),
+            isLoading: isLoading,
+            sortedLosersCoins: sortedLosersCoins,
+          ),
         ],
       ),
     );

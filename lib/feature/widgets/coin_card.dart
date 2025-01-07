@@ -13,8 +13,8 @@ import 'empty_widget.dart';
 ///
 class CoinCard extends StatelessWidget {
   final String symbol, price, name;
-  final String? url; // URL for the cryptocurrency's logo
-  final String? balance; // Current balance of the cryptocurrency
+  final String? url;
+  final String? balance;
 
   const CoinCard({
     super.key,

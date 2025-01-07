@@ -18,23 +18,25 @@ final class EarnsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: earnList.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final earns = earnList[index];
-          return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-              child: InkWell(
-                onTap: () {
-                  context.push(
-                    EarnDetailsPage(earnModel: earns),
-                  );
-                },
-                child: EarnCard(
-                    imageUrl: earns.imageUrl,
-                    title: earns.title,
-                    exchangeName: earns.exchangeName),
-              ));
-        });
+      itemCount: earnList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final earns = earnList[index];
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+          child: InkWell(
+            onTap: () {
+              context.push(
+                EarnDetailsPage(earnModel: earns),
+              );
+            },
+            child: EarnCard(
+                imageUrl: earns.imageUrl,
+                title: earns.title,
+                exchangeName: earns.exchangeName),
+          ),
+        );
+      },
+    );
   }
 }

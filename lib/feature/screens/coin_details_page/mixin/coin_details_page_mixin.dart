@@ -41,8 +41,29 @@ mixin CoinDetailsPageMixin on State<CoinDetailPage> {
   bool isLoading = true;
   int days = 1;
   List<bool> timesBool = [true, false, false, false, false, false];
-  String formattedDate =
-      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+  String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+
+  @override
+  void dispose() {
+    super.dispose();
+    sheetPriceController.dispose();
+    sheetQuantityController.dispose();
+    sheetTotalSpentController.dispose();
+    coinController.dispose();
+    balanceController.dispose();
+  }
+
+  @override
+  void initState() {
+    getChart();
+    trackballBehavior = TrackballBehavior(
+      enable: true,
+      activationMode: ActivationMode.singleTap,
+    );
+    sheetPriceController.text = widget.selectCoin.currentPrice.toString();
+    sheetQuantityController.text = "1";
+    super.initState();
+  }
 
   setDays(String txt) {
     if (txt == 'D') {
@@ -100,41 +121,19 @@ mixin CoinDetailsPageMixin on State<CoinDetailPage> {
     }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    sheetPriceController.dispose();
-    sheetQuantityController.dispose();
-    sheetTotalSpentController.dispose();
-    coinController.dispose();
-    balanceController.dispose();
-  }
-
-  @override
-  void initState() {
-    getChart();
-    trackballBehavior = TrackballBehavior(
-      enable: true,
-      activationMode: ActivationMode.singleTap,
-    );
-    sheetPriceController.text = widget.selectCoin.currentPrice.toString();
-    sheetQuantityController.text = "1";
-    super.initState();
-  }
-
 // To show the instant USD value of the entered amount of coins
   TextEditingController convertBalance(
       double x, TextEditingController controller, double price) {
-    double sonuc = x / price;
-    controller.text = sonuc.toString();
+    double result = x / price;
+    controller.text = result.toString();
     return controller;
   }
 
   // To show the instant coin value of the entered amount of USD
   TextEditingController convertCoin(
       double x, TextEditingController controller, double price) {
-    double sonuc = x * price;
-    controller.text = sonuc.toString();
+    double result = x * price;
+    controller.text = result.toString();
     return controller;
   }
 }

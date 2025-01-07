@@ -1,16 +1,26 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
+import '../../../providers/gecko_coins_provider.dart';
 import '../../../widgets/coin_list_card.dart';
 
-/// A widget that displays a list of sorted gainers' coins.
+/// [SortedGainersCoinsWidget] is a stateless widget designed to display the list of top gaining coins.
 ///
-/// This widget shows the list of coins that have gained the most, based on their market cap change in the last 24 hours.
-/// It also handles the loading state and displays an error message if the API request fails.
+/// ### Key Responsibilities:
+/// - Displays a list of coins sorted by their market cap percentage change over the last 24 hours.
+/// - Handles loading states and provides appropriate feedback if the API request fails.
 ///
-/// [isLoading] - A flag that indicates whether the data is being loaded.
-/// [sortedGainersCoins] - A list of coins sorted by their market cap change percentage in the last 24 hours.
+/// ### Parameters:
+/// - [isLoading] A boolean flag indicating whether the data is still being fetched.
+/// - [sortedGainersCoins] A list of coins sorted by their market cap percentage change.
 ///
+/// ### UI Details:
+/// - Shows a loading indicator when [isLoading] is true.
+/// - If the data is successfully fetched, displays the sorted coins as a vertical list of [CoinListCard] widgets.
+/// - Displays an error message if the API too many request fails.
+///
+
 class SortedGainersCoinsWidget extends StatelessWidget {
   const SortedGainersCoinsWidget({
     super.key,
@@ -23,25 +33,34 @@ class SortedGainersCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final geckoProvider = Provider.of<GeckoCoinsProvider>(context);
     return SizedBox(
       height: 400,
       width: double.infinity,
-      child: isLoading == null
-          ? const Center(
+      child: isLoading == true
+          ?
+          // Loading state
+          const Center(
               child: CircularProgressIndicator(),
             )
-          : isLoading == true
-              ? ListView.builder(
+          : geckoProvider.coins != null
+              ?
+              // Display the sorted list of gainers
+              ListView.builder(
                   itemCount: sortedGainersCoins.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: CoinListCard(
-                          item: sortedGainersCoins[index],
-                        ));
-                  })
-              : Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: CoinListCard(
+                        item: sortedGainersCoins[index],
+                      ),
+                    );
+                  },
+                )
+              :
+              // Error state when API too many request fails
+              Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(

@@ -3,17 +3,41 @@ import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../product/components/styles/application_constants.dart';
 import '../../product/components/styles/custom_colors.dart';
+import '../../product/components/styles/my_functions.dart';
 
-/// A widget representing a credit card-like UI element
-/// Shows the total spent balance, and includes a navigation button to the portfolio page.
-/// [balance] Quantity of coins in the user's portfolio
+/// [CreditCard] is a widget representing a credit card-like UI element that shows the user's portfolio balance and allows navigation to the portfolio page.
 ///
+/// ### Key Responsibilities:
+/// - Displays the total current value and total spent balance of the user's portfolio.
+/// - Shows the profit/loss percentage with a visual indicator.
+/// - Provides a button that navigates to the [PortfolioPage] when pressed.
+/// - The appearance of the widget adapts based on the current theme (light/dark).
+///
+/// ### Parameters:
+/// - [totalSpent] The total amount spent by the user in their portfolio.
+/// - [totalCurrentValue] The current value of the user's portfolio.
+///
+/// ### Widgets:
+/// - [CreditCardBackgroundDarkMode] and [CreditCardBackgroundLightMode] display different backgrounds for dark and light themes.
+/// - [balanceText] displays the user's balance with profit/loss information.
+/// - [profitPercent] shows the profit/loss percentage and navigates to the portfolio page.
+///
+
 class CreditCard extends StatelessWidget {
-  const CreditCard({super.key, this.balance});
-  final String? balance;
+  const CreditCard({
+    super.key,
+    required this.totalSpent,
+    required this.totalCurrentValue,
+  });
+  final double totalSpent;
+  final double totalCurrentValue;
 
   @override
   Widget build(BuildContext context) {
+    // Calculates the percentage of profit or loss based on the total spent and current value.
+    final double percentage = MyFunctions().calculatePercentage(totalCurrentValue, totalSpent);
+    // Calculates the profit or loss in dollar terms.
+    final double pnl = totalCurrentValue - totalSpent;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: SizedBox(
@@ -21,47 +45,54 @@ class CreditCard extends StatelessWidget {
         child: Stack(
           children: [
             context.isDarkMode
-                ? const CreditCardBackgroundDarkMode()
-                : const CreditCardBackgroundLightMode(),
-            balanceText(balance, context),
-            profitPercent(context),
+                ? const CreditCardBackgroundDarkMode() // Background for dark theme.
+                : const CreditCardBackgroundLightMode(), // Background for light theme.
+            balanceText(totalCurrentValue.toStringAsFixed(2), context,
+                percentage, pnl), // Displays the balance text.
+            profitPercent(context), // Displays the profit/loss percentage.
           ],
         ),
       ),
     );
   }
 
+  /// Displays a button to navigate to the [PortfolioPage] and shows profit or loss percentage.
   Widget profitPercent(BuildContext context) {
     return Positioned(
       right: 24,
       bottom: 75,
       child: Container(
-          padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: context.isDarkMode
-                ? const Color.fromARGB(255, 138, 124, 54)
-                : Colors.white,
+        padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: context.isDarkMode
+              ? const Color.fromARGB(255, 138, 124, 54)
+              : Colors.white, // Light mode button color.
+        ),
+        child: IconButton(
+          onPressed: () {
+            context.push(
+                const PortfolioPage()); // Navigates to the portfolio page.
+          },
+          icon: const Icon(
+            Icons.chevron_right_rounded,
+            size: 30,
           ),
-          child: IconButton(
-              onPressed: () {
-                context.push(const PortfolioPage());
-              },
-              icon: const Icon(
-                Icons.chevron_right_rounded,
-                size: 30,
-              ))),
+        ),
+      ),
     );
   }
 
-  Widget balanceText(String? balance, BuildContext context) {
+  /// Displays the user's balance, profit/loss percentage, and profit or loss in dollars.
+  Widget balanceText(String? balance, BuildContext context, double percentage, double pnl) {
     return Padding(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.mLocalizations.totalSpent,
+            context.mLocalizations
+                .accountBalance, // Displays the label for account balance.
             style: context.textThemeHeadLineSmall?.copyWith(
               color: context.isDarkMode
                   ? CustomColors.mLilacPrimary
@@ -71,13 +102,23 @@ class CreditCard extends StatelessWidget {
             ),
           ),
           Text(
-            "$balance \$",
+            "$balance \$", // Displays the balance in dollars.
             style: context.textThemeTitleLarge?.copyWith(
               color: context.isDarkMode
                   ? CustomColors.mGreyPrimary
-                  : CustomColors.mWhitePrimary,
+                  : CustomColors.bgcolor,
               fontWeight:
-              context.isDarkMode ? FontWeight.w400 : FontWeight.w900,
+                  context.isDarkMode ? FontWeight.w400 : FontWeight.w900,
+            ),
+          ),
+          Text(
+            '% ${percentage.toStringAsFixed(2)}  (\$${pnl.toStringAsFixed(2)})', // Shows the profit/loss percentage and the dollar amount.
+            overflow: TextOverflow.ellipsis,
+            style: context.textThemeBodyMedium?.copyWith(
+              color: percentage >= 0
+                  ? Colors.green.shade800 // Positive percentage (green color).
+                  : CustomColors
+                      .mRedPrimary, // Negative percentage (red color).
             ),
           ),
           const Spacer(),
@@ -85,7 +126,8 @@ class CreditCard extends StatelessWidget {
             height: 80,
             width: 140,
             child: Image.asset(
-              ApplicationConstants.blockchainImagePath,
+              ApplicationConstants
+                  .blockchainImagePath, // Displays a blockchain-related image.
               fit: BoxFit.fill,
             ),
           ),
@@ -95,6 +137,7 @@ class CreditCard extends StatelessWidget {
   }
 }
 
+/// [CreditCardBackgroundDarkMode] is a widget that provides a dark-themed background for the credit card widget.
 class CreditCardBackgroundDarkMode extends StatelessWidget {
   const CreditCardBackgroundDarkMode({super.key});
 
@@ -108,7 +151,8 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             stops: [0, 0.25, 0.75, 1],
-            colors: CustomColors.earnCardGradientColors),
+            colors:
+                CustomColors.earnCardGradientColors), // Dark theme gradient.
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(34),
@@ -120,7 +164,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
               colors: [
                 Color.fromARGB(255, 7, 6, 6),
                 Color.fromARGB(255, 6, 51, 93),
-              ],
+              ], // Dark gradient colors.
             ),
           ),
           child: Stack(
@@ -134,6 +178,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
     );
   }
 
+  /// Creates a circular gradient at the top-right corner.
   Widget circleTopRight() {
     return Positioned(
       right: -120,
@@ -156,6 +201,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
     );
   }
 
+  /// Creates a circular gradient at the bottom-left corner.
   Widget circleBottomLeft() {
     return Positioned(
       left: -15,
@@ -179,6 +225,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
   }
 }
 
+/// [CreditCardBackgroundLightMode] provides a light-themed background for the credit card widget.
 class CreditCardBackgroundLightMode extends StatelessWidget {
   const CreditCardBackgroundLightMode({super.key});
 
@@ -207,7 +254,7 @@ class CreditCardBackgroundLightMode extends StatelessWidget {
                 Color(0xFFB3B6B5),
                 Color(0xFFB3B6B5),
                 Color(0xFFF5F5F5),
-              ],
+              ], // Light gradient colors.
             ),
           ),
           child: Stack(
@@ -221,6 +268,7 @@ class CreditCardBackgroundLightMode extends StatelessWidget {
     );
   }
 
+  /// Creates a circular gradient at the top-right corner
   Widget circleTopRight() {
     return Positioned(
       right: -120,
@@ -247,6 +295,7 @@ class CreditCardBackgroundLightMode extends StatelessWidget {
     );
   }
 
+  /// Creates a circular gradient at the bottom-left corner
   Widget circleBottomLeft() {
     return Positioned(
       left: -15,

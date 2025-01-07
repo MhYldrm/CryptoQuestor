@@ -7,6 +7,19 @@ import '../../../../product/components/styles/custom_colors.dart';
 import '../../../widgets/empty_widget.dart';
 import 'bottom_sheet_list_widget.dart';
 
+/// A widget that allows users to support the app via donations.
+///
+/// The widget displays a "Buy Me Coffee" section, which when tapped,
+/// opens a modal bottom sheet with a list of wallet addresses for donations.
+///
+/// ### Components:
+/// - Displays a support message and an image button prompting users to donate.
+/// - Tapping the widget opens a bottom sheet with a list of wallet addresses to support the app.
+///
+/// ### Functionality:
+/// - [showModalBottomSheet] When tapped, the widget opens a bottom sheet displaying wallet addresses.
+///
+
 final class BuyMeCoffeeWidget extends StatefulWidget {
   const BuyMeCoffeeWidget({super.key});
 
@@ -28,14 +41,15 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
               return Container(
                 height: context.deviceHeight / 2,
                 decoration: context.isDarkMode
-                ? ProjectBoxDecorations.profilePageDarkThemeBoxDecoration
-                : ProjectBoxDecorations.profilePageLightThemeBoxDecoration,
+                    ? ProjectBoxDecorations.profilePageDarkThemeBoxDecoration
+                    : ProjectBoxDecorations.profilePageLightThemeBoxDecoration,
                 child: ListView.builder(
-                  itemCount:
-                      ApplicationConstants.buyMeCoffeeWalletAddress.length,
+                  // Item count is based on the length of wallet addresses
+                  itemCount: ApplicationConstants.buyMeCoffeeWalletAddress.length,
                   itemBuilder: (context, index) {
                     var list =
-                        ApplicationConstants.buyMeCoffeeWalletAddress[index];
+                    ApplicationConstants.buyMeCoffeeWalletAddress[index];
+                    // List items are displayed using BottomSheetListWidget
                     return BottomSheetListWidget(
                       url: list[0],
                       name: list[1],
@@ -50,18 +64,18 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Support message
+            // Support message displayed on the widget
             Text(
               context.mLocalizations.supportUs,
               style: context.textThemeBodyLarge!
-                  .copyWith(color: CustomColors.mGreyPrimary),
+                  .copyWith(color: CustomColors.mGreyPrimary), // Grey text color for the support message
             ),
-            const EmptyWidget(height: 10), // Spacer widget
+            const EmptyWidget(height: 10), // Spacer between text and image
             Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: context.deviceWidht * 0.25),
+              EdgeInsets.symmetric(horizontal: context.deviceWidht * 0.25),
               child: Image.asset(
-                ApplicationConstants.buyMeCoffeeImagePath,
+                ApplicationConstants.buyMeCoffeeImagePath, // Image for the "Buy Me Coffee" button
                 fit: BoxFit.fill,
               ),
             ),

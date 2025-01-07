@@ -4,21 +4,34 @@ import 'package:flutter/material.dart';
 import '../../../../product/models/portfolio_coins_model.dart';
 import '../../../widgets/coin_card.dart';
 
-/// A widget that displays the user's portfolio of coins.
+/// [PortfolioCoinsPartWidget] is a stateless widget designed to display the user's portfolio of coins.
 ///
-/// This widget shows a horizontal list of coins in the portfolio, including their details such as name,
-/// symbol, price, and balance. If there are no coins in the portfolio, a message is displayed.
+/// ### Key Responsibilities:
+/// - Displays a horizontal list of coins currently in the user's portfolio.
+/// - Provides quick access to the detailed history of a selected portfolio coin.
+/// - Handles scenarios where the portfolio is empty or still loading.
 ///
-/// [portfolioCoins] - A list of the coins in the portfolio containing their data.
-/// [resultList] - A list of processed portfolio coin models that include additional information like totalSpent, name, etc.
-/// [isLoading] - A boolean flag that indicates whether the data is being loaded.
+/// ### Parameters:
+/// - [portfolioCoins] A list containing raw data of portfolio coins.
+/// - [resultList] A processed list of [PortfolioCoinsModel], which includes details such as:
+///   - Coin name, symbol, and image URL.
+///   - Current value, balance, and total spent for each coin.
+/// - [isLoading] A boolean flag to indicate whether the portfolio data is being fetched.
 ///
+/// ### UI Details:
+/// - Shows a "My Portfolio" title section at the top.
+/// - Displays a [CircularProgressIndicator] if the data is still loading.
+/// - If there are coins in the portfolio, it shows them as [CoinCard] widgets in a horizontal list.
+/// - If the portfolio is empty, a message like "You have not any coin in portfolio" is displayed.
+///
+
 final class PortfolioCoinsPartWidget extends StatelessWidget {
-  const PortfolioCoinsPartWidget(
-      {super.key,
-      required this.portfolioCoins,
-      required this.resultList,
-      required this.isLoading});
+  const PortfolioCoinsPartWidget({
+    super.key,
+    required this.portfolioCoins,
+    required this.resultList,
+    required this.isLoading,
+  });
 
   final List<dynamic> portfolioCoins;
   final List<PortfolioCoinsModel> resultList;
@@ -29,6 +42,7 @@ final class PortfolioCoinsPartWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Portfolio title section
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Text(
@@ -39,13 +53,15 @@ final class PortfolioCoinsPartWidget extends StatelessWidget {
             ),
           ),
         ),
+        // Portfolio coins list or loading/empty message
         SizedBox(
           height: 170,
           child: isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(
+                  child: CircularProgressIndicator()) // Loading state
               : resultList.isNotEmpty
                   ?
-                  // If there are coins in the portfolio
+                  // Display the portfolio coins as a horizontal list
                   ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -56,21 +72,24 @@ final class PortfolioCoinsPartWidget extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(10, 0, 12, 0),
                           child: InkWell(
                             onTap: () {
-                              context.push(PortfolioCoinHistoryPage(coinData: portfolioCoins),);
+                              context.push(
+                                PortfolioCoinHistoryPage(
+                                    coinData: portfolioCoins),
+                              );
                             },
                             child: CoinCard(
                               symbol: portfolio.symbol,
-                              price: double.parse(portfolio.totalSpent)
-                                  .toStringAsFixed(2),
+                              price: portfolio.currentValue!,
                               name: portfolio.name,
                               url: portfolio.imageUrl,
                               balance: portfolio.quantity,
                             ),
                           ),
                         );
-                      })
+                      },
+                    )
                   :
-                  // If there are no coins in the portfolio show text : You have not any coin in portfolio
+                  // Display a message when the portfolio is empty
                   Center(
                       child: FittedBox(
                         child: Text(

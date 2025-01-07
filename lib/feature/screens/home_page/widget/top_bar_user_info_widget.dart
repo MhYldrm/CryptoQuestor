@@ -3,19 +3,31 @@ import 'package:flutter/material.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/services/firebase_service.dart';
 
-/// A widget that displays user information in the top bar of the app.
+/// [TopBarUserInfo] is a stateless widget that displays user information
+/// such as a greeting message and the user's display name or email address in the app's top bar.
 ///
-/// This widget is responsible for showing a greeting message and the user's display name or email address
-/// in the top bar. If the user is not signed in, a default message will be shown.
+/// ### Key Responsibilities:
+/// - Fetches user information from Firebase Authentication.
+/// - Displays a personalized greeting message with the user's name or email.
+/// - Provides a default message when no user information is available.
 ///
-/// [firebaseService] - The Firebase service used to retrieve the current user's information.
+/// ### UI Details:
+/// - Shows a "Welcome" message.
+/// - Displays the user's name or email in bold text below the greeting message.
+/// - If no user is signed in, it falls back to a generic message like "Crypto Lover."
 ///
+/// ### Usage:
+/// Include this widget in the app's top bar to provide a personalized user experience.
+///
+/// ### Firebase Integration:
+/// - Uses [FirebaseAuth] from [FirebaseService] to retrieve the current user's information.
 final class TopBarUserInfo extends StatelessWidget {
   const TopBarUserInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     final firebaseService = FirebaseService().firebaseAuth;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Row(
@@ -23,6 +35,7 @@ final class TopBarUserInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Greeting text
               Text(
                 context.mLocalizations.welcome,
                 style: TextStyle(
@@ -33,9 +46,9 @@ final class TopBarUserInfo extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 5),
+
+              // User display name or fallback text
               Text(
                 firebaseService.currentUser?.displayName ??
                     firebaseService.currentUser?.email ??

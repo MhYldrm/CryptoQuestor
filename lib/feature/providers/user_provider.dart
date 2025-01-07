@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'user_model.dart';
+import '../../product/models/user_model.dart';
 
 /// [UserProvider] manages the state of the user data and provides it
 /// to the widgets that listen to it.

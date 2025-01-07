@@ -34,12 +34,11 @@ final class UserInfoWidget extends StatelessWidget {
         children: [
           SizedBox(
             height: 140,
-            child: isLoading == null // Check if loading state is null
-                ? const CircularProgressIndicator(
-                    color: CustomColors.mYellow) // Show loading indicator
+            child: isLoading == null
+                ? const CircularProgressIndicator(color: CustomColors.mYellow)
                 : isLoading == false // Check if loading is complete
                     ? ListView.builder(
-                        itemCount: 1, // Display one user info card
+                        itemCount: 1,
                         itemBuilder: (context, index) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,7 +97,7 @@ final class UserInfoWidget extends StatelessWidget {
                                     color: context.isDarkMode
                                         ? CustomColors.mYellow
                                         : CustomColors.mPinkPrimary,
-                                  ), // Icon for managing accounts
+                                  ),
                                   onSelected: (value) {
                                     if (value ==
                                         context

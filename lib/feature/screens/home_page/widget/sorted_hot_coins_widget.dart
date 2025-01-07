@@ -1,16 +1,26 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
+import '../../../providers/gecko_coins_provider.dart';
 import '../../../widgets/coin_list_card.dart';
 
-/// A widget that displays a list of the most popular (hot) coins.
+/// [SortedHotCoinsWidget] is a stateless widget that displays a list of the most popular (hot) coins.
 ///
-/// This widget shows the list of coins that are currently "hot" or trending, based on their total volume.
-/// It handles the loading state and displays an error message if the API request fails.
+/// ### Key Responsibilities:
+/// - Displays a list of trending coins sorted by their total trading volume.
+/// - Handles loading and error states appropriately.
 ///
-/// [isLoading] - A flag that indicates whether the data is being loaded.
-/// [sortedHotCoins] - A list of coins that are sorted by their trading volume (hot coins).
+/// ### Parameters:
+/// - [isLoading] A boolean flag indicating whether the data is still being fetched.
+/// - [sortedHotCoins] A list of coins sorted by their trading volume (hot coins).
 ///
+/// ### UI Details:
+/// - Shows a [CircularProgressIndicator] while data is being fetched.
+/// - Displays a vertical list of [CoinListCard] widgets when data is available.
+/// - Displays an error message if the API too many request fails.
+///
+
 class SortedHotCoinsWidget extends StatelessWidget {
   const SortedHotCoinsWidget({
     super.key,
@@ -23,33 +33,43 @@ class SortedHotCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final geckoProvider = Provider.of<GeckoCoinsProvider>(context);
+
     return SizedBox(
       height: 400,
       width: double.infinity,
-      child: isLoading == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : isLoading == true
-              ? ListView.builder(
-                  itemCount: sortedHotCoins.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: CoinListCard(
-                          item: sortedHotCoins[index],
-                        ));
-                  })
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      context.mLocalizations.isApiRequestFailed,
-                      style: const TextStyle(color: CustomColors.mWhitePrimary),
-                    ),
-                  ),
-                ),
+      child: isLoading == true
+          ?
+      // Loading state
+      const Center(
+        child: CircularProgressIndicator(),
+      )
+          : geckoProvider.coins != null
+          ?
+      // Display the sorted hot coins list
+      ListView.builder(
+        itemCount: sortedHotCoins.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: CoinListCard(
+              item: sortedHotCoins[index],
+            ),
+          );
+        },
+      )
+          :
+      // Error state when API request fails
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(
+            context.mLocalizations.isApiRequestFailed,
+            style: const TextStyle(color: CustomColors.mWhitePrimary),
+          ),
+        ),
+      ),
     );
   }
 }

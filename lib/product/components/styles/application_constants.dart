@@ -82,6 +82,9 @@ final class ApplicationConstants {
   static const String womanImagePath = "assets/woman.png";
   static const String contactUsImagePath = "assets/contactus.png";
   static const String buyMeCoffeeImagePath = "assets/buymecoffee.png";
+  static const String splashImageOnePath = "assets/splash1.png";
+  static const String splashImageTwoPath = "assets/splash2.png";
+  static const String splashImageThreePath = "assets/splash3.png";
 
   /// Profile Page Support Us Wallet List Text
   // [buyMeCoffeeWalletAddress] A list of wallet addresses for different cryptocurrencies.

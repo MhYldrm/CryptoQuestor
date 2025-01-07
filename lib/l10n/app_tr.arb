@@ -15,6 +15,7 @@
   "isDeletingTransaction": "Bu işlemi SİLMEK istiyor musunuz ?",
   "accept": "Onayla",
   "quantity": "Adet:",
+  "totalSpent": "Maliyet:",
   "myAccount": "Profilim",
   "aboutUs": "Hakkımızda",
   "contactUs": "İletişim",
@@ -47,7 +48,7 @@
   "addPortfolioButtonText": "Portföye Ekle",
   "description": "Açıklama",
   "missions": "Görevler",
-  "totalSpent" : "Toplam Harcanan",
+  "totalSpentText": "Toplam Harcanan",
   "addPortfolioCoin" : "Portföye Ekle : ",
   "addedPortfolioCoin" : "Portföye Eklendi",
   "here" : "buradan",
@@ -57,7 +58,15 @@
   "changeThemeToDarkMode" : "Koyu Mod ->",
   "changeThemeToLightMode" : "Aydınlık Mod ->",
   "forgotPassword" : "Şifremi Unuttum",
-  "sendResetPasswordEmail" : "E-postanıza şifre sıfırlama talebi gönderildi!"
+  "sendResetPasswordEmail" : "E-postanıza şifre sıfırlama talebi gönderildi!",
+  "totalValue" : "Toplam Değer",
+  "currentValue" : "Anlık Değer",
+  "pnl" : "K/Z :",
+  "getStarted" : "Başlamak için Tıkla",
+  "accountBalance" : "Hesap Bakiyesi",
+  "splashImageOne" : "Tek Tusla Tüm Kripto Paralara Ulas",
+  "splashImageTwo" : "Ücretsiz Kripto Para Kazanmanın Tam Adresi",
+  "splashImageThree" : "Portfolyö Olustur ve Özgürce Yönet"
 }
 
 

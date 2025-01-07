@@ -7,9 +7,33 @@ import 'package:flutter/material.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/project_decoration/project_box_decorations.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
-import '../../../product/models/user_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/sign_in_form_fields_mixin.dart';
+
+/// The [SignInPage] widget is a form-based page where users can sign into their account.
+///
+/// This page includes:
+/// - A section for the user to enter their email address.
+/// - A section for the user to enter their password with an option to toggle visibility.
+/// - A button to submit the form for authentication.
+/// - A link to the sign-up page and a link for password reset.
+///
+/// ### Key Responsibilities:
+/// - Handles user authentication through email and password input fields.
+/// - Displays a sign-in button to authenticate the user.
+/// - Provides options to reset the password or navigate to the sign-up page.
+///
+/// ### State Management:
+/// - Uses [UserProvider] to store user data (e.g., email, password).
+/// - The form input is validated and saved into the provider for authentication.
+///
+/// ### Widgets:
+/// - [WalletImageWidgets] displays a relevant image for wallet or crypto theme.
+/// - [MyCustomButton] triggers the sign-in action.
+/// - [SignUpLinkWidget] provides a link to the sign-up page.
+/// - [ForgotPasswordWidget] allows the user to reset their password.
+///
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -38,74 +62,74 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
           return Form(
             key: formKey,
             child: SafeArea(
-                child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              backgroundColor: context.projectTheme!.primaryColor,
-              body: Column(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: WalletImageWidgets(),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _buildEmailPart(myWidht, context, userProvider),
-                        const EmptyWidget(height: 20),
-                        _buildPasswordPart(myWidht, context, userProvider),
-                        const ForgotPasswordWidget(),
-                      ],
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                backgroundColor: context.projectTheme!.primaryColor,
+                body: Column(
+                  children: [
+                    const Expanded(
+                      flex: 1,
+                      child: WalletImageWidgets(),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MyCustomButton(
-                          onPressed: () =>
-                              signIn(context, formKey, userProvider),
-                          buttonText: context.mLocalizations.login,
-                        ),
-                        SignUpLinkWidget(widht: myWidht / 10),
-                      ],
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Email input field
+                          _buildEmailPart(myWidht, context, userProvider),
+                          const EmptyWidget(height: 20),
+                          // Password input field
+                          _buildPasswordPart(myWidht, context, userProvider),
+                          const ForgotPasswordWidget(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Sign In button
+                          MyCustomButton(
+                            onPressed: () => signIn(context, formKey, userProvider),
+                            buttonText: context.mLocalizations.login,
+                          ),
+                          SignUpLinkWidget(widht: myWidht / 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )),
+            ),
           );
         },
       ),
     );
   }
 
-  Padding _buildEmailPart(
-      double myWidht, BuildContext context, UserProvider userProvider) {
+  /// [ _buildEmailPart] builds the email input section for the sign-in form.
+  Padding _buildEmailPart(double myWidht, BuildContext context, UserProvider userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration:
-              ProjectInputDecorations.signInPageEmailFieldInputDecoration(
-                  context),
+          decoration: ProjectInputDecorations.signInPageEmailFieldInputDecoration(context),
           keyboardType: TextInputType.emailAddress,
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-              context),
-          validator: (value) => validateEmail(value, context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+          validator: (value) => validateEmail(value, context), // Email validation
           onSaved: (value) {
-            userProvider.setUserData(email: value);
+            userProvider.setUserData(email: value); // Save the email to the provider
           },
         ),
       ),
     );
   }
 
-  Padding _buildPasswordPart(
-      double myWidht, BuildContext context, UserProvider userProvider) {
+  /// [_buildPasswordPart] builds the password input section for the sign-in form.
+  Padding _buildPasswordPart(double myWidht, BuildContext context, UserProvider userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
@@ -113,14 +137,13 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
         child: TextFormField(
           decoration: ProjectInputDecorations
               .signInPagePasswordFieldWithVisibilityInputDecoration(
-                  context, passwordVisibility, togglePasswordVisibility),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-              context),
+              context, passwordVisibility, togglePasswordVisibility),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           obscuringCharacter: '*',
           obscureText: passwordVisibility,
-          validator: (value) => validatePassword(value, context),
+          validator: (value) => validatePassword(value, context), // Password validation
           onSaved: (value) {
-            userProvider.setUserData(password: value);
+            userProvider.setUserData(password: value); // Save the password to the provider
           },
         ),
       ),
