@@ -2,7 +2,7 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../product/components/styles/custom_colors.dart';
-import '../providers/project_theme_provider.dart';
+import '../view_models/project_theme_view_model.dart';
 
 /// [ChangeThemeSwitchWidget] is a widget that allows the user to toggle between dark and light themes.
 ///
@@ -46,7 +46,7 @@ final class ChangeThemeSwitchWidget extends StatelessWidget {
       ),
       onChanged: (value) {
         // When the toggle switch changes, it triggers the theme change.
-        Provider.of<ProjectThemeProvider>(context, listen: false).changeTheme();
+        Provider.of<ProjectThemeViewModel>(context, listen: false).changeTheme();
       },
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/models/gecko_models.dart';
-import '../../../providers/gecko_coins_provider.dart';
+import '../../../view_models/gecko_coins_view_model.dart';
 import '../../../widgets/coin_list_card.dart';
 
 /// [AllCoinsWidget] is a stateless widget that displays a list of all coins fetched
@@ -34,7 +34,7 @@ class AllCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final geckoProvider = Provider.of<GeckoCoinsProvider>(context);
+    final geckoProvider = Provider.of<GeckoCoinsViewModel>(context);
     return SizedBox(
       height: 400,
       width: double.infinity,

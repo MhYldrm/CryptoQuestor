@@ -1,10 +1,11 @@
-import 'package:crypto_questor/feature/providers/gecko_coins_provider.dart';
-import 'package:crypto_questor/feature/providers/portfolio_coins_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import '../../feature/view_models/gecko_coins_view_model.dart';
+import '../../feature/view_models/portfolio_coins_view_model.dart';
+import '../../feature/view_models/project_theme_view_model.dart';
 import '../components/theme/project_theme.dart';
-import '../../feature/providers/project_theme_provider.dart';
+
 
 /// Localizations
 // This extension provides easy access to translations in any widget or context.
@@ -31,7 +32,7 @@ extension ThemeDataExtension on BuildContext {
 extension ThemeContextExtensions on BuildContext {
   /// Checks if the current theme is dark mode.
   bool get isDarkMode {
-    final themeProvider = Provider.of<ProjectThemeProvider>(this, listen: false);
+    final themeProvider = Provider.of<ProjectThemeViewModel>(this, listen: false);
     return themeProvider.themeData == darkTheme;
   }
 }
@@ -92,10 +93,10 @@ extension TextThemeStyles on BuildContext {
 
 extension ProviderExtensions on BuildContext {
   /// Provides access to the [GeckoCoinsProvider] without listening to changes.
-  GeckoCoinsProvider get geckoProvider =>
-      Provider.of<GeckoCoinsProvider>(this, listen: false);
+  GeckoCoinsViewModel get geckoProvider =>
+      Provider.of<GeckoCoinsViewModel>(this, listen: false);
 
   /// Provides access to the [PortfolioCoinsProvider] without listening to changes.
-  PortfolioCoinsProvider get portfolioCoinsProvider =>
-      Provider.of<PortfolioCoinsProvider>(this, listen: false);
+  PortfolioCoinsViewModel get portfolioCoinsProvider =>
+      Provider.of<PortfolioCoinsViewModel>(this, listen: false);
 }

@@ -1,10 +1,10 @@
 import 'package:crypto_questor/product/components/theme/project_theme.dart';
 import 'package:flutter/material.dart';
 
-/// [ProjectThemeProvider] A class that manages the theme of the application.
+/// [ProjectThemeViewModel] A class that manages the theme of the application.
 /// It provides functionality to switch between dark and light themes and notifies listeners about theme changes.
 ///
-class ProjectThemeProvider with ChangeNotifier {
+class ProjectThemeViewModel with ChangeNotifier {
   /// The current theme of the app, initially set to dark theme.
   ThemeData _themeData = darkTheme;
 
@@ -23,10 +23,7 @@ class ProjectThemeProvider with ChangeNotifier {
   /// If the current theme is dark, it switches to light theme.
   /// If the current theme is light, it switches to dark theme.
   void changeTheme() {
-    if (_themeData == darkTheme) {
-      themeData = lightTheme; // Switch to light theme
-    } else {
-      themeData = darkTheme; // Switch to dark theme
-    }
+    _themeData = _themeData == darkTheme ? lightTheme : darkTheme;
+    notifyListeners();
   }
 }

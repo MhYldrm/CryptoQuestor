@@ -1,8 +1,8 @@
 import 'package:crypto_questor/feature/screens/sign_in_page/sign_in_page.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../providers/user_provider.dart';
 import '../../../../product/services/firebase_service.dart';
+import '../../../view_models/user_view_model.dart';
 import '../widget/sign_show_error_dialog_widget.dart';
 import '../widget/user_created_snackbar_widget.dart';
 
@@ -42,7 +42,7 @@ mixin SignUpFormFieldsMixin {
   Future<void> signUp(
     BuildContext context,
     GlobalKey<FormState> formKey,
-    UserProvider userProvider,
+    UserViewModel userProvider,
   ) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();

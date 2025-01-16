@@ -1,9 +1,9 @@
-import 'package:crypto_questor/feature/providers/portfolio_coins_provider.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
 import '../../../../product/models/portfolio_coins_model.dart';
+import '../../../view_models/portfolio_coins_view_model.dart';
 import '../../../widgets/port_coins_card.dart';
 
 /// A widget that displays a list of portfolio coins in a ListView.
@@ -35,7 +35,7 @@ class PortfolioCoinsListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final portfolioCoinsProvider = Provider.of<PortfolioCoinsProvider>(context);
+    final portfolioCoinsProvider = Provider.of<PortfolioCoinsViewModel>(context);
     return isLoading == true
         ? const Center(
       child: CircularProgressIndicator(),

@@ -3,11 +3,11 @@ import 'package:crypto_questor/product/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import '../../product/models/portfolio_coins_model.dart';
 
-/// [PortfolioCoinsProvider] is a state management class that extends [ChangeNotifier].
+/// [PortfolioCoinsViewModel] is a state management class that extends [ChangeNotifier].
 /// It manages and provides portfolio coin data fetched from a Firebase service.
-class PortfolioCoinsProvider extends ChangeNotifier {
+class PortfolioCoinsViewModel extends ChangeNotifier {
   final PortfolioCoinsRepository repository;
-  PortfolioCoinsProvider(this.repository);
+  PortfolioCoinsViewModel(this.repository);
 
   // FirebaseService handles the data fetching logic for portfolio coins.
   final FirebaseService _service = FirebaseService();

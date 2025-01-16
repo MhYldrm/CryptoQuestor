@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../product/models/portfolio_coins_model.dart';
 import '../../../widgets/coin_card.dart';
 
-/// [PortfolioCoinsPartWidget] is a stateless widget designed to display the user's portfolio of coins.
+/// [PortfolioCoinsCardWidget] is a stateless widget designed to display the user's portfolio of coins.
 ///
 /// ### Key Responsibilities:
 /// - Displays a horizontal list of coins currently in the user's portfolio.
@@ -25,8 +25,8 @@ import '../../../widgets/coin_card.dart';
 /// - If the portfolio is empty, a message like "You have not any coin in portfolio" is displayed.
 ///
 
-final class PortfolioCoinsPartWidget extends StatelessWidget {
-  const PortfolioCoinsPartWidget({
+final class PortfolioCoinsCardWidget extends StatelessWidget {
+  const PortfolioCoinsCardWidget({
     super.key,
     required this.portfolioCoins,
     required this.resultList,

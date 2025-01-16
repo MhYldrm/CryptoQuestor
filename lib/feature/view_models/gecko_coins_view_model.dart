@@ -3,11 +3,11 @@ import 'package:crypto_questor/product/services/coin_services.dart';
 import 'package:flutter/material.dart';
 import '../../product/models/gecko_models.dart';
 
-/// [GeckoCoinsProvider] is a state management class that extends [ChangeNotifier].
+/// [GeckoCoinsViewModel] is a state management class that extends [ChangeNotifier].
 /// It manages and provides cryptocurrency data fetched from the CoinGecko API.
-class GeckoCoinsProvider extends ChangeNotifier {
+class GeckoCoinsViewModel extends ChangeNotifier {
   final CoinGeckoRepository repository;
-  GeckoCoinsProvider(this.repository);
+  GeckoCoinsViewModel(this.repository);
 
   final CoinService _service = CoinService();
 
@@ -26,9 +26,17 @@ class GeckoCoinsProvider extends ChangeNotifier {
     _isLoading = true; // Mark as loading.
     notifyListeners();
 
-    // Fetch data from the API and assign it to _geckoCoinProviderList
-    _geckoCoinProviderList = await _service.getCoinsFromCoinGeckoApi();
-    _isLoading = false; // Mark as not loading.
-    notifyListeners();
+    try {
+      // Fetch data from the API and assign it to _geckoCoinProviderList
+      final response = await _service.getCoinsFromCoinGeckoApi();
+      if (response != null) {
+        _geckoCoinProviderList = response;
+      }
+    } catch (e) {
+      _geckoCoinProviderList = [];
+    } finally {
+      _isLoading = false; // Mark as not loading.
+      notifyListeners();
+    }
   }
 }

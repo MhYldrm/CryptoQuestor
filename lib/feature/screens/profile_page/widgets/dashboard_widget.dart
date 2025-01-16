@@ -32,7 +32,6 @@ class DashboardWidget extends StatelessWidget {
               color: CustomColors.mGreyPrimary,
             ),
           ),
-          const EmptyWidget(height: 20), // Spacer widget
           // About Us link
           InkWell(
             onTap: () {

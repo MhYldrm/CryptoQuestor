@@ -66,7 +66,7 @@ class _SplashPageState extends State<SplashPage> with SplashPageMixin {
             children: [
               /// The carousel slider that displays images and descriptions of app features.
               Expanded(
-                flex: 12,
+                flex: 13,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

@@ -1,12 +1,10 @@
-import 'package:crypto_questor/feature/providers/gecko_coins_provider.dart';
+import 'package:crypto_questor/feature/screens/portfolio_page/widgets/chart_section_widget.dart';
 import 'package:crypto_questor/feature/screens/portfolio_page/widgets/pie_chart_widget.dart';
 import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_coins_listview_widget.dart';
+import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_section_widget.dart';
 import 'package:crypto_questor/feature/screens/portfolio_page/widgets/total_spent_description_widget.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../product/components/styles/my_functions.dart';
-import '../../providers/portfolio_coins_provider.dart';
 import 'mixin/portfolio_page_mixin.dart';
 
 /// A page that displays the user's cryptocurrency portfolio.
@@ -45,59 +43,13 @@ class _PortfolioPageState extends State<PortfolioPage> with PortfolioPageMixin {
             // First section: Pie chart and total spent description
             Expanded(
               flex: 3,
-              child: Consumer2<PortfolioCoinsProvider, GeckoCoinsProvider>(
-                builder:
-                    (context, portfolioCoinsProvider, geckoProvider, child) {
-                  // Process portfolio coins by merging data from both providers
-                  final resultList = MyFunctions().processPortfolioCoins(
-                    portfolioCoinsProvider.portfolioCoins,
-                    geckoProvider.coins!,
-                  );
-
-                  double totalSpent = 0;
-                  double totalCurrentValue = 0;
-
-                  // Calculate the total spent and current value of the portfolio
-                  for (var coin in resultList) {
-                    totalSpent += double.parse(coin.totalSpent);
-                    totalCurrentValue += double.parse(coin.currentValue!);
-                  }
-
-                  return Column(
-                    children: [
-                      // Pie chart showing portfolio distribution
-                      PieChartWidget(
-                        tooltipBehavior: toolTipBehavior,
-                        coinList: resultList, // List of coins to display
-                      ),
-                      // Total spent vs total current value description
-                      TotalSpentDescriptionWidget(
-                        totalValue: totalSpent,
-                        totalCurrentValue: totalCurrentValue,
-                      ),
-                    ],
-                  );
-                },
-              ),
+              child: ChartSectionWidget(toolTipBehavior: toolTipBehavior),
             ),
 
             // Second section: List of portfolio coins
-            Expanded(
+            const Expanded(
               flex: 3,
-              child: Consumer<PortfolioCoinsProvider>(
-                builder: (context, portfolioCoinsProvider, child) {
-                  // Watch for updates from the GeckoProvider
-                  final geckoProvider = context.watch<GeckoCoinsProvider>();
-                  final resultList = MyFunctions().processPortfolioCoins(
-                    portfolioCoinsProvider.portfolioCoins,
-                    geckoProvider.coins!,
-                  );
-                  return PortfolioCoinsListViewWidget(
-                    portfolioCoinList: resultList, // List of coins to display
-                    isLoading: portfolioCoinsProvider.isLoading,
-                  );
-                },
-              ),
+              child: PortfolioSectionWidget(),
             ),
           ],
         ),

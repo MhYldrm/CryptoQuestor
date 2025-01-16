@@ -65,7 +65,7 @@ final class ProjectBoxDecorations {
 
   static BoxDecoration get addPortfolioPagesLightThemeBoxDecoration {
     return BoxDecoration(
-      color: CustomColors.mYellow.withOpacity(0.2),
+      color: CustomColors.mGreyPrimary.withOpacity(0.1),
       borderRadius: BorderRadius.circular(12),
     );
   }

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/project_decoration/project_box_decorations.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
-import '../../providers/user_provider.dart';
+import '../../view_models/user_view_model.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/sign_up_form_fields_mixin.dart';
 
@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
     double myWidht = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: const EdgeInsets.all(0.1),
-      child: Consumer<UserProvider>(
+      child: Consumer<UserViewModel>(
         builder: (context, userProvider, _) {
           return Form(
             key: formKey,
@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildNamePart] builds the name input section for the user to enter their name.
-  Padding _buildNamePart(double myWidht, UserProvider userProvider, BuildContext context) {
+  Padding _buildNamePart(double myWidht, UserViewModel userProvider, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildPasswordPart] builds the password input section for the user to enter their password.
-  Padding _buildPasswordPart(double myWidht, UserProvider userProvider, BuildContext context) {
+  Padding _buildPasswordPart(double myWidht, UserViewModel userProvider, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
@@ -134,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildEmailPart] builds the email input section for the user to enter their email.
-  Padding _buildEmailPart(double myWidht, BuildContext context, UserProvider userProvider) {
+  Padding _buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(

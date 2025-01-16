@@ -2,8 +2,8 @@ import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../providers/gecko_coins_provider.dart';
-import '../../../providers/portfolio_coins_provider.dart';
+import '../../../view_models/gecko_coins_view_model.dart';
+import '../../../view_models/portfolio_coins_view_model.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../portfolio_page.dart';
 
@@ -22,8 +22,8 @@ mixin PortfolioPageMixin on State<PortfolioPage> {
 
     // Fetch portfolio coins and gecko API coins after the widget is initialized
     Future.microtask(() {
-      context.read<PortfolioCoinsProvider>().getPortfolioCoins();
-      context.read<GeckoCoinsProvider>().getGeckoApiCoins();
+      context.read<PortfolioCoinsViewModel>().getPortfolioCoins();
+      context.read<GeckoCoinsViewModel>().getGeckoApiCoins();
     });
 
     // Initialize the tooltip behavior for charts

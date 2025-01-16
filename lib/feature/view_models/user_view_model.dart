@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../product/models/user_model.dart';
 
-/// [UserProvider] manages the state of the user data and provides it
+/// [UserViewModel] manages the state of the user data and provides it
 /// to the widgets that listen to it.
-class UserProvider extends ChangeNotifier {
+class UserViewModel extends ChangeNotifier {
   UserModel _user = UserModel(name: '', email: '', password: '');
 
   // Gets the current user data

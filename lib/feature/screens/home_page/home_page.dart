@@ -1,15 +1,14 @@
-import 'package:crypto_questor/feature/providers/portfolio_coins_provider.dart';
 import 'package:crypto_questor/feature/screens/home_page/widget/categoires_names_part_widget.dart';
 import 'package:crypto_questor/feature/screens/home_page/widget/categories_coins_part_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_part_widget.dart';
+import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_card_widget.dart';
+import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_section_widget.dart';
 import 'package:crypto_questor/feature/screens/home_page/widget/top_bar_user_info_widget.dart';
+import 'package:crypto_questor/feature/view_models/gecko_coins_view_model.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../product/components/styles/my_functions.dart';
-import '../../providers/gecko_coins_provider.dart';
+import '../../view_models/portfolio_coins_view_model.dart';
 import '../../widgets/credit_card.dart';
-import '../../widgets/empty_widget.dart';
 import 'mixin/home_page_mixin.dart';
 
 /// [HomePage] is the main screen of the application, serving as the dashboard for users.
@@ -31,7 +30,7 @@ import 'mixin/home_page_mixin.dart';
 /// ### Widgets:
 /// - [TopBarUserInfo] displays a greeting and user information.
 /// - [CreditCard] shows the user's total current value and total spent.
-/// - [PortfolioCoinsPartWidget] lists the user's portfolio coins.
+/// - [PortfolioCoinsCardWidget] lists the user's portfolio coins.
 /// - [CategoriesCoinsPartWidget] displays categorized coin data (e.g., gainers, losers).
 ///
 final class HomePage extends StatefulWidget {
@@ -49,8 +48,8 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
     super.initState();
     // Fetch initial data using Future.micro task for better performance.
     Future.microtask(() {
-      context.read<PortfolioCoinsProvider>().getPortfolioCoins();
-      context.read<GeckoCoinsProvider>().getGeckoApiCoins();
+      context.read<PortfolioCoinsViewModel>().getPortfolioCoins();
+      context.read<GeckoCoinsViewModel>().getGeckoApiCoins();
     });
   }
 
@@ -68,45 +67,10 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
               const TopBarUserInfo(),
 
               // Portfolio Coins Section
-              Consumer<PortfolioCoinsProvider>(
-                builder: (context, portfolioCoinsProvider, child) {
-                  final geckoProvider = context.watch<GeckoCoinsProvider>();
-                  double totalSpent = 0;
-                  double accountBalance = 0;
-
-                  /// [resultList] List that collects the purchase and sale transactions of coins from Firebase and returns a single data for each coin
-                  final resultList = MyFunctions().processPortfolioCoins(
-                      portfolioCoinsProvider.portfolioCoins,
-                      geckoProvider.coins!);
-
-                  for (var coin in resultList) {
-                    totalSpent += double.parse(coin.totalSpent);
-                    accountBalance += double.parse(coin.currentValue!);
-                  }
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Credit card displaying portfolio summary
-                      CreditCard(
-                        totalCurrentValue: accountBalance,
-                        totalSpent: totalSpent,
-                      ),
-                      const EmptyWidget(height: 30), // Spacing
-
-                      // List of user's portfolio coins
-                      PortfolioCoinsPartWidget(
-                        portfolioCoins: portfolioCoinsProvider.portfolioCoins,
-                        resultList: resultList,
-                        isLoading: portfolioCoinsProvider.isLoading,
-                      ),
-                    ],
-                  );
-                },
-              ),
+              const PortfolioCoinsSectionWidget(),
 
               // Categories Section (Gainers, Losers, Hot Coins)
-              Consumer<GeckoCoinsProvider>(
+              Consumer<GeckoCoinsViewModel>(
                 builder: (context, geckoProvider, child) {
                   List sortedGainersCoins =
                       sortGainersCoins(geckoProvider.coins);

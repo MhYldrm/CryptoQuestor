@@ -2,7 +2,7 @@ import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../product/components/styles/custom_colors.dart';
-import '../../../providers/gecko_coins_provider.dart';
+import '../../../view_models/gecko_coins_view_model.dart';
 import '../../../widgets/coin_list_card.dart';
 
 /// [SortedHotCoinsWidget] is a stateless widget that displays a list of the most popular (hot) coins.
@@ -33,7 +33,7 @@ class SortedHotCoinsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final geckoProvider = Provider.of<GeckoCoinsProvider>(context);
+    final geckoProvider = Provider.of<GeckoCoinsViewModel>(context);
 
     return SizedBox(
       height: 400,

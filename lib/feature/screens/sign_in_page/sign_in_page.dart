@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../product/components/button/my_custom_button.dart';
 import '../../../product/components/project_decoration/project_box_decorations.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
-import '../../providers/user_provider.dart';
+import '../../view_models/user_view_model.dart';
 import '../../widgets/empty_widget.dart';
 import 'mixin/sign_in_form_fields_mixin.dart';
 
@@ -57,7 +57,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
     double myWidht = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: const EdgeInsets.all(0.1),
-      child: Consumer<UserProvider>(
+      child: Consumer<UserViewModel>(
         builder: (context, userProvider, _) {
           return Form(
             key: formKey,
@@ -110,7 +110,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
   }
 
   /// [ _buildEmailPart] builds the email input section for the sign-in form.
-  Padding _buildEmailPart(double myWidht, BuildContext context, UserProvider userProvider) {
+  Padding _buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
@@ -129,7 +129,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
   }
 
   /// [_buildPasswordPart] builds the password input section for the sign-in form.
-  Padding _buildPasswordPart(double myWidht, BuildContext context, UserProvider userProvider) {
+  Padding _buildPasswordPart(double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(

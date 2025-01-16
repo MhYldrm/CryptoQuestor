@@ -164,8 +164,8 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                         widget.totalSpent,
                         style: context.textThemeBodyLarge?.copyWith(
                           color: context.isDarkMode
-                              ? CustomColors.mWhitePrimary
-                              : CustomColors.bgcolor,
+                              ? CustomColors.mGreenPrimary
+                              : CustomColors.mRedPrimary,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

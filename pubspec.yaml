@@ -18,6 +18,7 @@ dependencies:
   json_annotation:
   equatable:
   provider:
+  get_it:
 
 
   flutter_localizations:
