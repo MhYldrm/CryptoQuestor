@@ -14,7 +14,8 @@ class SignShowErrorDialogWidget extends StatelessWidget {
   final BuildContext context;
   final String? descriptionText;
 
-  const SignShowErrorDialogWidget({super.key,
+  const SignShowErrorDialogWidget({
+    super.key,
     required this.context,
     required this.descriptionText,
   });
@@ -25,18 +26,21 @@ class SignShowErrorDialogWidget extends StatelessWidget {
       backgroundColor: CustomColors.bgcolor,
       title: Text(
         context.mLocalizations.error,
-        style: context.textThemeTitleMedium?.copyWith(color: CustomColors.mYellow),
+        style:
+            context.textThemeTitleMedium?.copyWith(color: CustomColors.mYellow),
       ),
       content: Text(
         descriptionText!,
-        style: context.textThemeBodyMedium?.copyWith(color: CustomColors.mWhitePrimary),
+        style: context.textThemeBodyMedium
+            ?.copyWith(color: CustomColors.mWhitePrimary),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(
             context.mLocalizations.tryAgain,
-            style: context.textThemeBodyMedium?.copyWith(color: CustomColors.mYellow),
+            style: context.textThemeBodyMedium
+                ?.copyWith(color: CustomColors.mYellow),
           ),
         ),
       ],

@@ -1,6 +1,4 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
+import '../../../../product/exports/exports.dart';
 import '../../sign_in_page/sign_in_page.dart';
 
 /// A widget that provides a link to the existing account sign-in page.
@@ -10,6 +8,7 @@ import '../../sign_in_page/sign_in_page.dart';
 /// [widht] is used to set the padding from the left of the widget.
 /// [CustomColors.mYellow] Yellow color for the login button text
 ///
+
 class ExistingAccountLinkWidget extends StatelessWidget {
   final double widht;
   const ExistingAccountLinkWidget({
@@ -39,7 +38,9 @@ class ExistingAccountLinkWidget extends StatelessWidget {
               child: Text(
                 context.mLocalizations.login,
                 style: context.textThemeTitleMedium?.copyWith(
-                  color: context.isDarkMode ? CustomColors.mYellow : CustomColors.mPinkPrimary,
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mPinkPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               )),

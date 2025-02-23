@@ -1,10 +1,11 @@
-import 'package:crypto_questor/feature/screens/earn_page/widget/earn_page_title_part_widget.dart';
-import 'package:crypto_questor/feature/screens/earn_page/widget/earns_list_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
+library earn_page;
+
+import 'package:crypto_questor/product/exports/exports.dart';
+import '../../../product/components/widgets/earn_card.dart';
 import '../../../product/models/earn_model.dart';
+import '../../../product/services/coin_services.dart';
 import '../coin_details_page/widget/show_error_widget.dart';
-import 'mixin/earn_page_mixin.dart';
+import '../earn_details_page/earn_details_page.dart';
 
 /// [EarnPage] is a stateful widget that displays a list of earning opportunities.
 ///
@@ -13,6 +14,11 @@ import 'mixin/earn_page_mixin.dart';
 /// - Fetches and displays a list of earning opportunities.
 /// - Shows a loading indicator while data is being fetched.
 /// - Displays an error widget if the list is empty or an error occurs.
+///
+part 'widget/earn_page_title_part_widget.dart';
+part 'widget/earns_list_widget.dart';
+part 'mixin/earn_page_mixin.dart';
+
 class EarnPage extends StatefulWidget {
   const EarnPage({super.key});
 
@@ -25,7 +31,7 @@ class _EarnPageState extends State<EarnPage> with EarnPageMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: context.projectTheme!.primaryColor,
+        backgroundColor: context.projectTheme?.primaryColor,
         body: Column(
           children: [
             // Title Section

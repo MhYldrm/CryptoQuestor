@@ -1,11 +1,3 @@
-import 'package:crypto_questor/product/components/padding/project_paddings.dart';
-import 'package:crypto_questor/product/components/project_decoration/project_box_decorations.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../widgets/empty_widget.dart';
-
 /// [CostCalculatorWidget] is a stateful widget designed to allow users
 /// to input the current price and quantity of a cryptocurrency, and display
 /// the calculated total spent in a visually styled manner.
@@ -14,6 +6,9 @@ import '../../../widgets/empty_widget.dart';
 /// - [totalSpent] The total amount spent, formatted as a string.
 /// - [currentPriceTextField] A widget for entering the current price per coin.
 /// - [quantityTextField] A widget for entering the quantity of the cryptocurrency.
+///
+part of '../add_portfolio_page.dart';
+
 class CostCalculatorWidget extends StatefulWidget {
   const CostCalculatorWidget({
     super.key,
@@ -46,28 +41,31 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
             children: [
               Text(
                 context.mLocalizations.pricePerCoin,
-                style: context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: context.textThemeBodyLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              const EmptyWidget(height: 15),
+              EmptyWidget(height: ApplicationSize.xSmall.value),
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.5,
                 decoration: context.isDarkMode
-                    ? ProjectBoxDecorations.addPortfolioPagesBoxDarkThemeDecoration
-                    : ProjectBoxDecorations.addPortfolioPagesLightThemeBoxDecoration,
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const ProjectPaddings.allSmall(),
                   child: Row(
                     children: [
                       // TextField for entering the current price.
                       SizedBox(
-                        width: 120,
-                        height: 50,
+                        width: ApplicationSize.xxxLarge.value,
+                        height: ApplicationSize.xxsLarge.value,
                         child: widget.currentPriceTextField,
                       ),
-                      const SizedBox(width: 25),
+                      SizedBox(width: ApplicationSize.small.value),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        padding: const ProjectPaddings.verticalSmall(),
                         child: VerticalDivider(
                           thickness: 1.5,
                           color: CustomColors.mWhitePrimary.withOpacity(0.1),
@@ -88,7 +86,7 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
               ),
             ],
           ),
-          const EmptyWidget(height: 30),
+          EmptyWidget(height: ApplicationSize.medium.value),
           // Section: Input for the quantity of coins.
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,26 +96,28 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
                 style: context.textThemeBodyLarge
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              const EmptyWidget(height: 15),
+              EmptyWidget(height: ApplicationSize.xSmall.value),
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.5,
                 decoration: context.isDarkMode
-                    ? ProjectBoxDecorations.addPortfolioPagesBoxDarkThemeDecoration
-                    : ProjectBoxDecorations.addPortfolioPagesLightThemeBoxDecoration,
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const ProjectPaddings.allSmall(),
                   child: Row(
                     children: [
                       // TextField for entering the quantity of coins.
                       SizedBox(
-                        width: 120,
-                        height: 50,
+                        width: ApplicationSize.xxxLarge.value,
+                        height: ApplicationSize.xxsLarge.value,
                         child: widget.quantityTextField,
                       ),
-                      const SizedBox(width: 25),
+                      SizedBox(width: ApplicationSize.small.value),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        padding: const ProjectPaddings.verticalSmall(),
                         child: VerticalDivider(
                           thickness: 1.5,
                           color: CustomColors.mWhitePrimary.withOpacity(0.1),
@@ -138,24 +138,27 @@ class _CostCalculatorWidgetState extends State<CostCalculatorWidget> {
               ),
             ],
           ),
-          const EmptyWidget(height: 30),
+          EmptyWidget(height: ApplicationSize.medium.value),
           // Section: Display of the total amount spent.
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 context.mLocalizations.totalSpent,
-                style: context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: context.textThemeBodyLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              const EmptyWidget(height: 15),
+              EmptyWidget(height: ApplicationSize.xSmall.value),
               Container(
                 height: context.deviceHeight * 0.1,
                 width: context.deviceWidht / 1.1,
                 decoration: context.isDarkMode
-                    ? ProjectBoxDecorations.addPortfolioPagesBoxDarkThemeDecoration
-                    : ProjectBoxDecorations.addPortfolioPagesLightThemeBoxDecoration,
+                    ? ProjectBoxDecorations
+                        .addPortfolioPagesBoxDarkThemeDecoration
+                    : ProjectBoxDecorations
+                        .addPortfolioPagesLightThemeBoxDecoration,
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const ProjectPaddings.allSmall(),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

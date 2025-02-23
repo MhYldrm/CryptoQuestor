@@ -1,14 +1,13 @@
-import 'package:crypto_questor/feature/screens/sign_up_page/widget/block_chain_image_wigdets.dart';
+library sign_up_page;
+
 import 'package:crypto_questor/feature/screens/sign_up_page/widget/existing_account_link_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
+import 'package:crypto_questor/feature/screens/sign_up_page/widget/sign_show_error_dialog_widget.dart';
 import 'package:provider/provider.dart';
-import '../../../product/components/button/my_custom_button.dart';
-import '../../../product/components/project_decoration/project_box_decorations.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
+import '../../../product/components/styles/application_size.dart';
 import '../../view_models/user_view_model.dart';
-import '../../widgets/empty_widget.dart';
-import 'mixin/sign_up_form_fields_mixin.dart';
+import '../sign_in_page/sign_in_page.dart';
 
 /// [SignUpPage] is the screen where new users can register by providing their details.
 ///
@@ -30,6 +29,9 @@ import 'mixin/sign_up_form_fields_mixin.dart';
 /// - [MyCustomButton] is used to trigger the sign-up process.
 /// - [ExistingAccountLinkWidget] provides a link to navigate to the sign-in page.
 ///
+part 'widget/block_chain_image_wigdets.dart';
+part 'widget/user_created_snackbar_widget.dart';
+part 'mixin/sign_up_form_fields_mixin.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -43,7 +45,6 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
 
   @override
   Widget build(BuildContext context) {
-    double myWidht = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: const EdgeInsets.all(0.1),
       child: Consumer<UserViewModel>(
@@ -52,45 +53,50 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
             key: formKey,
             child: SafeArea(
                 child: Scaffold(
-                  resizeToAvoidBottomInset: false,
-                  backgroundColor: context.projectTheme!.primaryColor,
-                  body: Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Column(
-                      children: [
-                        const Expanded(
-                          flex: 2,
-                          child: BlockchainImageWidgets(),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _buildNamePart(myWidht, userProvider, context),
-                              const EmptyWidget(height: 30),
-                              _buildEmailPart(myWidht, context, userProvider),
-                              const EmptyWidget(height: 30),
-                              _buildPasswordPart(myWidht, userProvider, context),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            children: [
-                              MyCustomButton(
-                                onPressed: () => signUp(context, formKey, userProvider),
-                                buttonText: context.mLocalizations.signUp,
-                              ),
-                              ExistingAccountLinkWidget(widht: myWidht / 10),
-                            ],
-                          ),
-                        ),
-                      ],
+              resizeToAvoidBottomInset: false,
+              backgroundColor: context.projectTheme!.primaryColor,
+              body: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Column(
+                  children: [
+                    const Expanded(
+                      flex: 2,
+                      child: BlockchainImageWidgets(),
                     ),
-                  ),
-                )),
+                    Expanded(
+                      flex: 5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildNamePart(
+                              context.deviceWidht, userProvider, context),
+                          EmptyWidget(height: ApplicationSize.size30.value),
+                          _buildEmailPart(
+                              context.deviceWidht, context, userProvider),
+                          EmptyWidget(height: ApplicationSize.size30.value),
+                          _buildPasswordPart(
+                              context.deviceWidht, userProvider, context),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          MyCustomButton(
+                            onPressed: () =>
+                                signUp(context, formKey, userProvider),
+                            buttonText: context.mLocalizations.signUp,
+                          ),
+                          ExistingAccountLinkWidget(
+                              widht: context.deviceWidht / 10),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
           );
         },
       ),
@@ -98,14 +104,18 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildNamePart] builds the name input section for the user to enter their name.
-  Padding _buildNamePart(double myWidht, UserViewModel userProvider, BuildContext context) {
+  Padding _buildNamePart(
+      double myWidht, UserViewModel userProvider, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration: ProjectInputDecorations.signUpPageNameFieldInputDecoration(context),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+          decoration:
+              ProjectInputDecorations.signUpPageNameFieldInputDecoration(
+                  context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+              context),
           validator: (value) => validateName(value, context),
           onSaved: (value) {
             userProvider.setUserData(name: value);
@@ -116,14 +126,18 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildPasswordPart] builds the password input section for the user to enter their password.
-  Padding _buildPasswordPart(double myWidht, UserViewModel userProvider, BuildContext context) {
+  Padding _buildPasswordPart(
+      double myWidht, UserViewModel userProvider, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration: ProjectInputDecorations.signUpPasswordFieldInputDecoration(context),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+          decoration:
+              ProjectInputDecorations.signUpPasswordFieldInputDecoration(
+                  context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+              context),
           validator: (value) => validatePassword(value, context),
           onSaved: (value) {
             userProvider.setUserData(password: value);
@@ -134,15 +148,19 @@ class _SignUpPageState extends State<SignUpPage> with SignUpFormFieldsMixin {
   }
 
   /// [_buildEmailPart] builds the email input section for the user to enter their email.
-  Padding _buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
+  Padding _buildEmailPart(
+      double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration: ProjectInputDecorations.signUpPageEmailFieldInputDecoration(context),
+          decoration:
+              ProjectInputDecorations.signUpPageEmailFieldInputDecoration(
+                  context),
           keyboardType: TextInputType.emailAddress,
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+              context),
           validator: (value) => validateEmail(value, context),
           onSaved: (value) {
             userProvider.setUserData(email: value);

@@ -1,9 +1,3 @@
-import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/services/firebase_service.dart';
-
 /// Custom SnackBar for deleting a coin transaction.
 ///
 /// This SnackBar is displayed when a user initiates a transaction deletion.
@@ -18,6 +12,8 @@ import '../../../../product/services/firebase_service.dart';
 /// - [mRedPrimary] The red color used for the "DELETE" button text when in dark mode.
 /// - [mYellow] The yellow color for the background of the SnackBar when in dark mode, or for the text in light mode.
 ///
+part of '../portfolio_coin_history_page.dart';
+
 class DeleteTransactionCustomSnackBar extends SnackBar {
   final String coinUid; // The UID of the coin transaction to be deleted
   final BuildContext context;

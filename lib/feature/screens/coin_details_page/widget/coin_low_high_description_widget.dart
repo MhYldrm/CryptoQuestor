@@ -1,8 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [low24H] The lowest price in the last 24 hours.
 /// [high24H] The highest price in the last 24 hours.
 /// [totalVolume] The total market cap of the coin.
@@ -12,8 +7,14 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [red.shade300] Low price text Red Color
 /// [green.shade300] High Price Text Green Color
 ///
+part of '../coin_details_page.dart';
+
 class CoinLowHighDescriptionWidget extends StatelessWidget {
-  const CoinLowHighDescriptionWidget({super.key, required this.low24H, required this.high24H, required this.totalVolume});
+  const CoinLowHighDescriptionWidget(
+      {super.key,
+      required this.low24H,
+      required this.high24H,
+      required this.totalVolume});
 
   final double low24H;
   final double high24H;
@@ -24,24 +25,22 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 10, right: 7, left: 7),
+          padding: const ProjectPaddings.topLeftAndRightSmall(),
           child: SizedBox(
-              height: 60,
+              height: ApplicationSize.size60.value,
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const ProjectPaddings.bottomSmall(),
                     child: Container(
-                      height: 45,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: CustomColors.mPurple,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                      height: ApplicationSize.size45.value,
+                      width: ApplicationSize.xxsLarge.value,
+                      decoration: ProjectBoxDecorations
+                          .coinDetailsPageWidgetsBoxDecoration,
                       child: Padding(
-                        padding: const EdgeInsets.all(5.5),
+                        padding: const ProjectPaddings.allxSmall(),
                         child: Column(
                           children: [
                             Text(
@@ -51,8 +50,7 @@ class CoinLowHighDescriptionWidget extends StatelessWidget {
                             ),
                             Text(
                               context.mLocalizations.details,
-                              style: context.textThemeLabelSmall
-                                  ?.copyWith(
+                              style: context.textThemeLabelSmall?.copyWith(
                                   color: CustomColors.mWhitePrimary,
                                   fontWeight: FontWeight.w400),
                             )

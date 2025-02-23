@@ -1,11 +1,3 @@
-import 'package:crypto_questor/feature/screens/add_portfolio_page/add_portfolio_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:random_string/random_string.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/services/firebase_service.dart';
-
 /// [AddPortfolioPageMixin] is a mixin used with [AddPortfolioPage] to handle
 /// business logic and state management for adding a cryptocurrency to a user's portfolio.
 ///
@@ -14,6 +6,8 @@ import '../../../../product/services/firebase_service.dart';
 /// - Calculates the total cost based on input values.
 /// - Saves the cryptocurrency to the user's portfolio using Firebase.
 /// - Provides user feedback upon successful save.
+///
+part of '../add_portfolio_page.dart';
 
 mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
   // Controllers for managing the input fields for current price and quantity.
@@ -21,19 +15,19 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
   TextEditingController quantityController = TextEditingController();
 
   // A string representing the total cost of the cryptocurrency purchase.
-  String totalSpent = '0';
+  String totalSpent = ApplicationConstants.zeroNumString;
 
   @override
   void initState() {
     super.initState();
     // Initialize the input fields with default values.
     currentPriceController.text = widget.selectCoin.currentPrice.toString();
-    quantityController.text = '0';
+    quantityController.text = ApplicationConstants.zeroNumString;
   }
 
   // The formatted current date and time for record-keeping.
-  String formattedDate =
-  DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+  String formattedDate = DateFormat(ApplicationConstants.dateFormatToConvert)
+      .format(DateTime.now());
 
   /// Calculates the total cost based on the provided current price and quantity.
   /// - [currentPrice]: Controller holding the current price of the cryptocurrency.
@@ -41,7 +35,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
   /// - Returns: A double representing the total cost.
   double calculateSpent(
       TextEditingController currentPrice, TextEditingController quantity) {
-    double totalSpent = 0;
+    double totalSpent = ApplicationConstants.zeroNumDouble;
     totalSpent = double.parse(currentPrice.text) * double.parse(quantity.text);
     return totalSpent;
   }
@@ -62,7 +56,8 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       'uid': uid,
     };
 
-    if (upToInfo['totalSpent'] != null && totalSpent != '0') {
+    if (upToInfo['totalSpent'] != null &&
+        totalSpent != ApplicationConstants.zeroNumString) {
       await FirebaseService().upToPortfolioCoin(upToInfo, uid);
     }
 
@@ -94,7 +89,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       });
     } else {
       setState(() {
-        currentPriceController.text = '0';
+        currentPriceController.text = ApplicationConstants.zeroNumString;
       });
     }
   }
@@ -110,7 +105,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       });
     } else {
       setState(() {
-        quantityController.text = '0';
+        quantityController.text = ApplicationConstants.zeroNumString;
       });
     }
   }

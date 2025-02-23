@@ -1,8 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/services/firebase_service.dart';
-
 /// [TopBarUserInfo] is a stateless widget that displays user information
 /// such as a greeting message and the user's display name or email address in the app's top bar.
 ///
@@ -21,6 +16,9 @@ import '../../../../product/services/firebase_service.dart';
 ///
 /// ### Firebase Integration:
 /// - Uses [FirebaseAuth] from [FirebaseService] to retrieve the current user's information.
+///
+part of '../home_page.dart';
+
 final class TopBarUserInfo extends StatelessWidget {
   const TopBarUserInfo({super.key});
 
@@ -29,7 +27,7 @@ final class TopBarUserInfo extends StatelessWidget {
     final firebaseService = FirebaseService().firebaseAuth;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const ProjectPaddings.horizontalAndVerticalMedium(),
       child: Row(
         children: [
           Column(
@@ -39,14 +37,14 @@ final class TopBarUserInfo extends StatelessWidget {
               Text(
                 context.mLocalizations.welcome,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: ApplicationSize.xSmall.value,
                   color: context.isDarkMode
                       ? CustomColors.mGreyPrimary
                       : CustomColors.bgcolor,
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              const SizedBox(height: 5),
+              SizedBox(height: ApplicationSize.xxSmall.value),
 
               // User display name or fallback text
               Text(
@@ -54,7 +52,7 @@ final class TopBarUserInfo extends StatelessWidget {
                     firebaseService.currentUser?.email ??
                     context.mLocalizations.cryptoLover,
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: ApplicationSize.xSmall.value,
                   color: context.isDarkMode
                       ? CustomColors.mGreyPrimary
                       : CustomColors.bgcolor,

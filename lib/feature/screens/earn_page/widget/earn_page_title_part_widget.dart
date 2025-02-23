@@ -1,8 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/services/firebase_service.dart';
-
 /// A widget displaying the title and user information on the Earn Page.
 /// It shows the user's display name or email, and the title for the crypto rewards section.
 /// [firebaseService] An object to access Firebase Authentication service to fetch the current user's info.
@@ -11,6 +6,8 @@ import '../../../../product/services/firebase_service.dart';
 /// [mGreyPrimary] name or email text grey color
 /// [mWhitePrimary] crypto reward text white color
 ///
+part of '../earn_page.dart';
+
 class EarnPageTitlePartWidget extends StatelessWidget {
   const EarnPageTitlePartWidget({super.key});
 
@@ -18,7 +15,7 @@ class EarnPageTitlePartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var firebaseService = FirebaseService().firebaseAuth;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const ProjectPaddings.horizontalMedium(),
       child: Row(
         children: [
           Column(

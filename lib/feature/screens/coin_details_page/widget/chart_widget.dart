@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/models/chart_model.dart';
-
 /// [itemChart] Indicates information of coin price chart
 /// [trackballBehavior] The trackball feature is a tool that displays a tooltip for data points closest to the point you touched in the chart area.
 /// [time] The data for the chart on the relevant date.
@@ -14,6 +8,8 @@ import '../../../../product/models/chart_model.dart';
 /// [Colors.green] If the close is higher, the candle on the chart will be green.
 /// [Colors.red] If the close is lower, the candle on the chart will be red.
 ///
+part of '../coin_details_page.dart';
+
 final class ChartWidget extends StatelessWidget {
   const ChartWidget(
       {super.key, required this.itemChart, required this.trackballBehavior});
@@ -24,7 +20,7 @@ final class ChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: ApplicationSize.size250.value,
       width: double.infinity,
       child: SfCartesianChart(
         trackballBehavior: trackballBehavior,
@@ -35,7 +31,7 @@ final class ChartWidget extends StatelessWidget {
             color: context.isDarkMode
                 ? CustomColors.mGreyPrimary
                 : CustomColors.bgcolor,
-            fontSize: 8,
+            fontSize: ApplicationSize.xxSmall.value,
             fontWeight: FontWeight.w300,
           ),
         ),
@@ -44,7 +40,7 @@ final class ChartWidget extends StatelessWidget {
             color: context.isDarkMode
                 ? CustomColors.mGreyPrimary
                 : CustomColors.bgcolor,
-            fontSize: 8,
+            fontSize: ApplicationSize.xxSmall.value,
             fontWeight: FontWeight.w300,
           ),
         ),
@@ -60,7 +56,7 @@ final class ChartWidget extends StatelessWidget {
             highValueMapper: (ChartModel sales, _) => sales.high,
             openValueMapper: (ChartModel sales, _) => sales.open,
             closeValueMapper: (ChartModel sales, _) => sales.close,
-            animationDuration: 55,
+            animationDuration: ApplicationSize.xsLarge.value,
           )
         ],
       ),

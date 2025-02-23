@@ -1,15 +1,17 @@
-import 'package:crypto_questor/feature/screens/home_page/widget/categoires_names_part_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/categories_coins_part_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_card_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/portfolio_coins_section_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/top_bar_user_info_widget.dart';
+library home_page;
+
 import 'package:crypto_questor/feature/view_models/gecko_coins_view_model.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:provider/provider.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import '../../../product/components/styles/my_functions.dart';
+import '../../../product/components/widgets/coin_card.dart';
+import '../../../product/components/widgets/coin_list_card.dart';
+import '../../../product/components/widgets/credit_card.dart';
+import '../../../product/models/gecko_model.dart';
+import '../../../product/models/portfolio_coins_model.dart';
 import '../../view_models/portfolio_coins_view_model.dart';
-import '../../widgets/credit_card.dart';
-import 'mixin/home_page_mixin.dart';
+import '../portfolio_coin_history_page/portfolio_coin_history_page.dart';
 
 /// [HomePage] is the main screen of the application, serving as the dashboard for users.
 ///
@@ -33,6 +35,17 @@ import 'mixin/home_page_mixin.dart';
 /// - [PortfolioCoinsCardWidget] lists the user's portfolio coins.
 /// - [CategoriesCoinsPartWidget] displays categorized coin data (e.g., gainers, losers).
 ///
+part 'widget/all_coins_widget.dart';
+part 'widget/categories_coins_part_widget.dart';
+part 'widget/categoires_names_part_widget.dart';
+part 'widget/portfolio_coins_card_widget.dart';
+part 'widget/portfolio_coins_section_widget.dart';
+part 'widget/sorted_gainers_coins_widget.dart';
+part 'widget/sorted_hot_coins_widget.dart';
+part 'widget/sorted_losers_coins_widget.dart';
+part 'widget/top_bar_user_info_widget.dart';
+part 'mixin/home_page_mixin.dart';
+
 final class HomePage extends StatefulWidget {
   const HomePage({super.key});
 

@@ -1,11 +1,3 @@
-import 'package:crypto_questor/feature/screens/sign_in_page/sign_in_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/services/firebase_service.dart';
-import '../../../view_models/user_view_model.dart';
-import '../widget/sign_show_error_dialog_widget.dart';
-import '../widget/user_created_snackbar_widget.dart';
-
 /// A mixin for managing form validation and user sign-up process.
 ///
 /// This mixin provides utility methods for validating form fields such as name,
@@ -17,24 +9,26 @@ import '../widget/user_created_snackbar_widget.dart';
 /// [signUp] Handles the sign-up process, including form validation and calling the Firebase sign-up method.
 /// If successful, navigates to the sign in page; otherwise, shows an error dialog.
 ///
+part of '../sign_up_page.dart';
+
 mixin SignUpFormFieldsMixin {
   String? validateName(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Name cannot be empty';
+      return context.mLocalizations.nameCannotBeEmpty;
     }
     return null;
   }
 
   String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Email cannot be empty';
+      return context.mLocalizations.emailCannotBeEmpty;
     }
     return null;
   }
 
   String? validatePassword(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Password cannot be empty';
+      return context.mLocalizations.passwordCannotBeEmpty;
     }
     return null;
   }
@@ -46,15 +40,12 @@ mixin SignUpFormFieldsMixin {
   ) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      var result = await FirebaseService().signUp(
-        userProvider.user.name,
-        userProvider.user.email,
-        userProvider.user.password,
-      );
+      var result = await FirebaseService().signUp(userProvider.user.name,
+          userProvider.user.email, userProvider.user.password, context);
 
       if (!context.mounted) return;
 
-      if (result == "success") {
+      if (result == ApplicationConstants.success) {
         formKey.currentState!.reset();
         ScaffoldMessenger.of(context).showSnackBar(
           UserCreatedSnackBarWidget(context: context),

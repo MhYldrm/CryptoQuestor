@@ -1,11 +1,3 @@
-import 'package:crypto_questor/feature/screens/home_page/widget/sorted_gainers_coins_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/sorted_hot_coins_widget.dart';
-import 'package:crypto_questor/feature/screens/home_page/widget/sorted_losers_coins_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/models/gecko_models.dart';
-import 'all_coins_widget.dart';
-
 /// [CategoriesCoinsPartWidget] is a stateless widget that displays different categories
 /// of cryptocurrencies in separate pages within a [PageView].
 ///
@@ -31,6 +23,7 @@ import 'all_coins_widget.dart';
 ///   - [SortedGainersCoinsWidget] Displays the sorted "Gainers."
 ///   - [SortedLosersCoinsWidget] Displays the sorted "Losers."
 ///
+part of '../home_page.dart';
 
 class CategoriesCoinsPartWidget extends StatelessWidget {
   const CategoriesCoinsPartWidget({

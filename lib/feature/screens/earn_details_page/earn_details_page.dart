@@ -1,11 +1,8 @@
-import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_button_widget.dart';
-import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_description_part_widget.dart';
-import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_image_part_widget.dart';
-import 'package:crypto_questor/feature/screens/earn_details_page/widget/earn_missions_part_widget.dart';
-import 'package:crypto_questor/feature/screens/earn_details_page/widget/market_details_part_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../product/components/styles/custom_colors.dart';
+library earn_details_page;
+
+import 'package:crypto_questor/product/components/styles/application_size.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
 import '../../../product/models/earn_model.dart';
 
 /// [EarnDetailsPage] is a stateful widget that displays the details of an earning opportunity.
@@ -16,9 +13,16 @@ import '../../../product/models/earn_model.dart';
 /// - Provides a detailed description of the opportunity.
 /// - Lists missions and a referral link for the earning process.
 /// - Includes a button to take action or access related missions.
+/// [earnModel] contains the details of the earning opportunity, such as the title,
+/// image URL, description, missions, and related links.
+///
+part 'widget/earn_button_widget.dart';
+part 'widget/earn_description_part_widget.dart';
+part 'widget/earn_image_part_widget.dart';
+part 'widget/earn_missions_part_widget.dart';
+part 'widget/market_details_part_widget.dart';
+
 final class EarnDetailsPage extends StatefulWidget {
-  /// [earnModel] contains the details of the earning opportunity, such as the title,
-  /// image URL, description, missions, and related links.
   final EarnModel earnModel;
 
   const EarnDetailsPage({super.key, required this.earnModel});

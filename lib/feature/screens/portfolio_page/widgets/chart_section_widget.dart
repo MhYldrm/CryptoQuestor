@@ -1,12 +1,3 @@
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/pie_chart_widget.dart';
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/total_spent_description_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../../product/components/styles/my_functions.dart';
-import '../../../view_models/gecko_coins_view_model.dart';
-import '../../../view_models/portfolio_coins_view_model.dart';
-
 /// A widget that displays a chart section for the portfolio page.
 ///
 /// This widget combines a pie chart showing the portfolio's distribution and a
@@ -23,6 +14,7 @@ import '../../../view_models/portfolio_coins_view_model.dart';
 /// - The pie chart provides an interactive visualization of the portfolio distribution.
 /// - The total spent and current value are displayed below the pie chart.
 ///
+part of '../portfolio_page.dart';
 
 class ChartSectionWidget extends StatelessWidget {
   const ChartSectionWidget({

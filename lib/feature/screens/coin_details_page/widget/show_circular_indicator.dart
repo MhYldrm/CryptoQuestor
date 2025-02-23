@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
+part of '../coin_details_page.dart';
 
 class ShowCircularIndicator extends StatelessWidget {
   const ShowCircularIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 250,
-      child: Center(
+    return SizedBox(
+      height: ApplicationSize.size250.value,
+      child: const Center(
         child: CircularProgressIndicator(
           color: CustomColors.mLilacPrimary,
         ),

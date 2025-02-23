@@ -1,37 +1,40 @@
-/// [ApplicationConstants] Contains static constants and URLs used throughout the app.
+/// [ApplicationConstants] contains static constants and URLs used throughout the app.
 /// It centralizes application data like API URLs, image paths, and wallet addresses for easy access.
-///
 final class ApplicationConstants {
   const ApplicationConstants._();
 
-  /// [appTitle] The main title of the application, typically displayed in the app bar.
+  /// The main title of the application, typically displayed in the app bar.
   static const String appTitle = "Crypto Questor";
 
   /// Coins Details Page Texts
-  /// [usd] The abbreviation for US Dollar, used in price data and currency conversions.
-  /// [vol] Abbreviation for trading volume, often used to represent the amount of trading activity for a given coin.
-  /// [statusCode] Default status code to indicate API rate-limiting.
-  /// For instance, '429' represents too many requests (rate limit exceeded).
+  ///
+  /// - [usd]: The abbreviation for US Dollar, used in price data and currency conversions.
+  /// - [vol]: Abbreviation for trading volume, representing the amount of trading activity for a given coin.
+  /// - [statusCode]: Default status code indicating API rate-limiting (e.g., '429' represents too many requests).
   static const String statusCode = "429";
   static const String usd = "USD";
   static const String vol = "Vol";
+  static const String success = "success";
+  static const String userNotFound = "user-not-found";
+  static const String obscuringCharacter = "*";
 
-  /// [getApiUrl] A function that generates a URL for fetching OHLC (Open, High, Low, Close) data for a specific coin.
-  /// [name] The name of the cryptocurrency (e.g., "bitcoin").
-  /// [days] The number of days of historical data to retrieve (e.g., 1, 30, 365).
+  /// Generates a URL for fetching OHLC (Open, High, Low, Close) data for a specific coin.
+  ///
+  /// - [name]: The cryptocurrency name (e.g., "bitcoin").
+  /// - [days]: The number of days of historical data to retrieve (e.g., 1, 30, 365).
   static String getApiUrl(String name, int days) =>
       "https://api.coingecko.com/api/v3/coins/$name/ohlc?vs_currency=usd&days=$days";
 
-  /// The base URL used for fetching market data for coins from the CoinGecko API.
+  /// The base URL for fetching market data from the CoinGecko API.
   static const String apiUrlFromGecko =
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&sparkline=true";
 
-  /// A URL used for fetching data from a custom Firebase-hosted file.
+  /// A URL for fetching data from a custom Firebase-hosted file.
   static const String apiUrlFromFirebase =
       "https://gist.githubusercontent.com/MhYldrm/38e294ee3df7d18704419df96a8d08c8/raw/55a934103626c09055e57fa98e770ba126a919ba/Earn%2520Files";
 
-  /// [times] A list of common timeframes for displaying cryptocurrency price or market data.
-  /// Timeframes range from daily ("D") to yearly ("Y").
+  /// A list of common timeframes for displaying cryptocurrency price or market data.
+  /// Available options range from daily ("D") to yearly ("Y").
   static const List<String> times = ["D", "W", "M", "3M", "6M", "Y"];
 
   /// HTTP headers used for making API requests, including content type and response format.
@@ -43,8 +46,8 @@ final class ApplicationConstants {
   ];
 
   /// Earn Details Page Texts
-  // [exchangeList] A list of supported cryptocurrency exchanges where users can engage in trading or earning.
-  // These exchanges are listed as options on the earnings page.
+  ///
+  /// A list of supported cryptocurrency exchanges where users can trade or earn rewards.
   static const List<String> exchangeList = [
     "OKX",
     "BINANCE",
@@ -56,25 +59,42 @@ final class ApplicationConstants {
     "Cro"
   ];
 
-  // A URL that links to the user's personal portfolio
+  /// Commonly used numeric and string constants.
+  static const String zeroNumString = '0';
+  static const String oneNumString = '1';
+  static const String emptyString = '';
+  static const String dateFormatToConvert = 'yyyy-MM-dd – kk:mm';
+  static const double zeroNumDouble = 0;
+  static const int zeroNumInt = 0;
+  static const int oneNumInt = 1;
+  static const int twoNumInt = 2;
+  static const int threeNumInt = 3;
+  static const int sevenNumInt = 7;
+  static const int thirtyNumInt = 30;
+  static const int ninetyNumInt = 90;
+  static const int oneHundredEightyNumInt = 180;
+  static const int threeHundredSixtyFiveNumInt = 365;
+
+  /// URL linking to the user's personal portfolio.
   static const String myPortfolioLink = "https://myildirrim.netlify.app";
 
-  // Contact email address for support and feedback.
+  /// Contact email address for support and feedback.
   static const String myEmail = "mmyildirrimm5@gmail.com";
 
-  // A mail link used for opening the default mail client with a pre-filled email address.
+  /// A mail link used for opening the default mail client with a pre-filled email address.
   static const String mailTo = "mailto";
 
+  /// General UI Texts
   static const String getStarted = "GET STARTED";
   static const String darkMode = "Dark Mode";
   static const String lightMode = "Light Mode";
 
-  /// Home Page Text
+  /// Home Page Texts
   ///
-  // The label used for the "Top 100" section, often used to display the top 100 cryptocurrencies by market cap.
+  /// Label for the "Top 100" section, displaying the top 100 cryptocurrencies by market cap.
   static const String top100 = "Top 100";
 
-  // Image Path Texts
+  /// Image Paths
   static const String walletImagePath = "assets/wallet.png";
   static const String blockchainImagePath = "assets/blockchain.png";
   static const String aboutUsImagePath = "assets/aboutus.png";
@@ -86,9 +106,10 @@ final class ApplicationConstants {
   static const String splashImageTwoPath = "assets/splash2.png";
   static const String splashImageThreePath = "assets/splash3.png";
 
-  /// Profile Page Support Us Wallet List Text
-  // [buyMeCoffeeWalletAddress] A list of wallet addresses for different cryptocurrencies.
-  // Users can donate to the developer using any of the following supported coins.
+  /// Profile Page Support Us Wallet List
+  ///
+  /// A list of wallet addresses for different cryptocurrencies.
+  /// Users can donate to the developer using any of the following supported coins.
   static const List<List<String>> buyMeCoffeeWalletAddress = [
     [
       "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",

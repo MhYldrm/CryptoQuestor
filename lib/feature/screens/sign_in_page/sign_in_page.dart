@@ -1,15 +1,14 @@
-import 'package:crypto_questor/feature/screens/sign_in_page/widget/forgot_password_widget.dart';
-import 'package:crypto_questor/feature/screens/sign_in_page/widget/sign_up_link_widget.dart';
-import 'package:crypto_questor/feature/screens/sign_in_page/widget/wallet_image_widgets.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
+library sign_in_page;
+
+import 'package:crypto_questor/product/components/styles/application_size.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
-import '../../../product/components/button/my_custom_button.dart';
-import '../../../product/components/project_decoration/project_box_decorations.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
 import '../../../product/components/project_decoration/project_input_decorations.dart';
 import '../../view_models/user_view_model.dart';
-import '../../widgets/empty_widget.dart';
-import 'mixin/sign_in_form_fields_mixin.dart';
+import '../intro_page/intro_page.dart';
+import '../sign_up_page/sign_up_page.dart';
+import '../sign_up_page/widget/sign_show_error_dialog_widget.dart';
 
 /// The [SignInPage] widget is a form-based page where users can sign into their account.
 ///
@@ -34,6 +33,10 @@ import 'mixin/sign_in_form_fields_mixin.dart';
 /// - [SignUpLinkWidget] provides a link to the sign-up page.
 /// - [ForgotPasswordWidget] allows the user to reset their password.
 ///
+part 'widget/forgot_password_widget.dart';
+part 'widget/sign_up_link_widget.dart';
+part 'widget/wallet_image_widgets.dart';
+part 'mixin/sign_in_form_fields_mixin.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -78,7 +81,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
                         children: [
                           // Email input field
                           _buildEmailPart(myWidht, context, userProvider),
-                          const EmptyWidget(height: 20),
+                          EmptyWidget(height: ApplicationSize.size20.value),
                           // Password input field
                           _buildPasswordPart(myWidht, context, userProvider),
                           const ForgotPasswordWidget(),
@@ -92,7 +95,8 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
                         children: [
                           // Sign In button
                           MyCustomButton(
-                            onPressed: () => signIn(context, formKey, userProvider),
+                            onPressed: () =>
+                                signIn(context, formKey, userProvider),
                             buttonText: context.mLocalizations.login,
                           ),
                           SignUpLinkWidget(widht: myWidht / 10),
@@ -110,18 +114,24 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
   }
 
   /// [ _buildEmailPart] builds the email input section for the sign-in form.
-  Padding _buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
+  Padding _buildEmailPart(
+      double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration: ProjectInputDecorations.signInPageEmailFieldInputDecoration(context),
+          decoration:
+              ProjectInputDecorations.signInPageEmailFieldInputDecoration(
+                  context),
           keyboardType: TextInputType.emailAddress,
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
-          validator: (value) => validateEmail(value, context), // Email validation
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+              context),
+          validator: (value) =>
+              validateEmail(value, context), // Email validation
           onSaved: (value) {
-            userProvider.setUserData(email: value); // Save the email to the provider
+            userProvider.setUserData(
+                email: value); // Save the email to the provider
           },
         ),
       ),
@@ -129,7 +139,8 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
   }
 
   /// [_buildPasswordPart] builds the password input section for the sign-in form.
-  Padding _buildPasswordPart(double myWidht, BuildContext context, UserViewModel userProvider) {
+  Padding _buildPasswordPart(
+      double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
@@ -137,13 +148,16 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin {
         child: TextFormField(
           decoration: ProjectInputDecorations
               .signInPagePasswordFieldWithVisibilityInputDecoration(
-              context, passwordVisibility, togglePasswordVisibility),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
-          obscuringCharacter: '*',
+                  context, passwordVisibility, togglePasswordVisibility),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+              context),
+          obscuringCharacter: ApplicationConstants.obscuringCharacter,
           obscureText: passwordVisibility,
-          validator: (value) => validatePassword(value, context), // Password validation
+          validator: (value) =>
+              validatePassword(value, context), // Password validation
           onSaved: (value) {
-            userProvider.setUserData(password: value); // Save the password to the provider
+            userProvider.setUserData(
+                password: value); // Save the password to the provider
           },
         ),
       ),

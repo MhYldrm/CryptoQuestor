@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// A widget that represents a list item in a bottom sheet. It displays a cryptocurrency's logo,
 /// name, and wallet address. When tapped, it copies the wallet address to the clipboard and shows
 /// a snack bar notification confirming the action.
@@ -12,6 +6,8 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [name] The name of the cryptocurrency.
 /// [walletAddress] The cryptocurrency wallet address that can be copied to the clipboard.
 ///
+part of '../profile_page.dart';
+
 final class BottomSheetListWidget extends StatelessWidget {
   const BottomSheetListWidget(
       {super.key,

@@ -1,10 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../view_models/gecko_coins_view_model.dart';
-import '../../../widgets/coin_list_card.dart';
-
 /// [SortedGainersCoinsWidget] is a stateless widget designed to display the list of top gaining coins.
 ///
 /// ### Key Responsibilities:
@@ -20,6 +13,7 @@ import '../../../widgets/coin_list_card.dart';
 /// - If the data is successfully fetched, displays the sorted coins as a vertical list of [CoinListCard] widgets.
 /// - Displays an error message if the API too many request fails.
 ///
+part of '../home_page.dart';
 
 class SortedGainersCoinsWidget extends StatelessWidget {
   const SortedGainersCoinsWidget({
@@ -35,7 +29,7 @@ class SortedGainersCoinsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final geckoProvider = Provider.of<GeckoCoinsViewModel>(context);
     return SizedBox(
-      height: 400,
+      height: ApplicationSize.size400.value,
       width: double.infinity,
       child: isLoading == true
           ?
@@ -51,7 +45,7 @@ class SortedGainersCoinsWidget extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      padding: const ProjectPaddings.listViewSmallPadding(),
                       child: CoinListCard(
                         item: sortedGainersCoins[index],
                       ),
@@ -61,7 +55,7 @@ class SortedGainersCoinsWidget extends StatelessWidget {
               :
               // Error state when API too many request fails
               Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const ProjectPaddings.allxSmall(),
                   child: Center(
                     child: Text(
                       context.mLocalizations.isApiRequestFailed,

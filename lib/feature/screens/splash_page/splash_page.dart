@@ -1,15 +1,14 @@
+library splash_page;
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
 import 'package:crypto_questor/feature/screens/sign_up_page/sign_up_page.dart';
-import 'package:crypto_questor/feature/screens/splash_page/widgets/animated_indicator_widget.dart';
-import 'package:crypto_questor/feature/screens/splash_page/widgets/carousel_slider_widget.dart';
-import 'package:crypto_questor/feature/widgets/change_theme_switch_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../product/components/button/my_custom_button.dart';
-import '../../../product/components/padding/project_paddings.dart';
-import '../../../product/services/firebase_service.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../product/components/widgets/change_theme_switch_widget.dart';
 import '../sign_up_page/widget/existing_account_link_widget.dart';
-import 'mixin/splash_page_mixin.dart';
 
 /// [SplashPage] is the introductory screen of the application, displayed when the app is launched.
 /// It provides a visual overview and guides users to either sign up or sign in to their account.
@@ -35,6 +34,10 @@ import 'mixin/splash_page_mixin.dart';
 /// - [MyCustomButton] is used for navigating to the sign-up page.
 /// - [ExistingAccountLinkWidget] provides a link for users who already have an account.
 ///
+part 'widgets/animated_indicator_widget.dart';
+part 'widgets/carousel_slider_widget.dart';
+part 'widgets/splash_images_card_widget.dart';
+part 'mixin/splash_page_mixin.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

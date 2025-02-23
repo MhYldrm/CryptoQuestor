@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import '../home_page.dart';
-
 /// A mixin to manage coin sorting operations in the [HomePage] widget.
 /// This mixin provides methods to sort the coins based on various criteria such as gainers, losers, and hot coins.
 ///
@@ -14,6 +11,8 @@ import '../home_page.dart';
 /// This method is used to identify the coins that have the highest trading volume, usually indicating increased market interest.
 /// [coins] - The list of coins to be sorted.
 ///
+part of '../home_page.dart';
+
 mixin HomePageMixin on State<HomePage> {
   List sortGainersCoins(List? coins) {
     if (coins == null) return [];

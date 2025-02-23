@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
-
 /// A widget that displays the category names as buttons to switch between different categories of coins.
 ///
 /// [pageController] - The [PageController] used to control the page view when a category is selected.
@@ -15,6 +9,8 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [mRedPrimary] "Losers" text Red Color
 /// [changePage] A method to change the page in the [PageController]. [index] - The index of the page to navigate to. This method is called when any of the category buttons are pressed.
 ///
+part of '../home_page.dart';
+
 class CategoriesNamesPartWidget extends StatelessWidget {
   const CategoriesNamesPartWidget({super.key, required this.pageController});
 
@@ -23,26 +19,24 @@ class CategoriesNamesPartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const ProjectPaddings.horizontalMedium(),
       child: Row(
         children: [
           TextButton(
               onPressed: () => changePage(0),
               child: Text(
                 ApplicationConstants.top100,
-                style: context.textThemeLabelSmall
-                    ?.copyWith(
-                    color: context.isDarkMode
-                  ? CustomColors.mLilacPrimary
-                  : CustomColors.bgcolor,
+                style: context.textThemeLabelSmall?.copyWith(
+                  color: context.isDarkMode
+                      ? CustomColors.mLilacPrimary
+                      : CustomColors.bgcolor,
                 ),
               )),
           TextButton(
               onPressed: () => changePage(1),
               child: Text(
                 "${context.mLocalizations.hotCoins} 🔥",
-                style: context.textThemeLabelSmall
-                    ?.copyWith(
+                style: context.textThemeLabelSmall?.copyWith(
                   color: context.isDarkMode
                       ? CustomColors.mYellow
                       : CustomColors.bgcolor,

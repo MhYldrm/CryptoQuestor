@@ -1,7 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// A custom material button widget with an icon and a label.
 /// This button widget is designed to be used in navigation bars, such as a bottom navigation bar.
 /// It includes customization options for icon color, label text, and handling tap events.
@@ -11,6 +7,8 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [isSelected] - A boolean value that indicates whether the button is in the selected state. It determines the color of the icon and the label text.
 /// [onTap] - A callback function that is triggered when the button is tapped.
 ///
+part of '../intro_page.dart';
+
 class CustomMaterialButton extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -28,24 +26,24 @@ class CustomMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      minWidth: 40,
+      minWidth: ApplicationSize.size40.value,
       onPressed: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Icon(
             icon,
-            size: 20,
+            size: ApplicationSize.size20.value,
             color: isSelected
                 ? context.isDarkMode
                     ? CustomColors.mYellow
-                    : CustomColors.bgcolor
+                    : CustomColors.mPinkPrimary
                 : CustomColors.mGreyPrimary,
           ),
           Text(
             label,
             style: TextStyle(
-              fontSize: 11,
+              fontSize: ApplicationSize.size11.value,
               color: isSelected
                   ? context.isDarkMode
                       ? CustomColors.mYellow

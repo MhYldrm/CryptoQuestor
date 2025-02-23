@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
+part of '../sign_up_page.dart';
 
 class BlockchainImageWidgets extends StatelessWidget {
   const BlockchainImageWidgets({super.key});
@@ -9,7 +8,7 @@ class BlockchainImageWidgets extends StatelessWidget {
     double widht = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: widht/10,
+        horizontal: widht / 10,
       ),
       child: Image.asset(
         ApplicationConstants.blockchainImagePath,

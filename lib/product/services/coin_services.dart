@@ -1,7 +1,8 @@
 import 'dart:io';
 import '../components/styles/application_constants.dart';
 import '../models/earn_model.dart';
-import '../models/gecko_models.dart';
+import '../models/gecko_model_helper.dart';
+import '../models/gecko_model.dart';
 import 'package:http/http.dart' as http;
 
 /// [CoinService] Handles API calls for fetching coin data and earning projects.
@@ -14,7 +15,7 @@ final class CoinService {
     List<GeckoModel> geckoMarketList;
     var response = await http.get(Uri.parse(ApplicationConstants.apiUrlFromGecko));
     if (response.statusCode == HttpStatus.ok) {
-      geckoMarketList = GeckoCoinModels.fromJsonList(response.body);
+      geckoMarketList = GeckoModelHelper.fromJsonList(response.body);
       return geckoMarketList;
     }
     return null;

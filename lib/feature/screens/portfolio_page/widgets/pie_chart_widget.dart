@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/components/styles/custom_colors.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../../product/models/portfolio_coins_model.dart';
-
 /// A widget that displays a pie chart of the portfolio's coin distribution.
 ///
 /// This widget renders a pie chart using [SfCircularChart] that visualizes the distribution of
@@ -26,6 +20,8 @@ import '../../../../product/models/portfolio_coins_model.dart';
 /// - The tooltip shows when hovering over each slice to give additional data on the coin.
 ///
 
+part of '../portfolio_page.dart';
+
 final class PieChartWidget extends StatelessWidget {
   const PieChartWidget(
       {super.key, required this.tooltipBehavior, required this.coinList});
@@ -47,15 +43,18 @@ final class PieChartWidget extends StatelessWidget {
           overflowMode: LegendItemOverflowMode.wrap,
           position: LegendPosition.left,
         ),
-        tooltipBehavior:
-            tooltipBehavior,
+        tooltipBehavior: tooltipBehavior,
         series: <CircularSeries>[
           PieSeries<PortfolioCoinsModel, String>(
             dataSource: coinList,
-            xValueMapper: (PortfolioCoinsModel data, _) => '${data.symbol.toUpperCase()} : ${data.quantity}',
-            yValueMapper: (PortfolioCoinsModel data, _) => double.parse(data.totalSpent),
-            dataLabelMapper: (PortfolioCoinsModel data, _) => data.symbol.toUpperCase(),
-            sortFieldValueMapper: (PortfolioCoinsModel data, _) => data.totalSpent, // Sort the data by totalSpent
+            xValueMapper: (PortfolioCoinsModel data, _) =>
+                '${data.symbol.toUpperCase()} : ${data.quantity}',
+            yValueMapper: (PortfolioCoinsModel data, _) =>
+                double.parse(data.totalSpent),
+            dataLabelMapper: (PortfolioCoinsModel data, _) =>
+                data.symbol.toUpperCase(),
+            sortFieldValueMapper: (PortfolioCoinsModel data, _) =>
+                data.totalSpent, // Sort the data by totalSpent
             dataLabelSettings: const DataLabelSettings(isVisible: true),
             enableTooltip: true,
             onPointTap: (ChartPointDetails details) {

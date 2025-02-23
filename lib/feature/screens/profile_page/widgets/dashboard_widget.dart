@@ -1,19 +1,10 @@
-import 'package:crypto_questor/feature/screens/splash_page/splash_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/services/firebase_service.dart';
-import '../../../widgets/change_theme_switch_widget.dart';
-import '../../../widgets/empty_widget.dart';
-
 /// A widget representing the dashboard section of the application.
 /// Displays key options like "About Us", "Contact Us", and a logout button.
 /// [context] The BuildContext used to get the localizations for the text.
 /// It also provides functionality for logging out, launching a web page, and sending emails.
 ///
+part of '../profile_page.dart';
+
 class DashboardWidget extends StatelessWidget {
   const DashboardWidget({super.key});
 

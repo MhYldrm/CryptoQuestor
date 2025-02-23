@@ -1,7 +1,9 @@
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../product/components/styles/custom_colors.dart';
-import '../screens/intro_page/intro_page.dart';
+
+import '../../../feature/screens/intro_page/intro_page.dart';
+import '../styles/custom_colors.dart';
+
 
 /// A custom AppBar widget used in the app.
 /// It consists of a title, an icon, and a back button.

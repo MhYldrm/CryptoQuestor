@@ -1,14 +1,11 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [exchangeName] Name of the exchange where the Earn campaign is located
 /// [exchangeIconUrl] Icon-Image Url of the exchange where the Earn campaign is located
 /// [dateTime] Validity date of the Earn campaign
 /// [mYellow] Pin and Date range Icon  Yellow Color
 /// [mWhitePrimary] Exchange name and date time text white color
 ///
+part of '../earn_details_page.dart';
+
 class MarketDetailsPartWidget extends StatelessWidget {
   const MarketDetailsPartWidget(
       {super.key,
@@ -33,7 +30,7 @@ class MarketDetailsPartWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.location_pin,
-                  size: 17,
+                  size: ApplicationSize.xSmall.value,
                   color: context.isDarkMode
                       ? CustomColors.mYellow
                       : CustomColors.mRedPrimary,
@@ -45,8 +42,8 @@ class MarketDetailsPartWidget extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(3),
                     child: SizedBox(
-                      height: 50,
-                      width: 130,
+                      height: ApplicationSize.xxsLarge.value,
+                      width: ApplicationSize.xxxxLarge.value,
                       child: Image.network(
                         exchangeIconUrl,
                         fit: BoxFit.contain,
@@ -55,11 +52,10 @@ class MarketDetailsPartWidget extends StatelessWidget {
                   ),
                 ),
                 ApplicationConstants.exchangeList.contains(exchangeName)
-                    ? const Text("")
+                    ? const Text(ApplicationConstants.emptyString)
                     : Text(
                         exchangeName,
-                        style: context.textThemeTitleMedium
-                            ?.copyWith(
+                        style: context.textThemeTitleMedium?.copyWith(
                           color: context.isDarkMode
                               ? CustomColors.mWhitePrimary
                               : CustomColors.mPurple,
@@ -75,15 +71,14 @@ class MarketDetailsPartWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.date_range_rounded,
-                  size: 15,
+                  size: ApplicationSize.xSmall.value,
                   color: context.isDarkMode
                       ? CustomColors.mYellow
                       : CustomColors.mRedPrimary,
                 ),
                 Text(
                   dateTime,
-                  style: context.textThemeBodyMedium
-                      ?.copyWith(
+                  style: context.textThemeBodyMedium?.copyWith(
                     color: context.isDarkMode
                         ? CustomColors.mWhitePrimary
                         : CustomColors.mPurple,

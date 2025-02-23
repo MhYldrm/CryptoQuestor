@@ -1,11 +1,9 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [descriptionTexts] Earn Campaign Description Texts
 /// [mPinkPrimary] Description Title Texts Pink Color
 /// [mWhitePrimary] Description Texts White Color
 ///
+part of '../earn_details_page.dart';
+
 class EarnDescriptionPartWidget extends StatelessWidget {
   const EarnDescriptionPartWidget({super.key, required this.descriptionTexts});
 
@@ -15,7 +13,7 @@ class EarnDescriptionPartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const ProjectPaddings.horizontalSmall(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,8 +26,8 @@ class EarnDescriptionPartWidget extends StatelessWidget {
               descriptionTexts,
               style: context.textThemeBodyMedium?.copyWith(
                   color: context.isDarkMode
-                  ? CustomColors.mWhitePrimary
-                  : CustomColors.bgcolor,
+                      ? CustomColors.mWhitePrimary
+                      : CustomColors.bgcolor,
                   fontWeight: FontWeight.w300),
               maxLines: 16,
               overflow: TextOverflow.ellipsis,

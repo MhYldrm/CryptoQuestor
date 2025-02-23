@@ -1,11 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../../product/models/portfolio_coins_model.dart';
-import '../../../view_models/portfolio_coins_view_model.dart';
-import '../../../widgets/port_coins_card.dart';
-
 /// A widget that displays a list of portfolio coins in a ListView.
 ///
 /// This widget takes a list of portfolio coins and displays them in a scrollable view.
@@ -25,6 +17,7 @@ import '../../../widgets/port_coins_card.dart';
 /// - If there are no coins, a message saying "You do not have any coins" is displayed.
 /// - If there are portfolio coins, they are displayed in a scrollable list using [PortCoinsCard] widget.
 ///
+part of '../portfolio_page.dart';
 
 class PortfolioCoinsListViewWidget extends StatelessWidget {
   const PortfolioCoinsListViewWidget(
@@ -35,42 +28,43 @@ class PortfolioCoinsListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final portfolioCoinsProvider = Provider.of<PortfolioCoinsViewModel>(context);
+    final portfolioCoinsProvider =
+        Provider.of<PortfolioCoinsViewModel>(context);
     return isLoading == true
         ? const Center(
-      child: CircularProgressIndicator(),
-    )
+            child: CircularProgressIndicator(),
+          )
         : portfolioCoinsProvider.portfolioCoins.isNotEmpty
-        ? ListView.builder(
-      itemCount: portfolioCoinList.length,
-      itemBuilder: (context, index) {
-        final coins = portfolioCoinList[index];
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-          child: PortCoinsCard(
-            imageUrl: coins.imageUrl,
-            symbol: coins.symbol,
-            name: coins.name,
-            quantity: double.parse(coins.quantity),
-            totalSpent: double.parse(coins.totalSpent),
-            currentValue: coins.currentValue.toString(),
-            priceChange24H: coins.priceChange24H!,
-          ),
-        );
-      },
-    )
-        : Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: Text(
-          context.mLocalizations.isNotHaveAnyCoins,
-          style: TextStyle(
-            color: context.isDarkMode
-                ? CustomColors.mWhitePrimary
-                : CustomColors.bgcolor,
-          ),
-        ),
-      ),
-    );
+            ? ListView.builder(
+                itemCount: portfolioCoinList.length,
+                itemBuilder: (context, index) {
+                  final coins = portfolioCoinList[index];
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    child: PortCoinsCard(
+                      imageUrl: coins.imageUrl,
+                      symbol: coins.symbol,
+                      name: coins.name,
+                      quantity: double.parse(coins.quantity),
+                      totalSpent: double.parse(coins.totalSpent),
+                      currentValue: coins.currentValue.toString(),
+                      priceChange24H: coins.priceChange24H!,
+                    ),
+                  );
+                },
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    context.mLocalizations.isNotHaveAnyCoins,
+                    style: TextStyle(
+                      color: context.isDarkMode
+                          ? CustomColors.mWhitePrimary
+                          : CustomColors.bgcolor,
+                    ),
+                  ),
+                ),
+              );
   }
 }

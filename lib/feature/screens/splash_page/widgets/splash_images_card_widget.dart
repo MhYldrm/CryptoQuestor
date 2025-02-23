@@ -1,7 +1,4 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../../product/components/styles/custom_colors.dart';
+part of '../splash_page.dart';
 
 class SplashImagesCardWidget extends StatelessWidget {
   const SplashImagesCardWidget(
@@ -19,8 +16,8 @@ class SplashImagesCardWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
-            height: 200,
-            width: 300,
+            height: ApplicationSize.size200.value,
+            width: ApplicationSize.size300.value,
             child: Image.asset(
               imageUrl,
               fit: BoxFit.fill,
@@ -29,14 +26,14 @@ class SplashImagesCardWidget extends StatelessWidget {
           SizedBox(
             height: 80,
             width: 300,
-            child: Text(
-                description,
-              style: GoogleFonts.permanentMarker(
-                color: context.isDarkMode ? CustomColors.mYellow : CustomColors.bgcolor,
-                fontSize: 20,
-                fontWeight: FontWeight.w100,
-              )
-            ),
+            child: Text(description,
+                style: GoogleFonts.permanentMarker(
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.bgcolor,
+                  fontSize: ApplicationSize.size20.value,
+                  fontWeight: FontWeight.w100,
+                )),
           ),
         ],
       ),

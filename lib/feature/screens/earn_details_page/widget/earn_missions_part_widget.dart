@@ -1,15 +1,11 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [refLink] URL to the Missions on Exchange web page
 /// [missionsText] Earn Campaign Missions Texts
 /// [mPinkPrimary] Missions Title Texts Pink Color
 /// [mWhitePrimary] Missions Texts White Color
 /// [_launchWebUrl] Launch Web Site Func.
 ///
+part of '../earn_details_page.dart';
+
 class EarnMissionsPartWidget extends StatelessWidget {
   const EarnMissionsPartWidget(
       {super.key, required this.refLink, required this.missionsText});

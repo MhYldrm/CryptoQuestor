@@ -1,7 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [imageUrl] Get coin image URL.
 /// [symbol] Indicates Coin Symbol.
 /// [name] Indicates Coin Name.
@@ -12,6 +8,9 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [red.shade300] if Coin Percentage 24H. is negative => percentage text Red Color
 /// [green.shade300] if Coin Percentage 24H. is positive => percentage text Green Color
 ///
+///
+part of '../add_portfolio_page.dart';
+
 final class AddPortfolioPageHeaderWidget extends StatelessWidget {
   const AddPortfolioPageHeaderWidget(
       {super.key,
@@ -34,7 +33,7 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 65,
+            height: ApplicationSize.xLarge.value,
             width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,19 +58,19 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       child: Image.network(
                         imageUrl,
-                        height: 55,
-                        width: 55,
+                        height: ApplicationSize.xsLarge.value,
+                        width: ApplicationSize.xsLarge.value,
                         fit: BoxFit.fill,
                       ),
                     ),
-                    const SizedBox(
-                      width: 25,
+                    SizedBox(
+                      width: ApplicationSize.small.value,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const ProjectPaddings.topSmall(),
                       child: SizedBox(
-                        height: 55,
-                        width: 130,
+                        height: ApplicationSize.xsLarge.value,
+                        width: ApplicationSize.xxxxLarge.value,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -104,7 +103,7 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const ProjectPaddings.topSmall(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -136,7 +135,7 @@ final class AddPortfolioPageHeaderWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const ProjectPaddings.horizontalSmall(),
             child: Divider(
               thickness: 0.5,
               color: CustomColors.mLilacPrimary.withOpacity(0.7),

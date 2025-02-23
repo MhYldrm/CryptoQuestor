@@ -1,5 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+part of '../splash_page.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
   const CarouselSliderWidget({
@@ -21,7 +20,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
     return CarouselSlider(
       items: widget.items,
       options: CarouselOptions(
-          height: 500,
+          height: ApplicationSize.size500.value,
           autoPlay: false,
           enlargeFactor: 0.45,
           autoPlayCurve: Curves.fastOutSlowIn,

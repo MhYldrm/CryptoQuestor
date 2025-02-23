@@ -1,4 +1,4 @@
-import 'package:crypto_questor/product/models/gecko_models.dart';
+import 'package:crypto_questor/product/models/gecko_model.dart';
 import 'package:crypto_questor/product/repository/coin_gecko_repository.dart';
 import 'package:crypto_questor/product/services/coin_services.dart';
 

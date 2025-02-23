@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/components/styles/custom_colors.dart';
-import 'package:crypto_questor/product/components/styles/my_functions.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-
 /// A widget that displays the total value, total spent, and profit/loss (PnL) information.
 ///
 /// This widget is used to show a summary of the user's portfolio performance, including the total current value,
@@ -24,6 +18,7 @@ import '../../../../product/components/padding/project_paddings.dart';
 /// - The PnL value is calculated as the difference between the total current value and total value.
 /// - If the PnL is positive, it is displayed in green; if negative, it is displayed in red.
 ///
+part of '../portfolio_page.dart';
 
 class TotalSpentDescriptionWidget extends StatelessWidget {
   const TotalSpentDescriptionWidget(
@@ -35,7 +30,8 @@ class TotalSpentDescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculate percentage change and profit or loss
-    final double percentage = MyFunctions().calculatePercentage(totalCurrentValue, totalValue);
+    final double percentage =
+        MyFunctions().calculatePercentage(totalCurrentValue, totalValue);
     final double pnl = totalCurrentValue - totalValue;
 
     return Padding(

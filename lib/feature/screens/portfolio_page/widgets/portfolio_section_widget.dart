@@ -1,10 +1,3 @@
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_coins_listview_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import '../../../../product/components/styles/my_functions.dart';
-import '../../../view_models/gecko_coins_view_model.dart';
-import '../../../view_models/portfolio_coins_view_model.dart';
-
 /// A widget that manages the portfolio section of the app.
 ///
 /// This widget listens to changes from [PortfolioCoinsViewModel] and [GeckoCoinsViewModel].
@@ -19,7 +12,7 @@ import '../../../view_models/portfolio_coins_view_model.dart';
 /// - Delegates the actual UI rendering to [PortfolioCoinsListViewWidget].
 /// - Passes the processed portfolio coin list and loading status to the child widget.
 ///
-
+part of '../portfolio_page.dart';
 class PortfolioSectionWidget extends StatelessWidget {
   const PortfolioSectionWidget({
     super.key,

@@ -1,8 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// A custom widget for displaying a conversion interface with two input fields
 /// - one for the coin amount and one for the equivalent balance in USD.
 /// It includes text fields with a currency icon and a divider separating the fields.
@@ -12,6 +7,9 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [balanceController] - A [TextEditingController] for managing the input in the second text field (the balance in USD).
 /// [onChangedFirst] - A callback function that is called when the value in the first text field (coin amount) changes.
 /// [onChangedSec] - A callback function that is called when the value in the second text field (balance in USD) changes.
+///
+part of '../coin_details_page.dart';
+
 class ConvertsWidget extends StatelessWidget {
   const ConvertsWidget(
       {super.key,
@@ -30,12 +28,12 @@ class ConvertsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const ProjectPaddings.horizontalMedium(),
       child: Row(
         children: [
           Container(
-            height: 70,
-            width: 160,
+            height: ApplicationSize.size70.value,
+            width: ApplicationSize.size160.value,
             decoration: BoxDecoration(
               color: context.isDarkMode
                   ? CustomColors.mLightGrey
@@ -43,19 +41,19 @@ class ConvertsWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const ProjectPaddings.allSmall(),
               child: Row(
                 children: [
                   SizedBox(
-                    width: 80,
-                    height: 50,
+                    width: ApplicationSize.xxLarge.value,
+                    height: ApplicationSize.xxsLarge.value,
                     child: TextField(
                       controller: coinController,
                       onChanged: onChangedFirst,
                       keyboardType: TextInputType.number,
                       cursorColor: CustomColors.mPurple,
                       decoration: const InputDecoration(
-                        hintMaxLines: 1,
+                        hintMaxLines: ApplicationConstants.oneNumInt,
                         border: InputBorder.none,
                         hintText: "0.00",
                       ),
@@ -65,14 +63,14 @@ class ConvertsWidget extends StatelessWidget {
                     thickness: 1.5,
                     color: CustomColors.mGreyPrimary.withOpacity(0.5),
                   ),
-                  const SizedBox(
-                    width: 5,
+                  SizedBox(
+                    width: ApplicationSize.xxSmall.value,
                   ),
                   Image.network(
                     imageUrl,
                     fit: BoxFit.fill,
-                    height: 30,
-                    width: 30,
+                    height: ApplicationSize.size30.value,
+                    width: ApplicationSize.size30.value,
                   ),
                 ],
               ),
@@ -80,8 +78,8 @@ class ConvertsWidget extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            height: 70,
-            width: 160,
+            height: ApplicationSize.size70.value,
+            width: ApplicationSize.size160.value,
             decoration: BoxDecoration(
               color: context.isDarkMode
                   ? CustomColors.mLightGrey
@@ -89,19 +87,19 @@ class ConvertsWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const ProjectPaddings.allSmall(),
               child: Row(
                 children: [
                   SizedBox(
-                    width: 80,
-                    height: 50,
+                    width: ApplicationSize.xxLarge.value,
+                    height: ApplicationSize.xxsLarge.value,
                     child: TextField(
                       controller: balanceController,
                       onChanged: onChangedSec,
                       keyboardType: TextInputType.number,
                       cursorColor: CustomColors.mPurple,
                       decoration: const InputDecoration(
-                        hintMaxLines: 1,
+                        hintMaxLines: ApplicationConstants.oneNumInt,
                         border: InputBorder.none,
                         hintText: "0.00",
                       ),

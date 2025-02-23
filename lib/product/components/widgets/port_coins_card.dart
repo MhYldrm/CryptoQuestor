@@ -1,7 +1,10 @@
+import 'package:crypto_questor/product/components/padding/project_paddings.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:crypto_questor/product/components/styles/my_functions.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../product/components/styles/custom_colors.dart';
+
+import '../styles/custom_colors.dart';
 
 /// [PortCoinsCard] is a stateful widget that displays detailed information about a cryptocurrency
 /// in the user's portfolio. It shows the coin's symbol, quantity, total spent value, and calculates
@@ -64,10 +67,11 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20),
-        color: context.projectTheme!.colorScheme.secondary, // Theme-based background color
+        color: context.projectTheme!.colorScheme
+            .secondary, // Theme-based background color
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: const ProjectPaddings.horizontalLarge(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -78,8 +82,8 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                 Image.network(
                   widget.imageUrl,
                   fit: BoxFit.fill,
-                  height: 35,
-                  width: 35,
+                  height: ApplicationSize.size35.value,
+                  width: ApplicationSize.size35.value,
                 ),
                 const SizedBox(
                   width: 15,
@@ -96,7 +100,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: const ProjectPaddings.verticalMedium(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -151,7 +155,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
             ),
             // Right section containing coin quantity, current value, and total spent
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: const ProjectPaddings.verticalMedium(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -173,9 +177,11 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                     "\$ ${widget.currentValue}",
                     style: context.textThemeBodyMedium?.copyWith(
                       color: double.tryParse(widget.currentValue)! >=
-                          widget.totalSpent
-                          ? CustomColors.mGreenPrimary // Green if current value is higher
-                          : CustomColors.mRedPrimary, // Red if current value is lower
+                              widget.totalSpent
+                          ? CustomColors
+                              .mGreenPrimary // Green if current value is higher
+                          : CustomColors
+                              .mRedPrimary, // Red if current value is lower
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -200,8 +206,10 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
                     "% ${percentage.toStringAsFixed(2)}",
                     style: context.textThemeBodySmall?.copyWith(
                       color: percentage >= 0
-                          ? CustomColors.mGreenPrimary // Green if the value is positive
-                          : CustomColors.mRedPrimary, // Red if the value is negative
+                          ? CustomColors
+                              .mGreenPrimary // Green if the value is positive
+                          : CustomColors
+                              .mRedPrimary, // Red if the value is negative
                       fontWeight: FontWeight.w300,
                     ),
                   ),

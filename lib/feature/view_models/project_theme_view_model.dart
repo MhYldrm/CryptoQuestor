@@ -1,5 +1,5 @@
-import 'package:crypto_questor/product/components/theme/project_theme.dart';
 import 'package:flutter/material.dart';
+import '../../product/init/theme/project_theme.dart';
 
 /// [ProjectThemeViewModel] A class that manages the theme of the application.
 /// It provides functionality to switch between dark and light themes and notifies listeners about theme changes.

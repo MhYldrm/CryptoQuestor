@@ -1,8 +1,9 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../product/components/styles/custom_colors.dart';
-import '../view_models/project_theme_view_model.dart';
+import '../../../feature/view_models/project_theme_view_model.dart';
+import '../styles/custom_colors.dart';
 
 /// [ChangeThemeSwitchWidget] is a widget that allows the user to toggle between dark and light themes.
 ///
@@ -24,31 +25,30 @@ final class ChangeThemeSwitchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedToggleSwitch<bool>.dual(
       current: isDarkTheme,
-      spacing: 10,
+      spacing: ApplicationSize.size10.value,
       first: true,
       second: false,
       styleBuilder: (isDarkTheme) => ToggleStyle(
         indicatorColor: isDarkTheme ? Colors.black : Colors.yellow,
-        backgroundColor: isDarkTheme
-            ? CustomColors.mBlackPrimary
-            : CustomColors.mYellow,
+        backgroundColor:
+            isDarkTheme ? CustomColors.mBlackPrimary : CustomColors.mYellow,
       ),
       iconBuilder: (isDarkTheme) => isDarkTheme
-          ? const Icon(
-        Icons.dark_mode,
-        color: Colors.white,
-        size: 30,
-      )
-          : const Icon(
-        Icons.light_mode,
-        color: Colors.pink,
-        size: 30,
-      ),
+          ? Icon(
+              Icons.dark_mode,
+              color: Colors.white,
+              size: ApplicationSize.size30.value,
+            )
+          : Icon(
+              Icons.light_mode,
+              color: Colors.pink,
+              size: ApplicationSize.size30.value,
+            ),
       onChanged: (value) {
         // When the toggle switch changes, it triggers the theme change.
-        Provider.of<ProjectThemeViewModel>(context, listen: false).changeTheme();
+        Provider.of<ProjectThemeViewModel>(context, listen: false)
+            .changeTheme();
       },
     );
   }
 }
-

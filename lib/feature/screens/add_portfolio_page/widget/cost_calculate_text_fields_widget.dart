@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
-
 /// [CostCalculateTextFieldsWidget] is a stateless widget designed to provide
 /// a text input field specifically for numeric inputs, such as price or quantity.
 ///
 /// - [controller] A [TextEditingController] that manages the text being entered into the field.
 /// - [onChanged] A callback function triggered whenever the text in the field changes,
 ///   passing the updated value as a [String].
+///
+///
+part of '../add_portfolio_page.dart';
+
 final class CostCalculateTextFieldsWidget extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
@@ -21,6 +23,9 @@ final class CostCalculateTextFieldsWidget extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly, // Only digits are allowed to be entered
+      ],
       onChanged: onChanged,
     );
   }

@@ -1,9 +1,12 @@
-import 'package:crypto_questor/feature/screens/profile_page/widgets/buy_me_coffee_widget.dart';
-import 'package:crypto_questor/feature/screens/profile_page/widgets/dashboard_widget.dart';
-import 'package:crypto_questor/feature/screens/profile_page/widgets/user_info_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'mixin/profile_page_mixin.dart';
+library portfolio_page;
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import '../../../product/components/widgets/change_theme_switch_widget.dart';
+import '../../../product/components/widgets/custom_app_bar.dart';
+import '../splash_page/splash_page.dart';
 
 /// A page that displays the user's profile information and dashboard.
 ///
@@ -20,6 +23,11 @@ import 'mixin/profile_page_mixin.dart';
 /// ### Initialization:
 /// - On initialization, the `fetchInfo` method is called to load the user's information using their UID.
 ///
+part 'widgets/bottom_sheet_list_widget.dart';
+part 'widgets/buy_me_coffee_widget.dart';
+part 'widgets/dashboard_widget.dart';
+part 'widgets/user_info_widget.dart';
+part 'mixin/profile_page_mixin.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -61,7 +69,8 @@ class _ProfilePageState extends State<ProfilePage> with ProfilePageMixin {
             ),
             const Expanded(
               flex: 2,
-              child: BuyMeCoffeeWidget(), // Shows the donation widget for the user to support the app
+              child:
+                  BuyMeCoffeeWidget(), // Shows the donation widget for the user to support the app
             ),
           ],
         ),

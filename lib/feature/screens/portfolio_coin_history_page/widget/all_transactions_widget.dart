@@ -1,8 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import 'delete_transaction_snackbar_widget.dart';
-
 /// [AllTransactionsWidget] displays a list of transactions, with the option to delete each transaction.
 ///
 /// It shows each transaction's coin information, including the symbol, date, quantity, and total spent.
@@ -16,6 +11,8 @@ import 'delete_transaction_snackbar_widget.dart';
 /// - [mGreyPrimary] Used for the description text in grey.
 /// - [mWhitePrimary] Used for the quantity text in white.
 ///
+part of '../portfolio_coin_history_page.dart';
+
 class AllTransactionsWidget extends StatelessWidget {
   const AllTransactionsWidget({required this.coinData, super.key});
 
@@ -47,7 +44,8 @@ class AllTransactionsWidget extends StatelessWidget {
                       fit: BoxFit.fill,
                     ),
                     title: Text(
-                      "${coin.symbol}".toUpperCase(), // Coin symbol in uppercase
+                      "${coin.symbol}"
+                          .toUpperCase(), // Coin symbol in uppercase
                       style: context.textThemeLabelLarge?.copyWith(
                         color: context.isDarkMode
                             ? CustomColors.mWhitePrimary

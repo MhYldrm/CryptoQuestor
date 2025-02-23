@@ -1,15 +1,11 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/models/earn_model.dart';
-import '../../../widgets/earn_card.dart';
-import '../../earn_details_page/earn_details_page.dart';
-
 /// A widget displaying a list of earn projects.
 /// It renders each project in an `EarnCard` widget and navigates to the details page when tapped.
 /// [earnList] A list of [EarnModel] objects that represent the available earn projects.
 /// [EarnCard] Displays the project's image, title, and exchange name.
 /// [EarnDetailsPage] Navigates to this page to show detailed information about the selected project.
 ///
+part of '../earn_page.dart';
+
 final class EarnsListWidget extends StatelessWidget {
   const EarnsListWidget({super.key, required this.earnList});
 
@@ -23,7 +19,7 @@ final class EarnsListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final earns = earnList[index];
         return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+          padding: const ProjectPaddings.listViewMediumPadding(),
           child: InkWell(
             onTap: () {
               context.push(

@@ -1,14 +1,10 @@
-import 'package:flutter/material.dart';
-import '../../../../product/models/earn_model.dart';
-import '../../../../product/services/coin_services.dart';
-import '../earn_page.dart';
-
-
 /// A mixin to manage the EarnPage Page State.
 /// [_service] An object to use functions in [CoinService] class.
 /// [earnListNotifier] This is used to notify listeners whenever the earn projects data is updated.
 /// [isLoadingNotifier] A [ValueNotifier] holding a boolean value to indicate whether the data is still loading or has finished loading.
 ///
+part of '../earn_page.dart';
+
 mixin EarnPageMixin on State<EarnPage> {
   final CoinService _service = CoinService();
   ValueNotifier<List<EarnModel>> earnListNotifier = ValueNotifier([]);

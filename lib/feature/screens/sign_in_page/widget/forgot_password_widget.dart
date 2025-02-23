@@ -1,10 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/project_decoration/project_box_decorations.dart';
-import '../../../../product/components/project_decoration/project_input_decorations.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// A widget that handles the Forgot Password feature.
 ///
 /// This widget allows users to reset their password by entering their email address.
@@ -18,6 +11,7 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// ### Firebase Authentication:
 /// - The widget utilizes Firebase Authentication to send the password reset email.
 ///
+part of '../sign_in_page.dart';
 
 class ForgotPasswordWidget extends StatefulWidget {
   const ForgotPasswordWidget({super.key});
@@ -73,15 +67,19 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
           decoration: ProjectBoxDecorations.signPagesBoxDecoration,
           child: TextField(
             controller: _emailController,
-            decoration: ProjectInputDecorations.signInPageEmailFieldInputDecoration(context),
+            decoration:
+                ProjectInputDecorations.signInPageEmailFieldInputDecoration(
+                    context),
             keyboardType: TextInputType.emailAddress,
-            style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+            style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
+                context),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Dismiss the dialog when "Cancel" is pressed
+              Navigator.pop(
+                  context); // Dismiss the dialog when "Cancel" is pressed
             },
             child: Text(
               context.mLocalizations.cancel,
@@ -116,16 +114,17 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
           backgroundColor: CustomColors.mYellow,
           content: Text(
             context.mLocalizations.sendResetPasswordEmail,
-            style: context.textThemeBodyMedium?.copyWith(color: CustomColors.bgcolor),
+            style: context.textThemeBodyMedium
+                ?.copyWith(color: CustomColors.bgcolor),
           ),
         ),
       );
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {
+      if (e.code == ApplicationConstants.userNotFound) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('No account found for this email address.'),
+          SnackBar(
+            content: Text(context.mLocalizations.noAccountFoundThisEmail),
           ),
         );
       } else {

@@ -1,14 +1,12 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../sign_up_page/sign_up_page.dart';
-
 /// A widget that provides a link to the sign-up page.
 ///
 /// The widget displays a message asking if the user doesn't have an account,
 /// and provides a button that navigates to the sign-up page when pressed.
 ///
 /// [widht] The left padding for the widget, defining its horizontal position.
+///
+part of '../sign_in_page.dart';
+
 class SignUpLinkWidget extends StatelessWidget {
   final double widht;
 
@@ -42,7 +40,9 @@ class SignUpLinkWidget extends StatelessWidget {
               child: Text(
                 context.mLocalizations.signUp,
                 style: context.textThemeTitleMedium?.copyWith(
-                  color: context.isDarkMode ? CustomColors.mYellow : CustomColors.mPinkPrimary,
+                  color: context.isDarkMode
+                      ? CustomColors.mYellow
+                      : CustomColors.mPinkPrimary,
                 ),
               ))
         ],

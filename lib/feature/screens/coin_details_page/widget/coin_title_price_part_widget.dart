@@ -1,8 +1,3 @@
-import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// [imageUrl] Get coin image URL.
 /// [symbol] Indicates Coin Symbol.
 /// [name] Indicates Coin Name.
@@ -13,6 +8,8 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [red.shade300] if Coin Percentage 24H. is negative => percentage text Red Color
 /// [green.shade300] if Coin Percentage 24H. is positive => percentage text Green Color
 ///
+part of '../coin_details_page.dart';
+
 final class CoinTitlePricePartWidget extends StatelessWidget {
   const CoinTitlePricePartWidget(
       {super.key,
@@ -31,17 +28,17 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const ProjectPaddings.horizontalXMedium(),
       child: Column(
         children: [
           SizedBox(
-            height: 65,
+            height: ApplicationSize.xLarge.value,
             width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const ProjectPaddings.topSmall(),
                   child: IconButton(
                       onPressed: () {
                         context.push(const IntroPage());
@@ -54,19 +51,19 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       child: Image.network(
                         imageUrl,
-                        height: 55,
-                        width: 55,
+                        height: ApplicationSize.xsLarge.value,
+                        width: ApplicationSize.xsLarge.value,
                         fit: BoxFit.fill,
                       ),
                     ),
-                    const SizedBox(
-                      width: 25,
+                    SizedBox(
+                      width: ApplicationSize.small.value,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const ProjectPaddings.topSmall(),
                       child: SizedBox(
-                        height: 55,
-                        width: 130,
+                        height: ApplicationSize.xsLarge.value,
+                        width: ApplicationSize.xxxxLarge.value,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -99,7 +96,7 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const ProjectPaddings.topSmall(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -131,7 +128,7 @@ final class CoinTitlePricePartWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const ProjectPaddings.horizontalSmall(),
             child: Divider(
               thickness: 0.5,
               color: context.isDarkMode

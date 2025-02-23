@@ -1,9 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-
 /// A widget to display user information, including their name, email, and gender-specific avatar.
 /// It also allows users to change the gender image by tapping a menu icon.
 /// [isLoading] A boolean that indicates whether the user data is still loading or has been fetched.
@@ -11,6 +5,8 @@ import '../../../../product/components/styles/custom_colors.dart';
 /// [personInfo] A list containing user information such as name and email.
 /// [chanceGender] A callback function to change the gender image when the menu option is selected.
 ///
+part of '../profile_page.dart';
+
 final class UserInfoWidget extends StatelessWidget {
   final bool? isLoading; // Indicates if the user data is currently loading
   final bool isMan; // Represents the user's gender

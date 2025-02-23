@@ -1,9 +1,3 @@
-import 'package:crypto_questor/feature/screens/portfolio_coin_history_page/portfolio_coin_history_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/models/portfolio_coins_model.dart';
-import '../../../widgets/coin_card.dart';
-
 /// [PortfolioCoinsCardWidget] is a stateless widget designed to display the user's portfolio of coins.
 ///
 /// ### Key Responsibilities:
@@ -24,6 +18,7 @@ import '../../../widgets/coin_card.dart';
 /// - If there are coins in the portfolio, it shows them as [CoinCard] widgets in a horizontal list.
 /// - If the portfolio is empty, a message like "You have not any coin in portfolio" is displayed.
 ///
+part of '../home_page.dart';
 
 final class PortfolioCoinsCardWidget extends StatelessWidget {
   const PortfolioCoinsCardWidget({
@@ -44,7 +39,7 @@ final class PortfolioCoinsCardWidget extends StatelessWidget {
       children: [
         // Portfolio title section
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          padding: const ProjectPaddings.horizontalAndVerticalSmall(),
           child: Text(
             context.mLocalizations.myPortfolio,
             style: context.textThemeBodyLarge?.copyWith(
@@ -55,7 +50,7 @@ final class PortfolioCoinsCardWidget extends StatelessWidget {
         ),
         // Portfolio coins list or loading/empty message
         SizedBox(
-          height: 170,
+          height: ApplicationSize.size170.value,
           child: isLoading
               ? const Center(
                   child: CircularProgressIndicator()) // Loading state
@@ -69,7 +64,8 @@ final class PortfolioCoinsCardWidget extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final portfolio = resultList[index];
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 12, 0),
+                          padding: const ProjectPaddings
+                              .listViewLeftAndRightPaddingSmall(),
                           child: InkWell(
                             onTap: () {
                               context.push(

@@ -1,9 +1,10 @@
 import 'package:crypto_questor/feature/screens/portfolio_page/portfolio_page.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../product/components/styles/application_constants.dart';
-import '../../product/components/styles/custom_colors.dart';
-import '../../product/components/styles/my_functions.dart';
+import '../styles/application_constants.dart';
+import '../styles/application_size.dart';
+import '../styles/custom_colors.dart';
+import '../styles/my_functions.dart';
 
 /// [CreditCard] is a widget representing a credit card-like UI element that shows the user's portfolio balance and allows navigation to the portfolio page.
 ///
@@ -35,13 +36,14 @@ class CreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculates the percentage of profit or loss based on the total spent and current value.
-    final double percentage = MyFunctions().calculatePercentage(totalCurrentValue, totalSpent);
+    final double percentage =
+        MyFunctions().calculatePercentage(totalCurrentValue, totalSpent);
     // Calculates the profit or loss in dollar terms.
     final double pnl = totalCurrentValue - totalSpent;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: SizedBox(
-        height: 200,
+        height: ApplicationSize.size200.value,
         child: Stack(
           children: [
             context.isDarkMode
@@ -84,7 +86,8 @@ class CreditCard extends StatelessWidget {
   }
 
   /// Displays the user's balance, profit/loss percentage, and profit or loss in dollars.
-  Widget balanceText(String? balance, BuildContext context, double percentage, double pnl) {
+  Widget balanceText(
+      String? balance, BuildContext context, double percentage, double pnl) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(

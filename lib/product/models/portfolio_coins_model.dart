@@ -6,15 +6,16 @@ part 'portfolio_coins_model.g.dart';
 /// It contains information about the coin's name, quantity, total spent, and additional data such as current value and price change.
 @JsonSerializable()
 class PortfolioCoinsModel {
-  final String dateTime;  // Date and time when the data was recorded
-  final String imageUrl;  // URL of the coin's image/logo
-  final String name;  // Name of the coin (e.g., Bitcoin, Ethereum)
-  final String quantity;  // Quantity of the coin in the portfolio
-  final String symbol;  // Symbol of the coin (e.g., BTC, ETH)
-  final String totalSpent;  // Total amount spent on the coin
-  final String uid;  // Unique identifier for the coin in the portfolio
-  final String? currentValue;  // Current value of the coin in the portfolio (optional)
-  final double? priceChange24H;  // Price change in the last 24 hours (optional)
+  final String dateTime; // Date and time when the data was recorded
+  final String imageUrl; // URL of the coin's image/logo
+  final String name; // Name of the coin (e.g., Bitcoin, Ethereum)
+  final String quantity; // Quantity of the coin in the portfolio
+  final String symbol; // Symbol of the coin (e.g., BTC, ETH)
+  final String totalSpent; // Total amount spent on the coin
+  final String uid; // Unique identifier for the coin in the portfolio
+  final String?
+      currentValue; // Current value of the coin in the portfolio (optional)
+  final double? priceChange24H; // Price change in the last 24 hours (optional)
 
   /// Constructor to create an instance of [PortfolioCoinsModel] with the provided values.
   PortfolioCoinsModel({

@@ -1,10 +1,3 @@
-import 'package:crypto_questor/feature/screens/intro_page/intro_page.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/services/firebase_service.dart';
-import '../../../view_models/user_view_model.dart';
-import '../../sign_up_page/widget/sign_show_error_dialog_widget.dart';
-
 /// A mixin that provides utility methods for validating form fields and signing in a user.
 ///
 /// [validateEmail] Validates the email input field. It checks if the email is empty.
@@ -12,17 +5,19 @@ import '../../sign_up_page/widget/sign_show_error_dialog_widget.dart';
 /// [signIn] Handles the sign-in process, including form validation and calling the Firebase sign-in method.
 /// If successful, navigates to the intro page; otherwise, shows an error dialog.
 ///
+part of '../sign_in_page.dart';
+
 mixin SignInFormFieldsMixin {
   String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Email cannot be empty';
+      return context.mLocalizations.emailCannotBeEmpty;
     }
     return null;
   }
 
   String? validatePassword(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Password cannot be empty';
+      return context.mLocalizations.passwordCannotBeEmpty;
     }
     return null;
   }
@@ -35,11 +30,11 @@ mixin SignInFormFieldsMixin {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       final result = await FirebaseService()
-          .signIn(userProvider.user.email, userProvider.user.password);
+          .signIn(userProvider.user.email, userProvider.user.password,context);
 
       if (!context.mounted) return;
 
-      if (result == "success") {
+      if (result == ApplicationConstants.success) {
         formKey.currentState!.reset();
         context.push(const IntroPage());
       } else {

@@ -1,16 +1,22 @@
+library coin_details_page;
+
 import 'package:crypto_questor/feature/screens/add_portfolio_page/add_portfolio_page.dart';
-import 'package:crypto_questor/feature/screens/coin_details_page/widget/chart_widget.dart';
-import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_low_high_description_widget.dart';
-import 'package:crypto_questor/feature/screens/coin_details_page/widget/coin_title_price_part_widget.dart';
-import 'package:crypto_questor/feature/screens/coin_details_page/widget/converts_widget.dart';
-import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_circular_indicator.dart';
 import 'package:crypto_questor/feature/screens/coin_details_page/widget/show_error_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../product/components/button/my_custom_button.dart';
-import '../../../product/components/styles/application_constants.dart';
-import '../../../product/components/styles/custom_colors.dart';
-import 'mixin/coin_details_page_mixin.dart';
+import 'package:crypto_questor/product/components/styles/application_constants.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import '../../../product/models/chart_model.dart';
+import '../intro_page/intro_page.dart';
+import 'package:http/http.dart' as http;
+
+part 'widget/chart_widget.dart';
+part 'widget/coin_low_high_description_widget.dart';
+part 'widget/coin_title_price_part_widget.dart';
+part 'widget/converts_widget.dart';
+part 'widget/show_circular_indicator.dart';
+part 'mixin/coin_details_page_mixin.dart';
 
 final class CoinDetailPage extends StatefulWidget {
   final dynamic selectCoin;

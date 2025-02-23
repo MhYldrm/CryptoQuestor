@@ -1,6 +1,8 @@
+import 'package:crypto_questor/product/components/project_decoration/project_box_decorations.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../product/components/styles/custom_colors.dart';
+import '../styles/custom_colors.dart';
 import 'empty_widget.dart';
 
 /// A card widget that displays information about a cryptocurrency in the portfolio
@@ -31,18 +33,10 @@ class CoinCard extends StatelessWidget {
       children: [
         // Container to style and hold the coin card
         Container(
-          height: 165,
-          width: 215,
+          height: ApplicationSize.size165.value,
+          width: ApplicationSize.size215.value,
           padding: const EdgeInsets.all(1),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(34), // Rounded corners
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: [0, 0.25, 0.75, 1],
-              colors: CustomColors.earnCardGradientColors, // Gradient background
-            ),
-          ),
+          decoration: ProjectBoxDecorations.coinCardsWidgetsBoxDecoration,
           child: ClipRRect(
             borderRadius:
                 BorderRadius.circular(34), // Rounded corners for the clip
@@ -61,7 +55,7 @@ class CoinCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const EmptyWidget(height: 20),
+                    EmptyWidget(height: ApplicationSize.size20.value),
                     Expanded(
                       flex: 1,
                       child: showTitlePart(context),
@@ -89,10 +83,10 @@ class CoinCard extends StatelessWidget {
         Image.network(
           url!,
           fit: BoxFit.fill,
-          height: 45,
-          width: 45,
+          height: ApplicationSize.size45.value,
+          width: ApplicationSize.size45.value,
         ),
-        const SizedBox(width: 20),
+        SizedBox(width: ApplicationSize.size20.value),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

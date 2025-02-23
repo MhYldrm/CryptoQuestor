@@ -4,8 +4,7 @@ import 'package:provider/provider.dart';
 import '../../feature/view_models/gecko_coins_view_model.dart';
 import '../../feature/view_models/portfolio_coins_view_model.dart';
 import '../../feature/view_models/project_theme_view_model.dart';
-import '../components/theme/project_theme.dart';
-
+import '../init/theme/project_theme.dart';
 
 /// Localizations
 // This extension provides easy access to translations in any widget or context.
@@ -32,7 +31,8 @@ extension ThemeDataExtension on BuildContext {
 extension ThemeContextExtensions on BuildContext {
   /// Checks if the current theme is dark mode.
   bool get isDarkMode {
-    final themeProvider = Provider.of<ProjectThemeViewModel>(this, listen: false);
+    final themeProvider =
+        Provider.of<ProjectThemeViewModel>(this, listen: false);
     return themeProvider.themeData == darkTheme;
   }
 }
@@ -55,7 +55,8 @@ extension NavigatorExtension on BuildContext {
   }
 
   /// Pushes a new page and removes all previous pages from the stack until the predicate condition is met.
-  Future<T?> pushAndRemoveUntil<T>(Widget page, bool Function(Route<dynamic>) predicate) {
+  Future<T?> pushAndRemoveUntil<T>(
+      Widget page, bool Function(Route<dynamic>) predicate) {
     return Navigator.pushAndRemoveUntil(
       this,
       MaterialPageRoute(builder: (context) => page),

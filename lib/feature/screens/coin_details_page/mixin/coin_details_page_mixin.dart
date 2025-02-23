@@ -1,13 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:http/http.dart' as http;
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/models/chart_model.dart';
-import '../coin_details_page.dart';
-
 /// A mixin to manage the CoinDetailsPage Page State.
 /// [coinController] Holds the USD value of the entered quantity of coins
 /// [balanceController] Holds the coin amount of the entered USD value
@@ -25,6 +15,8 @@ import '../coin_details_page.dart';
 /// [convertCoin]  A function that displays the current USD value of the number of coins entered by the user.
 /// [calculatePortfolioTotalSpent]  A function that calculates the total amount spent when the user wants to add the specified amount of coins to their portfolio.
 ///
+part of '../coin_details_page.dart';
+
 mixin CoinDetailsPageMixin on State<CoinDetailPage> {
   // for calculate coin-usd section textField
   TextEditingController coinController = TextEditingController();
@@ -39,9 +31,10 @@ mixin CoinDetailsPageMixin on State<CoinDetailPage> {
   List<ChartModel>? itemChart;
   String? statusCodeError;
   bool isLoading = true;
-  int days = 1;
+  int days = ApplicationConstants.oneNumInt;
   List<bool> timesBool = [true, false, false, false, false, false];
-  String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+  String formattedDate = DateFormat(ApplicationConstants.dateFormatToConvert)
+      .format(DateTime.now());
 
   @override
   void dispose() {
@@ -61,34 +54,34 @@ mixin CoinDetailsPageMixin on State<CoinDetailPage> {
       activationMode: ActivationMode.singleTap,
     );
     sheetPriceController.text = widget.selectCoin.currentPrice.toString();
-    sheetQuantityController.text = "1";
+    sheetQuantityController.text = ApplicationConstants.oneNumString;
     super.initState();
   }
 
-  setDays(String txt) {
-    if (txt == 'D') {
+  setDays(String time) {
+    if (time == ApplicationConstants.times[0]) {
       setState(() {
-        days = 1;
+        days = ApplicationConstants.oneNumInt;
       });
-    } else if (txt == 'W') {
+    } else if (time == ApplicationConstants.times[1]) {
       setState(() {
-        days = 7;
+        days = ApplicationConstants.sevenNumInt;
       });
-    } else if (txt == 'M') {
+    } else if (time == ApplicationConstants.times[2]) {
       setState(() {
-        days = 30;
+        days = ApplicationConstants.thirtyNumInt;
       });
-    } else if (txt == '3M') {
+    } else if (time == ApplicationConstants.times[3]) {
       setState(() {
-        days = 90;
+        days = ApplicationConstants.ninetyNumInt;
       });
-    } else if (txt == '6M') {
+    } else if (time == ApplicationConstants.times[4]) {
       setState(() {
-        days = 180;
+        days = ApplicationConstants.oneHundredEightyNumInt;
       });
-    } else if (txt == 'Y') {
+    } else if (time == ApplicationConstants.times[5]) {
       setState(() {
-        days = 365;
+        days = ApplicationConstants.threeHundredSixtyFiveNumInt;
       });
     }
   }

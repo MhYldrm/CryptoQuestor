@@ -1,14 +1,20 @@
-import 'package:crypto_questor/feature/screens/add_portfolio_page/mixin/add_portfolio_page_mixin.dart';
-import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/add_portfolio_page_header_widget.dart';
-import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/cost_calculate_text_fields_widget.dart';
-import 'package:crypto_questor/feature/screens/add_portfolio_page/widget/cost_calculator_widget.dart';
-import 'package:crypto_questor/product/components/button/my_custom_button.dart';
-import 'package:crypto_questor/product/components/padding/project_paddings.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
+library add_portfolio_page;
+
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:flutter/material.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:random_string/random_string.dart';
+
+part 'widget/add_portfolio_page_header_widget.dart';
+part 'widget/cost_calculate_text_fields_widget.dart';
+part 'widget/cost_calculator_widget.dart';
+part 'mixin/add_portfolio_page_mixin.dart';
 
 /// [AddPortfolioPage] is a stateful widget that allows users to add a cryptocurrency
 /// to their portfolio by entering relevant data such as price and quantity.
+///
 final class AddPortfolioPage extends StatefulWidget {
   const AddPortfolioPage({super.key, this.selectCoin});
 
@@ -26,7 +32,7 @@ class _AddPortfolioPageState extends State<AddPortfolioPage>
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: context.projectTheme!.primaryColor,
+        backgroundColor: context.projectTheme?.primaryColor,
         body: Column(
           children: [
             // Top section: Displays the header widget with selected coin information.

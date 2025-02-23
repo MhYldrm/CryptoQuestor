@@ -1,12 +1,3 @@
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import '../../../../product/components/padding/project_paddings.dart';
-import '../../../../product/components/project_decoration/project_box_decorations.dart';
-import '../../../../product/components/styles/application_constants.dart';
-import '../../../../product/components/styles/custom_colors.dart';
-import '../../../widgets/empty_widget.dart';
-import 'bottom_sheet_list_widget.dart';
-
 /// A widget that allows users to support the app via donations.
 ///
 /// The widget displays a "Buy Me Coffee" section, which when tapped,
@@ -19,6 +10,8 @@ import 'bottom_sheet_list_widget.dart';
 /// ### Functionality:
 /// - [showModalBottomSheet] When tapped, the widget opens a bottom sheet displaying wallet addresses.
 ///
+
+part of '../profile_page.dart';
 
 final class BuyMeCoffeeWidget extends StatefulWidget {
   const BuyMeCoffeeWidget({super.key});
@@ -45,10 +38,11 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
                     : ProjectBoxDecorations.profilePageLightThemeBoxDecoration,
                 child: ListView.builder(
                   // Item count is based on the length of wallet addresses
-                  itemCount: ApplicationConstants.buyMeCoffeeWalletAddress.length,
+                  itemCount:
+                      ApplicationConstants.buyMeCoffeeWalletAddress.length,
                   itemBuilder: (context, index) {
                     var list =
-                    ApplicationConstants.buyMeCoffeeWalletAddress[index];
+                        ApplicationConstants.buyMeCoffeeWalletAddress[index];
                     // List items are displayed using BottomSheetListWidget
                     return BottomSheetListWidget(
                       url: list[0],
@@ -67,15 +61,17 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
             // Support message displayed on the widget
             Text(
               context.mLocalizations.supportUs,
-              style: context.textThemeBodyLarge!
-                  .copyWith(color: CustomColors.mGreyPrimary), // Grey text color for the support message
+              style: context.textThemeBodyLarge!.copyWith(
+                  color: CustomColors
+                      .mGreyPrimary), // Grey text color for the support message
             ),
             const EmptyWidget(height: 10), // Spacer between text and image
             Padding(
               padding:
-              EdgeInsets.symmetric(horizontal: context.deviceWidht * 0.25),
+                  EdgeInsets.symmetric(horizontal: context.deviceWidht * 0.25),
               child: Image.asset(
-                ApplicationConstants.buyMeCoffeeImagePath, // Image for the "Buy Me Coffee" button
+                ApplicationConstants
+                    .buyMeCoffeeImagePath, // Image for the "Buy Me Coffee" button
                 fit: BoxFit.fill,
               ),
             ),

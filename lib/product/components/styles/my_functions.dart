@@ -1,4 +1,4 @@
-import '../../models/gecko_models.dart';
+import '../../models/gecko_model.dart';
 import '../../models/portfolio_coins_model.dart';
 
 /// [MyFunctions] A utility class containing helper functions for processing portfolio-related data.
@@ -6,7 +6,6 @@ import '../../models/portfolio_coins_model.dart';
 /// [summarizeCoin] Summarizes the portfolio data by aggregating the total quantity of coins and the total amount spent for each unique coin.
 ///
 final class MyFunctions {
-
   /// Summarizes the current value of each coin in the portfolio by matching with the GeckoModel data.
   /// This method multiplies the coin quantity with its current price to calculate the current value.
   ///
@@ -14,19 +13,19 @@ final class MyFunctions {
   /// [geckoCoins] List of the coins data fetched from CoinGecko API.
   /// Returns a list of PortfolioCoinsModel with updated current values.
   List<PortfolioCoinsModel> summarizePortfolioCoinsCurrentValue(
-      List<PortfolioCoinsModel> portfolioCoins,
-      List<GeckoModel> geckoCoins,
-      ) {
+    List<PortfolioCoinsModel> portfolioCoins,
+    List<GeckoModel> geckoCoins,
+  ) {
     return portfolioCoins.map((portfolioCoin) {
       // Find the matching coin from GeckoModel
       final matchingGeckoCoin = geckoCoins.firstWhere(
-            (geckoCoin) => geckoCoin.symbol == portfolioCoin.symbol,
+        (geckoCoin) => geckoCoin.symbol == portfolioCoin.symbol,
       );
 
       // If a matching GeckoModel exists, calculate the current value
       final currentValue = matchingGeckoCoin != null
           ? (double.tryParse(portfolioCoin.quantity) ?? 0) *
-          matchingGeckoCoin.currentPrice
+              matchingGeckoCoin.currentPrice
           : null;
 
       // Return a new PortfolioCoinsModel object
@@ -52,9 +51,9 @@ final class MyFunctions {
   /// [geckoCoins] List of the coins data fetched from CoinGecko API.
   /// Returns a list of aggregated and processed PortfolioCoinsModel.
   List<PortfolioCoinsModel> processPortfolioCoins(
-      List<PortfolioCoinsModel> portfolioCoins,
-      List<GeckoModel> geckoCoins,
-      ) {
+    List<PortfolioCoinsModel> portfolioCoins,
+    List<GeckoModel> geckoCoins,
+  ) {
     Map<String, PortfolioCoinsModel> summary = {};
 
     for (var item in portfolioCoins) {
@@ -69,7 +68,7 @@ final class MyFunctions {
         summary[name] = existing.copyWith(
           quantity: (double.parse(existing.quantity) + quantity).toString(),
           totalSpent:
-          (double.parse(existing.totalSpent) + totalSpent).toString(),
+              (double.parse(existing.totalSpent) + totalSpent).toString(),
         );
       } else {
         summary[name] = PortfolioCoinsModel(
@@ -91,13 +90,13 @@ final class MyFunctions {
     return summarizedCoins.map((portfolioCoin) {
       // Find the matching coin from GeckoModel
       final matchingGeckoCoin = geckoCoins.firstWhere(
-            (geckoCoin) => geckoCoin.symbol == portfolioCoin.symbol,
+        (geckoCoin) => geckoCoin.symbol == portfolioCoin.symbol,
       );
 
       // If a matching GeckoModel exists, calculate the current value
       final currentValue = matchingGeckoCoin != null
           ? (double.tryParse(portfolioCoin.quantity) ?? 0) *
-          matchingGeckoCoin.currentPrice
+              matchingGeckoCoin.currentPrice
           : null;
 
       final priceChange24H = matchingGeckoCoin.priceChange24H;

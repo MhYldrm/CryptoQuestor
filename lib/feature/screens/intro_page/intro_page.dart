@@ -1,11 +1,14 @@
-import 'package:crypto_questor/feature/screens/intro_page/widget/custom_material_button.dart';
+library intro_page;
+
+import 'package:crypto_questor/product/components/styles/application_constants.dart';
+import 'package:crypto_questor/product/components/styles/application_size.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
+import '../../../product/components/styles/custom_colors.dart';
 import '../earn_page/earn_page.dart';
 import '../home_page/home_page.dart';
 import '../portfolio_page/portfolio_page.dart';
 import '../profile_page/profile_page.dart';
-import 'mixin/intro_page_mixin.dart';
 
 /// [IntroPage] represents the main entry point of the app with a bottom navigation bar.
 ///
@@ -17,6 +20,9 @@ import 'mixin/intro_page_mixin.dart';
 /// - Allows navigation between four main pages: Home, Earn, Portfolio, and Profile.
 /// - Keeps track of the current screen and tab selection using [IntroPageMixin].
 ///
+part 'widget/custom_material_button.dart';
+part 'mixin/intro_page_mixin.dart';
+
 final class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
 
@@ -34,12 +40,11 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
 
         // Bottom navigation bar for navigating between different pages
         bottomNavigationBar: BottomAppBar(
-          elevation: 10,
-          notchMargin: 17,
-          color: context.projectTheme!.primaryColor,
+          elevation: ApplicationSize.size11.value,
+          notchMargin: ApplicationSize.xSmall.value,
           shape: const CircularNotchedRectangle(),
           child: SizedBox(
-            height: 60,
+            height: ApplicationSize.size60.value,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -47,11 +52,12 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                 CustomMaterialButton(
                   icon: Icons.home_filled,
                   label: context.mLocalizations.homePage,
-                  isSelected: currentTab == 0,
+                  isSelected: currentTab == ApplicationConstants.zeroNumInt,
                   onTap: () {
                     setState(() {
                       currentScreen = const HomePage();
-                      currentTab = 0; // Set the current tab to Home
+                      currentTab = ApplicationConstants
+                          .zeroNumInt; // Set the current tab to Home
                     });
                   },
                 ),
@@ -60,11 +66,12 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                 CustomMaterialButton(
                   icon: Icons.currency_bitcoin_rounded,
                   label: context.mLocalizations.earn,
-                  isSelected: currentTab == 1,
+                  isSelected: currentTab == ApplicationConstants.oneNumInt,
                   onTap: () {
                     setState(() {
                       currentScreen = const EarnPage();
-                      currentTab = 1; // Set the current tab to Earn
+                      currentTab = ApplicationConstants
+                          .oneNumInt; // Set the current tab to Earn
                     });
                   },
                 ),
@@ -73,11 +80,12 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                 CustomMaterialButton(
                   icon: Icons.pie_chart_outline_rounded,
                   label: context.mLocalizations.myPortfolio,
-                  isSelected: currentTab == 2,
+                  isSelected: currentTab == ApplicationConstants.twoNumInt,
                   onTap: () {
                     setState(() {
                       currentScreen = const PortfolioPage();
-                      currentTab = 2; // Set the current tab to Portfolio
+                      currentTab = ApplicationConstants
+                          .twoNumInt; // Set the current tab to Portfolio
                     });
                   },
                 ),
@@ -86,11 +94,12 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                 CustomMaterialButton(
                   icon: Icons.person_2_rounded,
                   label: context.mLocalizations.profile,
-                  isSelected: currentTab == 3,
+                  isSelected: currentTab == ApplicationConstants.threeNumInt,
                   onTap: () {
                     setState(() {
                       currentScreen = const ProfilePage();
-                      currentTab = 3; // Set the current tab to Profile
+                      currentTab = ApplicationConstants
+                          .threeNumInt; // Set the current tab to Profile
                     });
                   },
                 ),

@@ -1,11 +1,15 @@
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/chart_section_widget.dart';
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/pie_chart_widget.dart';
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_coins_listview_widget.dart';
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/portfolio_section_widget.dart';
-import 'package:crypto_questor/feature/screens/portfolio_page/widgets/total_spent_description_widget.dart';
-import 'package:crypto_questor/product/extension/my_extensions.dart';
-import 'package:flutter/material.dart';
-import 'mixin/portfolio_page_mixin.dart';
+library portfolio_page;
+
+
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:crypto_questor/product/exports/exports.dart';
+import '../../../product/components/styles/my_functions.dart';
+import '../../../product/components/widgets/custom_app_bar.dart';
+import '../../../product/components/widgets/port_coins_card.dart';
+import '../../../product/models/portfolio_coins_model.dart';
+import '../../view_models/gecko_coins_view_model.dart';
+import '../../view_models/portfolio_coins_view_model.dart';
 
 /// A page that displays the user's cryptocurrency portfolio.
 ///
@@ -23,6 +27,12 @@ import 'mixin/portfolio_page_mixin.dart';
 /// - The `PortfolioCoinsProvider` is used to retrieve the portfolio data from Firebase or local storage.
 /// - The `GeckoProvider` fetches the current market values for each coin.
 ///
+part 'widgets/chart_section_widget.dart';
+part 'widgets/pie_chart_widget.dart';
+part 'widgets/portfolio_coins_listview_widget.dart';
+part 'widgets/total_spent_description_widget.dart';
+part 'widgets/portfolio_section_widget.dart';
+part 'mixin/portfolio_page_mixin.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});

@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:crypto_questor/product/components/project_decoration/project_box_decorations.dart';
 import 'package:crypto_questor/product/extension/my_extensions.dart';
 import 'package:flutter/material.dart';
-import '../../product/components/styles/custom_colors.dart';
+
+import '../styles/custom_colors.dart';
 
 /// A card widget used to display earning opportunities on an exchange.
 /// It includes the exchange logo, title, exchange name, and a button to view details.
@@ -28,15 +30,7 @@ class EarnCard extends StatelessWidget {
           height: height / 6,
           width: widht / 1.05,
           padding: const EdgeInsets.all(1),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(34),
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: [0, 0.25, 0.75, 1],
-              colors: CustomColors.earnCardGradientColors,
-            ),
-          ),
+          decoration: ProjectBoxDecorations.earnCardsWidgetsBoxDecoration,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(34),
             child: Container(
@@ -45,8 +39,8 @@ class EarnCard extends StatelessWidget {
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
                   colors: context.isDarkMode
-                  ? CustomColors.creditCardGradientDarkThemeColors
-                  : CustomColors.earnCardGradientLightThemeColors,
+                      ? CustomColors.creditCardGradientDarkThemeColors
+                      : CustomColors.earnCardGradientLightThemeColors,
                 ),
               ),
               child: Padding(
@@ -88,8 +82,8 @@ class EarnCard extends StatelessWidget {
                               style: context.textThemeTitleSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: context.isDarkMode
-                                ? CustomColors.mWhitePrimary
-                                : CustomColors.bgcolor,
+                                    ? CustomColors.mWhitePrimary
+                                    : CustomColors.bgcolor,
                               ),
                               maxLines: 1,
                               minFontSize: 11,
