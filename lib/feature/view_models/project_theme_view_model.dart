@@ -1,4 +1,4 @@
-import 'package:crypto_questor/product/components/theme/project_theme.dart';
+import 'package:crypto_questor/product/init/theme/project_theme.dart';
 import 'package:flutter/material.dart';
 
 /// [ProjectThemeViewModel] A class that manages the theme of the application.

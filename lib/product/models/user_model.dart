@@ -6,9 +6,7 @@ part 'user_model.g.dart';
 /// It is used for storing and managing user data, typically during registration or authentication.
 @JsonSerializable()
 final class UserModel {
-  String name;  // The user's name
-  String email;  // The user's email address
-  String password;  // The user's password (should be securely stored)
+  // The user's password (should be securely stored)
 
   /// Constructor to create an instance of [UserModel] with the provided values.
   UserModel({
@@ -16,4 +14,7 @@ final class UserModel {
     required this.email,
     required this.password,
   });
+  String name; // The user's name
+  String email; // The user's email address
+  String password;
 }

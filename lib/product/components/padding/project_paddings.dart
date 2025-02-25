@@ -1,48 +1,104 @@
 import 'package:flutter/material.dart';
 
-/// A custom class for defining padding values used across the project.
+/// A utility class for defining padding values used across the project.
 ///
-/// This class extends [EdgeInsets] and provides commonly used padding
-/// values to maintain consistent spacing across the app. These padding
-/// values can be reused in various widgets to ensure consistent UI layout.
+/// This class extends [EdgeInsets] and provides predefined padding values
+/// to maintain consistent spacing throughout the app. These padding values
+/// can be reused in various widgets to ensure a uniform UI layout.
 
 final class ProjectPaddings extends EdgeInsets {
   /// Default constructor, provides no padding (all zeros).
   const ProjectPaddings() : super.all(0);
 
-  /// Padding for all sides set to medium (16 units).
-  /// This is used for general spacing where equal padding on all sides is required.
+  // ─────────────────────── All Sides Padding ───────────────────────
+
+  /// Padding applied to all sides (5.5 units).
+  const ProjectPaddings.allxSmall() : super.all(5.5);
+
+  /// Padding applied to all sides (8 units).
+  const ProjectPaddings.allXsSmall() : super.all(8);
+
+  /// Padding applied to all sides (12 units).
+  const ProjectPaddings.allSmall() : super.all(12);
+
+  /// Padding applied to all sides (16 units).
   const ProjectPaddings.allMedium() : super.all(16);
 
-  /// Padding for the top only set to medium (20 units).
-  /// This is useful for adding space at the top of a widget.
+  /// Padding applied to all sides (25 units).
+  const ProjectPaddings.allLarge() : super.all(25);
+
+  // ─────────────────────── Single Side Padding ───────────────────────
+
+  /// Padding applied to the top (10 units).
+  const ProjectPaddings.topSmall() : super.only(top: 10);
+
+  /// Padding applied to the top (20 units).
   const ProjectPaddings.topMedium() : super.only(top: 20);
 
-  /// Padding for the left side only set to medium (30 units).
-  /// This can be used when there is a need for extra space on the left side.
+  /// Padding applied to the top (30 units).
+  const ProjectPaddings.topLarge() : super.only(top: 30);
+
+  /// Padding applied to the left (30 units).
   const ProjectPaddings.leftMedium() : super.only(left: 30);
 
-  /// Padding for horizontal sides (left and right) set to small (10 units).
-  /// This is useful when a small horizontal padding is needed for elements.
+  /// Padding applied to the bottom (10 units).
+  const ProjectPaddings.bottomSmall() : super.only(bottom: 10);
+
+  /// Padding applied to the bottom (20 units).
+  const ProjectPaddings.bottomMedium() : super.only(bottom: 20);
+
+  // ─────────────────────── Symmetric Padding ───────────────────────
+
+  /// Padding applied to the left and right (10 units).
   const ProjectPaddings.horizontalSmall() : super.symmetric(horizontal: 10);
 
-  /// Padding for horizontal sides (left and right) set to medium (20 units).
-  /// This is used when a medium horizontal space is required between elements.
+  /// Padding applied to the left and right (15 units).
+  const ProjectPaddings.horizontalXMedium() : super.symmetric(horizontal: 15);
+
+  /// Padding applied to the left and right (20 units).
   const ProjectPaddings.horizontalMedium() : super.symmetric(horizontal: 20);
 
-  /// Padding for vertical sides (top and bottom) set to small (5 units).
-  /// This is ideal for small vertical spacing between widgets.
+  /// Padding applied to the left and right (25 units).
+  const ProjectPaddings.horizontalLarge() : super.symmetric(horizontal: 25);
+
+  /// Padding applied to the left and right (20 units) and top and bottom (5 units).
+  const ProjectPaddings.horizontalAndVerticalSmall()
+      : super.symmetric(horizontal: 20, vertical: 5);
+
+  /// Padding applied to the left and right (20 units) and top and bottom (20 units).
+  const ProjectPaddings.horizontalAndVerticalMedium()
+      : super.symmetric(horizontal: 20, vertical: 20);
+
+  /// Padding applied to the top and bottom (5 units).
   const ProjectPaddings.verticalSmall() : super.symmetric(vertical: 5);
 
-  /// Padding for top and left sides set to small (10 units for top and 10 units for left).
-  /// This can be used for widgets that need space from both top and left.
+  /// Padding applied to the top and bottom (15 units).
+  const ProjectPaddings.verticalMedium() : super.symmetric(vertical: 15);
+
+  // ─────────────────────── Combination Padding ───────────────────────
+
+  /// Padding applied to the top (10 units) and left (10 units).
   const ProjectPaddings.topAndLeftSmall() : super.only(top: 10, left: 10);
 
-  /// Padding for top and right sides with small top padding (5 units) and right padding (10 units).
-  /// Useful when you need a specific padding for the top and right.
+  /// Padding applied to the top (5 units) and right (10 units).
   const ProjectPaddings.topAndRightSmall() : super.only(right: 10, top: 5);
 
-  /// Padding for bottom side only set to medium (20 units).
-  /// This is commonly used when you need to add space at the bottom of a widget.
-  const ProjectPaddings.bottomMedium() : super.only(bottom: 20);
+  /// Padding applied to the top (10 units) and right (50 units).
+  const ProjectPaddings.topAndRightMedium() : super.only(right: 50, top: 10);
+
+  /// Padding applied to the top (10 units), left (7 units), and right (7 units).
+  const ProjectPaddings.topLeftAndRightSmall()
+      : super.only(top: 10, right: 7, left: 7);
+
+  // ─────────────────────── List View Padding ───────────────────────
+
+  /// Padding applied only to the bottom (10 units).
+  const ProjectPaddings.listViewSmallPadding() : super.fromLTRB(0, 0, 0, 10);
+
+  /// Padding applied only to the bottom (15 units).
+  const ProjectPaddings.listViewMediumPadding() : super.fromLTRB(0, 0, 0, 15);
+
+  /// Padding applied to the left (10 units) and right (12 units).
+  const ProjectPaddings.listViewLeftAndRightPaddingSmall()
+      : super.fromLTRB(10, 0, 12, 0);
 }

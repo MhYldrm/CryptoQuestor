@@ -1,4 +1,4 @@
-import '../models/gecko_models.dart';
+import '../models/gecko_model.dart';
 
 abstract class CoinGeckoRepository{
   Future<List<GeckoModel>?> getCoinsFromGeckoApi();

@@ -1,11 +1,10 @@
-import 'package:crypto_questor/feature/screens/splash_page/splash_page.dart';
 import 'package:crypto_questor/feature/view_models/project_theme_view_model.dart';
 import 'package:crypto_questor/product/components/localization/localization_settings.dart';
-import 'package:crypto_questor/product/components/styles/application_constants.dart';
 import 'package:crypto_questor/product/init/app_initialize.dart';
+import 'package:crypto_questor/product/components/styles/project_exports.dart';
 import 'package:crypto_questor/product/locator/locator.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'feature/view/splash_page/splash_page.dart';
 
 
 void main() async {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: ApplicationConstants.appTitle,
+      title: ProjectConstants.appTitle,
       localizationsDelegates: LocalizationSettings.localizationsDelegates,
       supportedLocales: LocalizationSettings.supportedLocales,
       debugShowCheckedModeBanner: false,

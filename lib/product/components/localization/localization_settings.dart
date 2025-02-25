@@ -18,7 +18,7 @@ final class LocalizationSettings {
     GlobalCupertinoLocalizations.delegate,
   ];
   static const List<Locale> supportedLocales = [
-    Locale("en", "US"),
-    Locale("tr", "TR"),
+    Locale('en', 'US'),
+    Locale('tr', 'TR'),
   ];
 }

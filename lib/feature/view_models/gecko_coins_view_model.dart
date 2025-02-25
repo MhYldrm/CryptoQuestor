@@ -1,13 +1,13 @@
 import 'package:crypto_questor/product/repository/coin_gecko_repository.dart';
-import 'package:crypto_questor/product/services/coin_services.dart';
+import 'package:crypto_questor/product/services/coin_service/coin_service.dart';
 import 'package:flutter/material.dart';
-import '../../product/models/gecko_models.dart';
+import '../../product/models/gecko_model.dart';
 
 /// [GeckoCoinsViewModel] is a state management class that extends [ChangeNotifier].
 /// It manages and provides cryptocurrency data fetched from the CoinGecko API.
 class GeckoCoinsViewModel extends ChangeNotifier {
-  final CoinGeckoRepository repository;
   GeckoCoinsViewModel(this.repository);
+  final CoinGeckoRepository repository;
 
   final CoinService _service = CoinService();
 
