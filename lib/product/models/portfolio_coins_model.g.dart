@@ -15,6 +15,8 @@ PortfolioCoinsModel _$PortfolioCoinsModelFromJson(Map<String, dynamic> json) =>
       symbol: json['symbol'] as String,
       totalSpent: json['totalSpent'] as String,
       uid: json['uid'] as String,
+      currentValue: json['currentValue'] as String?,
+      priceChange24H: (json['priceChange24H'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$PortfolioCoinsModelToJson(
@@ -27,4 +29,6 @@ Map<String, dynamic> _$PortfolioCoinsModelToJson(
       'symbol': instance.symbol,
       'totalSpent': instance.totalSpent,
       'uid': instance.uid,
+      'currentValue': instance.currentValue,
+      'priceChange24H': instance.priceChange24H,
     };

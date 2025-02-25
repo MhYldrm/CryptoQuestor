@@ -66,5 +66,17 @@
   "accountBalance" : "Account Balance",
   "splashImageOne" : "Keep your finger on the pulse of the crypto market!",
   "splashImageTwo" : "Free crypto is just a click away!",
-  "splashImageThree" : "Manage your portfolio and take control of your crypto journey!"
+  "splashImageThree" : "Manage your portfolio and take control of your crypto journey!",
+  "nameCannotBeEmpty" : "Name cannot be empty",
+  "emailCannotBeEmpty" : "Email cannot be empty",
+  "passwordCannotBeEmpty" : "Password cannot be empty",
+  "noAccountFoundThisEmail" : "No account found for this email address.",
+  "emailAlreadyUseAnotherAccount" : "The email address is already in use by another account.",
+  "weakPassword" : "Weak Password.\nPassword should be at least 6 characters",
+  "emailBadFormatted" : "The email address is badly formatted.",
+  "signUpFailed" : "Sign Up Failed. Please Try Again.",
+  "userNotFound" : "User Not Found",
+  "emailOrPasswordIncorrect" : "Email or Password is incorrect",
+  "userDisabled" : "User Disabled",
+  "loginFailed" : "Login Failed. Please Try Again."
 }
