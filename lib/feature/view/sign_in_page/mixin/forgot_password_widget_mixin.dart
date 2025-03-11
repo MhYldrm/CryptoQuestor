@@ -25,21 +25,15 @@ mixin ForgotPasswordWidgetMixin {
           decoration: ProjectBoxDecorations.signPagesBoxDecoration,
           child: TextField(
             controller: _emailController,
-            decoration:
-                ProjectInputDecorations.signInPageEmailFieldInputDecoration(
-                    context),
+            decoration: ProjectInputDecorations.signInPageEmailFieldInputDecoration(context),
             keyboardType: TextInputType.emailAddress,
-            style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-              context,
-            ),
+            style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(
-                context,
-              ); // Dismiss the dialog when "Cancel" is pressed
+              Navigator.pop(context); // Dismiss the dialog when "Cancel" is pressed
             },
             child: Text(
               context.mLocalizations.cancel,

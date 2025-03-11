@@ -13,8 +13,10 @@ class FirebaseService {
   final firebaseFireStore = FirebaseFirestore.instance;
 
   /// Retrieves user information based on their [uid] from Fire store
+  ///
   Future<List> getInfo(String uid) async {
     List personInfo = [];
+
     var data = await FirebaseFirestore.instance
         .collection(FirebaseServiceConstants.users)
         .doc(uid)
@@ -26,8 +28,10 @@ class FirebaseService {
   }
 
   /// Fetches the portfolio coins list for the current user from Fire store
+  ///
   Future<List<PortfolioCoinsModel>> getPortfolioCoins() async {
     final firebaseAuth = FirebaseAuth.instance;
+
     final snapshot = await FirebaseFirestore.instance
         .collection(firebaseAuth.currentUser!.uid)
         .orderBy(FirebaseServiceConstants.name)
@@ -36,22 +40,13 @@ class FirebaseService {
   }
 
   /// Converts Fire store documents to a list of [PortfolioCoinsModel]
-  List<PortfolioCoinsModel> _convertToPortfolioCoinsModel(
-    List<QueryDocumentSnapshot> docs,
-  ) {
-    return docs
-        .map(
-          (doc) =>
-              PortfolioCoinsModel.fromJson(doc.data() as Map<String, dynamic>),
-        )
+  List<PortfolioCoinsModel> _convertToPortfolioCoinsModel(List<QueryDocumentSnapshot> docs) {
+    return docs.map((doc) => PortfolioCoinsModel.fromJson(doc.data() as Map<String, dynamic>),)
         .toList();
   }
 
   /// Updates a portfolio coin in Fire store
-  Future<void> upToPortfolioCoin(
-    Map<String, dynamic> upToInfo,
-    String uid,
-  ) async {
+  Future<void> upToPortfolioCoin(Map<String, dynamic> upToInfo, String uid,) async {
     await firebaseFireStore
         .collection(firebaseAuth.currentUser!.uid)
         .doc(uid)
@@ -68,11 +63,7 @@ class FirebaseService {
   }
 
   /// Signs in the user with email and password
-  Future<String?> signIn(
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
+  Future<String?> signIn(String email, String password, BuildContext context,) async {
     String? res;
     try {
       await firebaseAuth.signInWithEmailAndPassword(
@@ -86,12 +77,7 @@ class FirebaseService {
   }
 
   /// Signs up a new user with name, email, and password
-  Future<String?> signUp(
-    String name,
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
+  Future<String?> signUp(String name, String email, String password, BuildContext context,) async {
     String? res;
     try {
       UserCredential credential = await firebaseAuth

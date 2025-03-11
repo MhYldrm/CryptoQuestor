@@ -34,13 +34,10 @@ final class GeckoModel extends Equatable {
   final double high24H; // Highest price in the last 24 hours
   final double low24H; // Lowest price in the last 24 hours
   final double? priceChange24H; // Price change in the last 24 hours
-  final double?
-      marketCapChangePercentage24H; // Market cap change percentage in the last 24 hours
-  final GeckoModelSpaklineIn7DModel
-      sparklineIn7D; // Price trend in the last 7 days
+  final double? marketCapChangePercentage24H; // Market cap change percentage in the last 24 hours
+  final GeckoModelSpaklineIn7DModel sparklineIn7D; // Price trend in the last 7 days
 
-  factory GeckoModel.fromJson(Map<String, dynamic> json) =>
-      _$GeckoModelFromJson(json);
+  factory GeckoModel.fromJson(Map<String, dynamic> json) => _$GeckoModelFromJson(json);
 
   @override
   // Override Equatable to compare instances based on their properties.

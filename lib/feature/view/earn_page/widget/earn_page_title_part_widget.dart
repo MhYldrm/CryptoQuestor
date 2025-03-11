@@ -10,10 +10,7 @@
 part of '../earn_page.dart';
 
 class EarnPageTitlePartWidget extends StatelessWidget {
-  const EarnPageTitlePartWidget({
-    required this.headerNamePart,
-    super.key,
-  });
+  const EarnPageTitlePartWidget({required this.headerNamePart, super.key});
 
   final String headerNamePart;
 

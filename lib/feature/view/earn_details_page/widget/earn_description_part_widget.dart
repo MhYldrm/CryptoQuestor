@@ -19,8 +19,7 @@ class EarnDescriptionPartWidget extends StatelessWidget {
           children: [
             Text(
               context.mLocalizations.description,
-              style: context.textThemeTitleLarge
-                  ?.copyWith(color: ProjectCustomColors.mPinkPrimary),
+              style: context.textThemeTitleLarge?.copyWith(color: ProjectCustomColors.mPinkPrimary),
             ),
             Text(
               descriptionTexts,

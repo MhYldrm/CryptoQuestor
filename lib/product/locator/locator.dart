@@ -1,3 +1,5 @@
+import 'package:crypto_questor/feature/view_models/profile_info_view_model.dart';
+import 'package:crypto_questor/product/repository/profile_info_repository_impl.dart';
 import 'package:get_it/get_it.dart';
 import '../../feature/view_models/gecko_coins_view_model.dart';
 import '../../feature/view_models/portfolio_coins_view_model.dart';
@@ -11,25 +13,31 @@ import '../services/firebase_service/firebase_service.dart';
 final getIt = GetIt.instance;
 
 void setupLocator() {
-  // FirebaseService ve CoinService (Data Source)
+  // FirebaseService and CoinService (Data Source)
   getIt
     ..registerSingleton<FirebaseService>(FirebaseService())
     ..registerSingleton<CoinService>(CoinService())
 
-    // Repository'ler
+    // Repositories
     ..registerSingleton<PortfolioCoinsRepositoryImpl>(
       PortfolioCoinsRepositoryImpl(getIt<FirebaseService>()),
     )
     ..registerSingleton<CoinGeckoRepositoryImpl>(
       CoinGeckoRepositoryImpl(getIt<CoinService>()),
     )
+    ..registerSingleton<ProfileInfoRepositoryImpl>(
+      ProfileInfoRepositoryImpl(getIt<FirebaseService>()),
+    )
 
-    // ViewModel'ler
+    // ViewModels
     ..registerFactory(
       () => PortfolioCoinsViewModel(getIt<PortfolioCoinsRepositoryImpl>()),
     )
     ..registerFactory(
       () => GeckoCoinsViewModel(getIt<CoinGeckoRepositoryImpl>()),
+    )
+    ..registerFactory(
+          () => ProfileInfoViewModel(getIt<ProfileInfoRepositoryImpl>()),
     )
     ..registerFactory(() => UserViewModel())
     ..registerFactory(() => ProjectThemeViewModel());

@@ -43,8 +43,7 @@ final class CostCalculatorTotalSpentSchemaWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style:
-              context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         EmptyWidget(height: ProjectSizes.xSmall.value),
         Container(

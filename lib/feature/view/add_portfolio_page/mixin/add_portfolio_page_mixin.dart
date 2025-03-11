@@ -53,8 +53,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
       'uid': uid,
     };
 
-    if (upToInfo['totalSpent'] != null &&
-        _totalSpent != ProjectConstants.zeroNumString) {
+    if (upToInfo['totalSpent'] != null && _totalSpent != ProjectConstants.zeroNumString) {
       await FirebaseService().upToPortfolioCoin(upToInfo, uid);
     }
 
@@ -81,9 +80,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
     if (value.isNotEmpty) {
       setState(() {
         _currentPriceController.text = value;
-        _totalSpent =
-            calculateSpent(_currentPriceController, _quantityController)
-                .toString();
+        _totalSpent = calculateSpent(_currentPriceController, _quantityController).toString();
       });
     } else {
       setState(() {
@@ -98,9 +95,7 @@ mixin AddPortfolioPageMixin on State<AddPortfolioPage> {
     if (value.isNotEmpty) {
       setState(() {
         _quantityController.text = value;
-        _totalSpent =
-            calculateSpent(_currentPriceController, _quantityController)
-                .toString();
+        _totalSpent = calculateSpent(_currentPriceController, _quantityController).toString();
       });
     } else {
       setState(() {

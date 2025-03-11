@@ -46,10 +46,8 @@ class PortfolioCoinsSectionWidget extends StatelessWidget {
 
         // Calculate total spent and current account balance from the result list.
         for (var coin in resultList) {
-          totalSpent +=
-              double.parse(coin.totalSpent); // Total money spent on coins.
-          accountBalance +=
-              double.parse(coin.currentValue!); // Current total value of coins.
+          totalSpent += double.parse(coin.totalSpent); // Total money spent on coins.
+          accountBalance += double.parse(coin.currentValue!); // Current total value of coins.
         }
 
         return Column(

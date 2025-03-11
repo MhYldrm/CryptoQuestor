@@ -47,8 +47,7 @@ class AllTransactionsWidget extends StatelessWidget {
                       fit: BoxFit.fill,
                     ),
                     title: Text(
-                      '${coin.symbol}'
-                          .toUpperCase(), // Coin symbol in uppercase
+                      '${coin.symbol}'.toUpperCase(), // Coin symbol in uppercase
                       style: context.textThemeLabelLarge?.copyWith(
                         color: context.isDarkMode
                             ? ProjectCustomColors.mWhitePrimary
@@ -57,8 +56,7 @@ class AllTransactionsWidget extends StatelessWidget {
                     ),
                     subtitle: Text(
                       coin.dateTime, // Show the date and time of the transaction
-                      style: context.textThemeLabelSmall
-                          ?.copyWith(color: ProjectCustomColors.mGreyPrimary),
+                      style: context.textThemeLabelSmall?.copyWith(color: ProjectCustomColors.mGreyPrimary),
                     ),
                     trailing: Padding(
                       padding: const EdgeInsets.only(top: 10.5),

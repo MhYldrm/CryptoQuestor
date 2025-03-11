@@ -18,11 +18,8 @@ class DeleteTransactionCustomSnackBar extends SnackBar {
   final String coinUid; // The UID of the coin transaction to be deleted
   final BuildContext context;
 
-  DeleteTransactionCustomSnackBar({
-    required this.coinUid,
-    required this.context,
-    super.key,
-  }) : super(
+  DeleteTransactionCustomSnackBar({required this.coinUid, required this.context, super.key,})
+      : super(
           backgroundColor: context.isDarkMode
               ? ProjectCustomColors.mYellow
               : ProjectCustomColors.bgColor,

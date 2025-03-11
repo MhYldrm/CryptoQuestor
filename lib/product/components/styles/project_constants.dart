@@ -18,13 +18,6 @@ final class ProjectConstants {
   static const String userNotFound = 'user-not-found';
   static const String obscuringCharacter = '*';
 
-  /// Generates a URL for fetching OHLC (Open, High, Low, Close) data for a specific coin.
-  ///
-  /// - [name]: The cryptocurrency name (e.g., "bitcoin").
-  /// - [days]: The number of days of historical data to retrieve (e.g., 1, 30, 365).
-  static String getApiUrl(String name, int days) =>
-      'https://api.coingecko.com/api/v3/coins/$name/ohlc?vs_currency=usd&days=$days';
-
   /// The base URL for fetching market data from the CoinGecko API.
   static const String apiUrlFromGecko =
       'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&sparkline=true';
@@ -92,6 +85,13 @@ final class ProjectConstants {
   static const String getStarted = 'GET STARTED';
   static const String darkMode = 'Dark Mode';
   static const String lightMode = 'Light Mode';
+
+  /// Generates a URL for fetching OHLC (Open, High, Low, Close) data for a specific coin.
+  ///
+  /// - [name]: The cryptocurrency name (e.g., "bitcoin").
+  /// - [days]: The number of days of historical data to retrieve (e.g., 1, 30, 365).
+  static String getApiUrl(String name, int days) =>
+      'https://api.coingecko.com/api/v3/coins/$name/ohlc?vs_currency=usd&days=$days';
 
   /// Home Page Texts
   ///

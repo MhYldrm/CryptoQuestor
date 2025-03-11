@@ -102,8 +102,7 @@ final class PieChartWidget extends StatelessWidget {
                   ),
                   actions: [
                     TextButton(
-                      onPressed: () =>
-                          Navigator.of(context).pop(), // Close the dialog
+                      onPressed: () => Navigator.of(context).pop(), // Close the dialog
                       child: Text(
                         context.mLocalizations.cancel,
                         style: TextStyle(

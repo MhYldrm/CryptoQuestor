@@ -13,7 +13,7 @@ import 'empty_widget.dart';
 /// [url] Coin's image url
 /// [balance] Quantity of coins in the user's portfolio
 ///
-class CoinCard extends StatelessWidget {
+final class CoinCard extends StatelessWidget {
   const CoinCard({
     required this.symbol,
     required this.price,
@@ -39,8 +39,7 @@ class CoinCard extends StatelessWidget {
           padding: const EdgeInsets.all(1),
           decoration: ProjectBoxDecorations.coinCardsWidgetsBoxDecoration,
           child: ClipRRect(
-            borderRadius:
-                BorderRadius.circular(34), // Rounded corners for the clip
+            borderRadius: BorderRadius.circular(34), // Rounded corners for the clip
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(

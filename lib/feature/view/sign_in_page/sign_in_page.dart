@@ -61,8 +61,7 @@ class _SignInPageState extends State<SignInPage> with SignInFormFieldsMixin,Sign
                 body: Column(
                   children: [
                     const Expanded(
-                      child: WalletImageWidgets(),
-                    ),
+                      child: WalletImageWidgets(),),
                     Expanded(
                       flex: 2,
                       child: Column(

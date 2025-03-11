@@ -31,10 +31,7 @@ class ExistingAccountLinkWidget extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignInPage()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage()));
             },
             child: Text(
               context.mLocalizations.login,

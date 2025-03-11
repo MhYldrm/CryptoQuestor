@@ -17,13 +17,8 @@ mixin SignUpPageMixin on State<SignUpPage> {
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration:
-              ProjectInputDecorations.signUpPageNameFieldInputDecoration(
-            context,
-          ),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-            context,
-          ),
+          decoration: ProjectInputDecorations.signUpPageNameFieldInputDecoration(context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           validator: (value) => validateName(value, context),
           onSaved: (value) {
             userProvider.setUserData(name: value);
@@ -34,20 +29,14 @@ mixin SignUpPageMixin on State<SignUpPage> {
   }
 
   /// [buildPasswordPart] builds the password input section for the user to enter their password.
-  Padding buildPasswordPart(
-      double myWidht, UserViewModel userProvider, BuildContext context) {
+  Padding buildPasswordPart(double myWidht, UserViewModel userProvider, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration:
-              ProjectInputDecorations.signUpPasswordFieldInputDecoration(
-            context,
-          ),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-            context,
-          ),
+          decoration: ProjectInputDecorations.signUpPasswordFieldInputDecoration(context),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           validator: (value) => validatePassword(value, context),
           onSaved: (value) {
             userProvider.setUserData(password: value);
@@ -58,21 +47,16 @@ mixin SignUpPageMixin on State<SignUpPage> {
   }
 
   /// [buildEmailPart] builds the email input section for the user to enter their email.
-  Padding buildEmailPart(
-      double myWidht, BuildContext context, UserViewModel userProvider) {
+  Padding buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
           decoration:
-              ProjectInputDecorations.signUpPageEmailFieldInputDecoration(
-            context,
-          ),
+              ProjectInputDecorations.signUpPageEmailFieldInputDecoration(context),
           keyboardType: TextInputType.emailAddress,
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-            context,
-          ),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           validator: (value) => validateEmail(value, context),
           onSaved: (value) {
             userProvider.setUserData(email: value);

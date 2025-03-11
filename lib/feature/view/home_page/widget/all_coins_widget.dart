@@ -34,10 +34,7 @@ class AllCoinsWidget extends StatelessWidget {
       height: ProjectSizes.size400.value,
       width: double.infinity,
       child: isLoading == true
-          ? const Center(
-              // Loading Indicator
-              child: CircularProgressIndicator(),
-            )
+          ? const Center(child: CircularProgressIndicator(),) // Loading Indicator
           : geckoProvider.coins != null
               ? ListView.builder(
                   // List of coins

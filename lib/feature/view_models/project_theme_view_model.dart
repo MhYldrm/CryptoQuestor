@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// It provides functionality to switch between dark and light themes and notifies listeners about theme changes.
 ///
 class ProjectThemeViewModel with ChangeNotifier {
-  /// The current theme of the app, initially set to dark theme.
+  // The current theme of the app, initially set to dark theme.
   ThemeData _themeData = darkTheme;
 
   /// Getter for the current theme.

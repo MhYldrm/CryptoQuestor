@@ -33,8 +33,7 @@ class TotalSpentDescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculate percentage change and profit or loss
-    final double percentage =
-        ProjectFunctions().calculatePercentage(totalCurrentValue, totalValue);
+    final double percentage = ProjectFunctions().calculatePercentage(totalCurrentValue, totalValue);
     final double pnl = totalCurrentValue - totalValue;
 
     return Padding(

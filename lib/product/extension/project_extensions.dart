@@ -31,8 +31,7 @@ extension ThemeDataExtension on BuildContext {
 extension ThemeContextExtensions on BuildContext {
   /// Checks if the current theme is dark mode.
   bool get isDarkMode {
-    final themeProvider =
-        Provider.of<ProjectThemeViewModel>(this, listen: false);
+    final themeProvider = Provider.of<ProjectThemeViewModel>(this, listen: false);
     return themeProvider.themeData == darkTheme;
   }
 }
@@ -40,28 +39,19 @@ extension ThemeContextExtensions on BuildContext {
 extension NavigatorExtension on BuildContext {
   /// Pushes a new page onto the navigator stack and returns the result of the navigation.
   Future<T?> push<T>(Widget page) {
-    return Navigator.push(
-      this,
-      MaterialPageRoute(builder: (context) => page),
-    );
+    return Navigator.push(this, MaterialPageRoute(builder: (context) => page),);
   }
 
   /// Replaces the current page with a new page and returns the result of the navigation.
   Future<T?> pushReplacement<T, TO>(Widget page) {
-    return Navigator.pushReplacement(
-      this,
-      MaterialPageRoute(builder: (context) => page),
+    return Navigator.pushReplacement(this, MaterialPageRoute(builder: (context) => page),
     );
   }
 
   /// Pushes a new page and removes all previous pages from the stack until the predicate condition is met.
-  Future<T?> pushAndRemoveUntil<T>(
-      Widget page, bool Function(Route<dynamic>) predicate) {
-    return Navigator.pushAndRemoveUntil(
-      this,
-      MaterialPageRoute(builder: (context) => page),
-      predicate,
-    );
+  ///
+  Future<T?> pushAndRemoveUntil<T>(Widget page, bool Function(Route<dynamic>) predicate) {
+    return Navigator.pushAndRemoveUntil(this, MaterialPageRoute(builder: (context) => page), predicate,);
   }
 }
 
@@ -88,8 +78,7 @@ extension TextThemeStyles on BuildContext {
   TextStyle? get textThemeLabelSmall => Theme.of(this).textTheme.labelSmall;
   TextStyle? get textThemeLabelMedium => Theme.of(this).textTheme.labelMedium;
   TextStyle? get textThemeLabelLarge => Theme.of(this).textTheme.labelLarge;
-  TextStyle? get textThemeHeadLineSmall =>
-      Theme.of(this).textTheme.headlineSmall;
+  TextStyle? get textThemeHeadLineSmall => Theme.of(this).textTheme.headlineSmall;
 }
 
 extension ProviderExtensions on BuildContext {

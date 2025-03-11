@@ -52,17 +52,16 @@ class MarketDetailsPartWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (ProjectConstants.exchangeList.contains(exchangeName))
-                  const Text(ProjectConstants.emptyString)
-                else
-                  Text(
-                    exchangeName,
-                    style: context.textThemeTitleMedium?.copyWith(
-                      color: context.isDarkMode
-                          ? ProjectCustomColors.mWhitePrimary
-                          : ProjectCustomColors.mPurple,
-                    ),
-                  ),
+                ProjectConstants.exchangeList.contains(exchangeName)
+                    ? const Text(ProjectConstants.emptyString)
+                    : Text(
+                        exchangeName,
+                        style: context.textThemeTitleMedium?.copyWith(
+                          color: context.isDarkMode
+                              ? ProjectCustomColors.mWhitePrimary
+                              : ProjectCustomColors.mPurple,
+                        ),
+                      ),
               ],
             ),
           ),

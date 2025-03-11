@@ -1,3 +1,4 @@
+import 'package:crypto_questor/feature/view_models/profile_info_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,6 +44,9 @@ final class AppInitialize {
       ),
       ChangeNotifierProvider(
         create: (_) => getIt<ProjectThemeViewModel>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => getIt<ProfileInfoViewModel>(),
       ),
     ];
   }
