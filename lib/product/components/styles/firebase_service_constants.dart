@@ -5,6 +5,7 @@
 ///
 /// Using these constants helps maintain consistency and avoid typos
 /// across the project when interacting with Firebase.
+///
 final class FirebaseServiceConstants {
   /// Private constructor to prevent instantiation.
   const FirebaseServiceConstants._();

@@ -5,8 +5,7 @@
 part of '../earn_details_page.dart';
 
 class EarnImagePartWidget extends StatelessWidget {
-  const EarnImagePartWidget(
-      {required this.title, required this.imageUrl, super.key});
+  const EarnImagePartWidget({required this.title, required this.imageUrl, super.key});
 
   final String imageUrl;
   final String title;

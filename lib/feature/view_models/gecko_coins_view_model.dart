@@ -23,7 +23,7 @@ class GeckoCoinsViewModel extends ChangeNotifier {
 
   /// Fetches cryptocurrency data from the CoinGecko API and updates the state.
   Future<void> getGeckoApiCoins() async {
-    _isLoading = true; // Mark as loading.
+    _isLoading = true;
     notifyListeners();
 
     try {
@@ -35,7 +35,7 @@ class GeckoCoinsViewModel extends ChangeNotifier {
     } catch (e) {
       _geckoCoinProviderList = [];
     } finally {
-      _isLoading = false; // Mark as not loading.
+      _isLoading = false;
       notifyListeners();
     }
   }

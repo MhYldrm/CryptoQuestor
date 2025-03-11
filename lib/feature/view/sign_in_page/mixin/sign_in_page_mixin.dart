@@ -21,15 +21,12 @@ mixin SignInPageMixin on State<SignInPage> {
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
-          decoration: ProjectInputDecorations
-              .signInPagePasswordFieldWithVisibilityInputDecoration(
-                  context, passwordVisibility, togglePasswordVisibility),
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-              context),
+          decoration: ProjectInputDecorations.signInPagePasswordFieldWithVisibilityInputDecoration(
+              context, passwordVisibility, togglePasswordVisibility),
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
           obscuringCharacter: ProjectConstants.obscuringCharacter,
           obscureText: passwordVisibility,
-          validator: (value) =>
-              validatePassword(value, context), // Password validation
+          validator: (value) => validatePassword(value, context), // Password validation
           onSaved: (value) {
             userProvider.setUserData(
               password: value,
@@ -41,21 +38,17 @@ mixin SignInPageMixin on State<SignInPage> {
   }
 
   /// [ buildEmailPart] builds the email input section for the sign-in form.
-  Padding buildEmailPart(
-      double myWidht, BuildContext context, UserViewModel userProvider) {
+  Padding buildEmailPart(double myWidht, BuildContext context, UserViewModel userProvider) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: myWidht / 10.5),
       child: Container(
         decoration: ProjectBoxDecorations.signPagesBoxDecoration,
         child: TextFormField(
           decoration:
-              ProjectInputDecorations.signInPageEmailFieldInputDecoration(
-                  context),
+              ProjectInputDecorations.signInPageEmailFieldInputDecoration(context),
           keyboardType: TextInputType.emailAddress,
-          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(
-              context),
-          validator: (value) =>
-              validateEmail(value, context), // Email validation
+          style: ProjectInputDecorations.signPagesInputDecorationTextStyle(context),
+          validator: (value) => validateEmail(value, context), // Email validation
           onSaved: (value) {
             userProvider.setUserData(
               email: value,

@@ -56,8 +56,7 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                   onTap: () {
                     setState(() {
                       _currentScreen = const HomePage();
-                      _currentTab = ProjectConstants
-                          .zeroNumInt; // Set the current tab to Home
+                      _currentTab = ProjectConstants.zeroNumInt; // Set the current tab to Home
                     });
                   },
                 ),
@@ -70,8 +69,7 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                   onTap: () {
                     setState(() {
                       _currentScreen = const EarnPage();
-                      _currentTab = ProjectConstants
-                          .oneNumInt; // Set the current tab to Earn
+                      _currentTab = ProjectConstants.oneNumInt; // Set the current tab to Earn
                     });
                   },
                 ),
@@ -84,8 +82,7 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                   onTap: () {
                     setState(() {
                       _currentScreen = const PortfolioPage();
-                      _currentTab = ProjectConstants
-                          .twoNumInt; // Set the current tab to Portfolio
+                      _currentTab = ProjectConstants.twoNumInt; // Set the current tab to Portfolio
                     });
                   },
                 ),
@@ -98,8 +95,7 @@ class _IntroPageState extends State<IntroPage> with IntroPageMixin {
                   onTap: () {
                     setState(() {
                       _currentScreen = const ProfilePage();
-                      _currentTab = ProjectConstants
-                          .threeNumInt; // Set the current tab to Profile
+                      _currentTab = ProjectConstants.threeNumInt; // Set the current tab to Profile
                     });
                   },
                 ),

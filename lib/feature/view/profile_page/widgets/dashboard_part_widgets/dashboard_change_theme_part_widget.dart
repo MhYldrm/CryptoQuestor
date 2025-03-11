@@ -1,5 +1,4 @@
 import 'package:crypto_questor/product/components/styles/project_sizes.dart';
-
 import '../../../../../product/components/styles/project_exports.dart';
 import '../../../../../product/components/widgets/change_theme_switch_widget.dart';
 

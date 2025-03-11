@@ -10,6 +10,4 @@ class PortfolioCoinsRepositoryImpl implements PortfolioCoinsRepository{
   Future<List<PortfolioCoinsModel>> getPortfolioCoins() async{
     return await _service.getPortfolioCoins();
   }
-
-
 }

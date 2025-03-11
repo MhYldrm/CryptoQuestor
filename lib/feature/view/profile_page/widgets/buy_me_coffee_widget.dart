@@ -68,8 +68,7 @@ class _BuyMeCoffeeWidgetState extends State<BuyMeCoffeeWidget> {
               padding:
                   EdgeInsets.symmetric(horizontal: context.deviceWidht * 0.25),
               child: Image.asset(
-                ProjectConstants
-                    .buyMeCoffeeImagePath, // Image for the "Buy Me Coffee" button
+                ProjectConstants.buyMeCoffeeImagePath, // Image for the "Buy Me Coffee" button
                 fit: BoxFit.fill,
               ),
             ),

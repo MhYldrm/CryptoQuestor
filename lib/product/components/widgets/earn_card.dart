@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_questor/product/components/project_decoration/project_box_decorations.dart';
 import 'package:crypto_questor/product/extension/project_extensions.dart';
 import 'package:flutter/material.dart';
-
 import '../styles/project_custom_colors.dart';
 
 /// A card widget used to display earning opportunities on an exchange.

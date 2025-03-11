@@ -17,11 +17,7 @@ final class CoinListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(
-          CoinDetailPage(
-            selectCoin: item,
-          ),
-        );
+        context.push(CoinDetailPage(selectCoin: item,),);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -42,10 +38,8 @@ final class CoinListCard extends StatelessWidget {
                   flex: 4,
                   child: Row(
                     children: [
-                      showImagePart(),
-                      SizedBox(
-                        width: ProjectSizes.size10.value,
-                      ),
+                      showCoinLogoPart(),
+                      SizedBox(width: ProjectSizes.size10.value,),
                       showTitlePart(context),
                     ],
                   ),
@@ -63,7 +57,7 @@ final class CoinListCard extends StatelessWidget {
   }
 
   // Coin Logo Part
-  Image showImagePart() {
+  Image showCoinLogoPart() {
     return Image.network(
       item.image,
       fit: BoxFit.fill,

@@ -74,9 +74,7 @@ class _SplashPageState extends State<SplashPage> with SplashPageMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CarouselSliderWidget(
-                      items: getImagesList(
-                        context,
-                      ), // Images and descriptions fetched from the mixin.
+                      items: getImagesList(context), // Images and descriptions fetched from the mixin.
                       onIndexChanged: (index) {
                         setState(() {
                           _currentIndex = index;

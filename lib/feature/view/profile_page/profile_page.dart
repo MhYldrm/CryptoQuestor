@@ -4,9 +4,11 @@ import 'package:crypto_questor/feature/view/profile_page/widgets/dashboard_part_
 import 'package:crypto_questor/feature/view/profile_page/widgets/dashboard_part_widgets/dashboard_change_theme_part_widget.dart';
 import 'package:crypto_questor/feature/view/profile_page/widgets/dashboard_part_widgets/dashboard_contact_us_part_widget.dart';
 import 'package:crypto_questor/feature/view/profile_page/widgets/dashboard_part_widgets/dashboard_sign_out_part_widget.dart';
+import 'package:crypto_questor/feature/view_models/profile_info_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:crypto_questor/product/components/styles/project_exports.dart';
+import 'package:provider/provider.dart';
 import '../../../product/components/widgets/custom_app_bar.dart';
 
 /// A page that displays the user's profile information and dashboard.
@@ -27,8 +29,8 @@ import '../../../product/components/widgets/custom_app_bar.dart';
 part 'widgets/bottom_sheet_list_widget.dart';
 part 'widgets/buy_me_coffee_widget.dart';
 part 'widgets/dashboard_widget.dart';
-part 'widgets/user_info_widget.dart';
 part 'mixin/profile_page_mixin.dart';
+part 'widgets/users_info_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -38,13 +40,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> with ProfilePageMixin {
-  @override
-  void initState() {
-    super.initState();
-    // Fetch user info based on the user's UID when the page is loaded
-    fetchInfo(authService.currentUser!.uid);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,13 +51,7 @@ class _ProfilePageState extends State<ProfilePage> with ProfilePageMixin {
           children: [
             Expanded(
               flex: 3,
-              child: UserInfoWidget(
-                // Displays user information
-                isLoading: _isLoading,
-                isMan: _isMan,
-                personInfo: _personInfo,
-                chanceGender: chanceGender,
-              ),
+              child: UsersInfoWidget(isMan: _isMan, chanceGender: chanceGender),
             ),
             const Expanded(
               flex: 4,

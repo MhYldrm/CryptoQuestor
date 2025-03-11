@@ -3,55 +3,50 @@ description: "New Gen Crypto Portfolio"
 publish_to: 'none'
 version: 1.0.1+2
 
-
 environment:
   sdk: '>=3.4.4 <4.0.0'
-
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
 
-  #Core
-  firebase_core: ^3.5.0
-  json_annotation:
-  equatable:
-  provider:
-  get_it:
-
+  # Core dependencies (Firebase, State Management, Data Serialization)
+  firebase_core: ^3.5.0             # Firebase SDK initialization
+  json_annotation:                  # Code generation for JSON serialization
+  equatable:                        # Simplifies comparison of objects
+  provider:                         # State management solution
+  get_it:                           # Service locator for dependency injection
 
   flutter_localizations:
-    sdk: flutter
+    sdk: flutter                     # Flutter localization support
 
-  #Utils
-  syncfusion_flutter_charts: # Create chart for price of history
-  font_awesome_flutter: ^10.7.0
-  flutter_launcher_icons: ^0.13.1
-  random_string: ^2.3.1
-  intl: ^0.19.0
-  auto_size_text: ^3.0.0
-  smooth_page_indicator: ^1.2.0+3
-  carousel_slider: ^5.0.0
-  google_fonts: ^6.2.1
-  animated_toggle_switch: ^0.8.4
+  # Utils (UI, Formatting, Animation, etc.)
+  syncfusion_flutter_charts:         # Create charts for historical price data
+  font_awesome_flutter: ^10.7.0      # FontAwesome icons for UI
+  flutter_launcher_icons: ^0.13.1    # Custom app launcher icon
+  random_string: ^2.3.1              # Generate random strings
+  intl: ^0.19.0                      # Internationalization and date formatting
+  auto_size_text: ^3.0.0             # Auto resizing text widget
+  smooth_page_indicator: ^1.2.0+3    # Smooth page indicator for pagination
+  carousel_slider: ^5.0.0           # Carousel slider widget
+  google_fonts: ^6.2.1               # Google Fonts integration
+  animated_toggle_switch: ^0.8.4     # Animated toggle switch widget
 
-  #Service
-  http: ^1.2.2
-  url_launcher: ^6.3.0
-  cloud_firestore:
-  firebase_auth:
-  dio:
-
+  # Service (Networking, Firebase, etc.)
+  http: ^1.2.2                       # HTTP client for networking
+  url_launcher: ^6.3.0               # Launch URLs in a browser
+  cloud_firestore:                   # Firebase Firestore database
+  firebase_auth:                     # Firebase authentication
+  dio:                               # Networking and HTTP requests (alternative to `http`)
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  very_good_analysis: ^6.0.0
-  json_serializable:
+  very_good_analysis: ^6.0.0          # Static code analysis tools
+  json_serializable:                 # Code generation for JSON serialization
   build_runner:
-
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -63,4 +58,3 @@ flutter:
   generate: true
   assets:
     - assets/
-

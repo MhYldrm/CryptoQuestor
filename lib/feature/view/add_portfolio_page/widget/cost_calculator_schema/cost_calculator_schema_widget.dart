@@ -45,8 +45,7 @@ final class CostCalculatorSchemaWidget extends StatelessWidget {
         // Displays the section title
         Text(
           title,
-          style:
-              context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: context.textThemeBodyLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         EmptyWidget(height: ProjectSizes.xSmall.value),
         Container(

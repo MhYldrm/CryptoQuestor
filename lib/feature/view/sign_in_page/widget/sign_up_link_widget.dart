@@ -22,8 +22,7 @@ class SignUpLinkWidget extends StatelessWidget {
         children: [
           Text(
             context.mLocalizations.isNotHaveAccount,
-            style: context.textThemeTitleSmall
-                ?.copyWith(color: ProjectCustomColors.mGreyPrimary),
+            style: context.textThemeTitleSmall?.copyWith(color: ProjectCustomColors.mGreyPrimary),
           ),
           SizedBox(
             width: ProjectSizes.size10.value,
@@ -32,9 +31,7 @@ class SignUpLinkWidget extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpPage(),
-                ),
+                MaterialPageRoute(builder: (context) => const SignUpPage(),),
               );
             },
             child: Text(

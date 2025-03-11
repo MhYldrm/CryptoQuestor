@@ -30,16 +30,14 @@ mixin HomePageMixin on State<HomePage> {
   List sortGainersCoins(List? coins) {
     if (coins == null) return [];
     List sortedCoins = List.from(coins);
-    sortedCoins.sort((a, b) => b.marketCapChangePercentage24H
-        .compareTo(a.marketCapChangePercentage24H));
+    sortedCoins.sort((a, b) => b.marketCapChangePercentage24H.compareTo(a.marketCapChangePercentage24H));
     return sortedCoins;
   }
 
   List sortLosersCoins(List? coins) {
     if (coins == null) return [];
     List sortedCoins = List.from(coins);
-    sortedCoins.sort((a, b) => a.marketCapChangePercentage24H
-        .compareTo(b.marketCapChangePercentage24H));
+    sortedCoins.sort((a, b) => a.marketCapChangePercentage24H.compareTo(b.marketCapChangePercentage24H));
     return sortedCoins;
   }
 

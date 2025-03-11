@@ -46,8 +46,7 @@ class _AddPortfolioPageState extends State<AddPortfolioPage>
                   symbol: widget.selectCoin.symbol,
                   name: widget.selectCoin.name,
                   currentPrice: widget.selectCoin.currentPrice,
-                  marketCapChangePercentage24H:
-                      widget.selectCoin.marketCapChangePercentage24H,
+                  marketCapChangePercentage24H: widget.selectCoin.marketCapChangePercentage24H,
                 ),
               ),
             ),

@@ -30,8 +30,7 @@ final class ChangeThemeSwitchWidget extends StatelessWidget {
       second: false,
       styleBuilder: (isDarkTheme) => ToggleStyle(
         indicatorColor: isDarkTheme ? Colors.black : Colors.yellow,
-        backgroundColor:
-            isDarkTheme ? ProjectCustomColors.mBlackPrimary : ProjectCustomColors.mYellow,
+        backgroundColor: isDarkTheme ? ProjectCustomColors.mBlackPrimary : ProjectCustomColors.mYellow,
       ),
       iconBuilder: (isDarkTheme) => isDarkTheme
           ? Icon(
@@ -46,8 +45,7 @@ final class ChangeThemeSwitchWidget extends StatelessWidget {
             ),
       onChanged: (value) {
         // When the toggle switch changes, it triggers the theme change.
-        Provider.of<ProjectThemeViewModel>(context, listen: false)
-            .changeTheme();
+        Provider.of<ProjectThemeViewModel>(context, listen: false).changeTheme();
       },
     );
   }

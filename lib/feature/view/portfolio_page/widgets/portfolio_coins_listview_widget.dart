@@ -31,12 +31,9 @@ class PortfolioCoinsListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final portfolioCoinsProvider =
-        Provider.of<PortfolioCoinsViewModel>(context);
-    return isLoading == true
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
+    final portfolioCoinsProvider = Provider.of<PortfolioCoinsViewModel>(context);
+
+    return isLoading == true ? const Center(child: CircularProgressIndicator(),)
         : portfolioCoinsProvider.portfolioCoins.isNotEmpty
             ? ListView.builder(
                 itemCount: portfolioCoinList.length,

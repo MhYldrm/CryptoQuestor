@@ -92,8 +92,7 @@ class _SignUpPageState extends State<SignUpPage>
                       child: Column(
                         children: [
                           ProjectCustomButton(
-                            onPressed: () =>
-                                signUp(context, formKey, userProvider),
+                            onPressed: () => signUp(context, formKey, userProvider),
                             buttonText: context.mLocalizations.signUp,
                           ),
                           ExistingAccountLinkWidget(

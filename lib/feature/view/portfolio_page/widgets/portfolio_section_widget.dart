@@ -36,10 +36,8 @@ class PortfolioSectionWidget extends StatelessWidget {
         /// Returns a widget that displays the portfolio coin list
         /// along with a loading indicator or empty state if applicable.
         return PortfolioCoinsListViewWidget(
-          portfolioCoinList:
-              resultList, // The processed list of portfolio coins
-          isLoading: portfolioCoinsProvider
-              .isLoading, // Whether the data is still loading
+          portfolioCoinList: resultList, // The processed list of portfolio coins
+          isLoading: portfolioCoinsProvider.isLoading, // Whether the data is still loading
         );
       },
     );

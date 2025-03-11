@@ -19,11 +19,9 @@ final class ChartModel extends Equatable {
     required this.close,
   });
 
-  factory ChartModel.fromJson(List<dynamic> value) =>
-      _$ChartModelFromJson(value);
+  factory ChartModel.fromJson(List<dynamic> value) => _$ChartModelFromJson(value);
   final int time; // Timestamp of the data point (Unix timestamp)
-  final double
-      open; // Opening price of the asset at the start of the time period
+  final double open; // Opening price of the asset at the start of the time period
   final double high; // Highest price of the asset during the time period
   final double low; // Lowest price of the asset during the time period
   final double close;

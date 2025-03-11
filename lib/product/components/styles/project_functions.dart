@@ -12,6 +12,7 @@ final class ProjectFunctions {
   /// [portfolioCoins] List of the user's portfolio coins.
   /// [geckoCoins] List of the coins data fetched from CoinGecko API.
   /// Returns a list of PortfolioCoinsModel with updated current values.
+  ///
   List<PortfolioCoinsModel> summarizePortfolioCoinsCurrentValue(
     List<PortfolioCoinsModel> portfolioCoins,
     List<GeckoModel> geckoCoins,

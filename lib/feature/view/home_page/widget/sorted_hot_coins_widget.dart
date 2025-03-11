@@ -32,14 +32,11 @@ class SortedHotCoinsWidget extends StatelessWidget {
     return SizedBox(
       height: ProjectSizes.size400.value,
       width: double.infinity,
-      child: isLoading == true
-          ?
+      child: isLoading == true ?
           // Loading state
           const Center(
-              child: CircularProgressIndicator(),
-            )
-          : geckoProvider.coins != null
-              ?
+              child: CircularProgressIndicator(),)
+          : geckoProvider.coins != null ?
               // Display the sorted hot coins list
               ListView.builder(
                   itemCount: sortedHotCoins.length,

@@ -35,10 +35,8 @@ final class BottomSheetListWidget extends StatelessWidget {
                 SnackBar(
                   backgroundColor: ProjectCustomColors.mYellow,
                   content: Text(
-                    context
-                        .mLocalizations.copiedBoard, // Localized copied message
-                    style: context.textThemeBodyMedium
-                        ?.copyWith(color: ProjectCustomColors.bgColor),
+                    context.mLocalizations.copiedBoard, // Localized copied message
+                    style: context.textThemeBodyMedium?.copyWith(color: ProjectCustomColors.bgColor),
                   ),
                 ),
               );

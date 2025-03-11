@@ -18,20 +18,20 @@ class PortfolioCoinsViewModel extends ChangeNotifier {
   // Tracks the loading state. [true] if data is being fetched.
   bool _isLoading = false;
 
-  /// Provides the list of portfolio coins to external consumers.
-  /// Returns an empty list if no data is available.
+  // Provides the list of portfolio coins to external consumers.
+  // Returns an empty list if no data is available.
   List<PortfolioCoinsModel> get portfolioCoins => _portfolioCoins ?? <PortfolioCoinsModel>[];
   bool get isLoading => _isLoading;
 
-  /// Fetches portfolio coin data from Firebase and updates the state.
+  // Fetches portfolio coin data from Firebase and updates the state.
   Future<void> getPortfolioCoins() async {
-    _isLoading = true; // Mark as loading.
+    _isLoading = true;
     notifyListeners();
 
     // Fetch data from Firebase and assign it to _portfolioCoins.
     _portfolioCoins = await _service.getPortfolioCoins();
 
-    _isLoading = false; // Mark as not loading.
+    _isLoading = false;
     notifyListeners();
   }
 }

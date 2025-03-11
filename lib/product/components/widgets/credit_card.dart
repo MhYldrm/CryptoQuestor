@@ -24,7 +24,7 @@ import '../styles/project_functions.dart';
 /// - [profitPercent] shows the profit/loss percentage and navigates to the portfolio page.
 ///
 
-class CreditCard extends StatelessWidget {
+final class CreditCard extends StatelessWidget {
   const CreditCard({
     required this.totalSpent,
     required this.totalCurrentValue,
@@ -36,23 +36,26 @@ class CreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculates the percentage of profit or loss based on the total spent and current value.
-    final double percentage =
-        ProjectFunctions().calculatePercentage(totalCurrentValue, totalSpent);
+    final double percentage = ProjectFunctions().calculatePercentage(totalCurrentValue, totalSpent);
+
     // Calculates the profit or loss in dollar terms.
     final double pnl = totalCurrentValue - totalSpent;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: SizedBox(
         height: ProjectSizes.size200.value,
         child: Stack(
           children: [
-            if (context.isDarkMode)
-              const CreditCardBackgroundDarkMode()
-            else
-              const CreditCardBackgroundLightMode(), // Background for light theme.
-            balanceText(totalCurrentValue.toStringAsFixed(2), context,
-                percentage, pnl), // Displays the balance text.
-            profitPercent(context), // Displays the profit/loss percentage.
+          context.isDarkMode
+              ?  const CreditCardBackgroundDarkMode()
+              : const CreditCardBackgroundLightMode(),
+
+            // Displays the balance text.
+            balanceText(totalCurrentValue.toStringAsFixed(2), context, percentage, pnl),
+
+            // Displays the profit/loss percentage.
+            profitPercent(context),
           ],
         ),
       ),
@@ -74,8 +77,7 @@ class CreditCard extends StatelessWidget {
         ),
         child: IconButton(
           onPressed: () {
-            context.push(
-                const PortfolioPage()); // Navigates to the portfolio page.
+            context.push(const PortfolioPage()); // Navigates to the portfolio page.
           },
           icon: const Icon(
             Icons.chevron_right_rounded,
@@ -87,16 +89,15 @@ class CreditCard extends StatelessWidget {
   }
 
   /// Displays the user's balance, profit/loss percentage, and profit or loss in dollars.
-  Widget balanceText(
-      String? balance, BuildContext context, double percentage, double pnl) {
+  Widget balanceText(String? balance, BuildContext context, double percentage, double pnl) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Displays the label for account balance.
           Text(
-            context.mLocalizations
-                .accountBalance, // Displays the label for account balance.
+            context.mLocalizations.accountBalance,
             style: context.textThemeHeadLineSmall?.copyWith(
               color: context.isDarkMode
                   ? ProjectCustomColors.mLilacPrimary
@@ -105,8 +106,10 @@ class CreditCard extends StatelessWidget {
                   context.isDarkMode ? FontWeight.w800 : FontWeight.w600,
             ),
           ),
+
+          // Displays the balance in dollars.
           Text(
-            '$balance \$', // Displays the balance in dollars.
+            '$balance \$',
             style: context.textThemeTitleLarge?.copyWith(
               color: context.isDarkMode
                   ? ProjectCustomColors.mGreyPrimary
@@ -115,8 +118,10 @@ class CreditCard extends StatelessWidget {
                   context.isDarkMode ? FontWeight.w400 : FontWeight.w900,
             ),
           ),
+
+          // Shows the profit/loss percentage and the dollar amount.
           Text(
-            '% ${percentage.toStringAsFixed(2)}  (\$${pnl.toStringAsFixed(2)})', // Shows the profit/loss percentage and the dollar amount.
+            '% ${percentage.toStringAsFixed(2)}  (\$${pnl.toStringAsFixed(2)})',
             overflow: TextOverflow.ellipsis,
             style: context.textThemeBodyMedium?.copyWith(
               color: percentage >= 0
@@ -130,8 +135,7 @@ class CreditCard extends StatelessWidget {
             height: 80,
             width: 140,
             child: Image.asset(
-              ProjectConstants
-                  .blockchainImagePath, // Displays a blockchain-related image.
+              ProjectConstants.blockchainImagePath, // Displays a blockchain-related image.
               fit: BoxFit.fill,
             ),
           ),
@@ -155,8 +159,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             stops: [0, 0.25, 0.75, 1],
-            colors: ProjectCustomColors
-                .earnCardGradientColors), // Dark theme gradient.
+            colors: ProjectCustomColors.earnCardGradientColors),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(34),
@@ -168,7 +171,7 @@ class CreditCardBackgroundDarkMode extends StatelessWidget {
               colors: [
                 Color.fromARGB(255, 7, 6, 6),
                 Color.fromARGB(255, 6, 51, 93),
-              ], // Dark gradient colors.
+              ],
             ),
           ),
           child: Stack(

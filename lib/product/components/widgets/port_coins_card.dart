@@ -3,7 +3,6 @@ import 'package:crypto_questor/product/components/styles/project_sizes.dart';
 import 'package:crypto_questor/product/components/styles/project_functions.dart';
 import 'package:crypto_questor/product/extension/project_extensions.dart';
 import 'package:flutter/material.dart';
-
 import '../styles/project_custom_colors.dart';
 
 /// [PortCoinsCard] is a stateful widget that displays detailed information about a cryptocurrency
@@ -67,7 +66,7 @@ class _PortCoinsCardState extends State<PortCoinsCard> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: context.projectTheme!.colorScheme
-            .secondary, // Theme-based background color
+            .secondary,
       ),
       child: Padding(
         padding: const ProjectPaddings.horizontalLarge(),

@@ -20,11 +20,9 @@ final class EarnModel {
   });
 
   /// Factory constructor to create an [EarnModel] from a JSON map.
-  factory EarnModel.fromJson(Map<String, dynamic> json) =>
-      _$EarnModelFromJson(json);
+  factory EarnModel.fromJson(Map<String, dynamic> json) => _$EarnModelFromJson(json);
   final String title; // Title of the earning opportunity
-  final String
-      imageUrl; // URL of the image associated with the earning opportunity
+  final String imageUrl; // URL of the image associated with the earning opportunity
   final String exchangeIconUrl; // URL of the exchange icon
   final String exchangeName; // Name of the exchange
   final String dateTime; // Date and time of the earning event

@@ -51,12 +51,9 @@ final class PortfolioCoinsCardWidget extends StatelessWidget {
         // Portfolio coins list or loading/empty message
         SizedBox(
           height: ProjectSizes.size170.value,
-          child: isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                ) // Loading state
-              : resultList.isNotEmpty
-                  ?
+          child: isLoading ? const Center(
+                  child: CircularProgressIndicator(),) // Loading state
+              : resultList.isNotEmpty ?
                   // Display the portfolio coins as a horizontal list
                   ListView.builder(
                       scrollDirection: Axis.horizontal,
